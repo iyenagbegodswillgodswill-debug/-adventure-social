@@ -12,6 +12,7 @@ Last updated: 2026-11-23
 - [x] GitHub Pages configured to publish from `main` / root.
 - [x] Early-preview notice clarifies that profiles are illustrative and Follow state is local to the current browser.
 - [x] Keyboard skip navigation, visible focus styles, reduced-motion support and improved filter accessibility added.
+- [x] PWA manifest, app icon, install guidance and offline app-shell caching added.
 - [x] Account/profile MVP plan documented in `docs/ACCOUNT_AND_PROFILE_PLAN.md`.
 - [x] Community rules, report handling and moderator accountability proposed in `docs/COMMUNITY_SAFETY_AND_MODERATION.md`.
 - [x] Separate Supabase project `Adventure` created in the existing Free organisation at quoted $0/month; project is `ACTIVE_HEALTHY`.
@@ -29,7 +30,8 @@ Last updated: 2026-11-23
 
 - [x] GitHub Pages source enabled from `main` / root.
 - [x] Previous published version completed successfully in GitHub Pages build/deployment (run `45199119487`).
-- [ ] Confirm the latest frontend and documentation commits finish the branch-based Pages build.
+- [x] Latest documentation/backend-status commit `dd7dfba4c67fb287dda1bdcdf7e566095e6d04a8` completed successfully in GitHub Pages build/deployment (run `45201992767`).
+- [ ] Confirm the newest PWA frontend commit finishes the branch-based Pages build.
 - [ ] Verify the published URL in a browser on desktop and mobile.
 - Expected public URL: `https://iyenagbegodswillgodswill-debug.github.io/-adventure-social/`.
 - [x] Removed the duplicate custom Pages workflow; branch-based GitHub Pages publishing is the single intended deployment path.
