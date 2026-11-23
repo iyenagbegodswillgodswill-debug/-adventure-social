@@ -1,7 +1,7 @@
 # Adventure — Community Safety and Moderation Plan
 
 Last updated: 2026-11-23  
-Status: Operational proposal. No member reporting or moderation tools are live yet.
+Status: Safety requirements documented; first report/block controls and admin report-status workflow are implemented but await real-account end-to-end tests.
 
 ## Why this exists
 
@@ -26,14 +26,14 @@ Respectful disagreement, cultural discussion and criticism are allowed. Moderati
 
 ## Minimum safety controls before the first real member
 
-1. A visible report action on member profiles.
-2. A block action that prevents profile discovery and unwanted follow interactions in both directions.
-3. Private report records with restricted reviewer access.
-4. A documented moderator identity and trusted authorization mechanism.
-5. A way to disable or suspend an account while a serious report is reviewed.
-6. A published contact route for urgent safety concerns and privacy requests.
-7. An account deletion and data-retention procedure.
-8. A process for reviewing appeals or correcting mistaken enforcement.
+1. [x] A visible report action on real discoverable member profiles.
+2. [x] A block action that prevents profile discovery and follow interactions in both directions; existing follows are removed.
+3. [x] Private report records with restricted reviewer access and moderator-only status changes.
+4. [x] A private server-managed administrator role registry and owner/moderator authorization checks.
+5. [ ] A way to suspend and reinstate an account while a serious report is reviewed.
+6. [ ] A published contact route for urgent safety concerns and privacy requests.
+7. [ ] An account deletion and data-retention procedure.
+8. [ ] A process for reviewing appeals or correcting mistaken enforcement.
 
 Do not enable registration until these controls are implemented and tested. The static preview may remain available with clearly labelled sample profiles.
 
@@ -70,4 +70,4 @@ Start with a small, invite-only group in Ghana. Add members gradually only when 
 
 ## Readiness gate
 
-This proposal is not a substitute for legal review or working moderation tooling. Before launch, publish member-facing rules and privacy information, assign an accountable safety contact, implement report/block/suspension workflows, test authorization boundaries and rehearse a sample report from submission through closure.
+This plan is not a substitute for legal review or a staffed moderation operation. Before launch, publish member-facing rules and privacy information, assign an accountable safety contact, implement suspension/account-deletion workflows, test authorization boundaries with real accounts and rehearse a sample report from submission through closure.
