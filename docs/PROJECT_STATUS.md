@@ -15,6 +15,7 @@ Last updated: 2026-11-23
 - [x] PWA manifest, app icon, install guidance and offline app-shell caching added.
 - [x] Account/profile MVP plan documented in `docs/ACCOUNT_AND_PROFILE_PLAN.md`.
 - [x] Community rules, report handling and moderator accountability proposed in `docs/COMMUNITY_SAFETY_AND_MODERATION.md`.
+- [x] Private Adventure Admin Control Centre requirements documented in `docs/ADMIN_CONTROL_CENTRE_PLAN.md`.
 - [x] Separate Supabase project `Adventure` created in the existing Free organisation at quoted $0/month; project is `ACTIVE_HEALTHY`.
 - [x] Initial `profiles`, `follows`, `blocks` and `reports` tables created in Adventure only.
 - [x] RLS enabled on all four tables; profile discovery defaults to off.
@@ -33,10 +34,17 @@ Last updated: 2026-11-23
 - [x] GitHub Pages source enabled from `main` / root.
 - [x] Previous published version completed successfully in GitHub Pages build/deployment (run `45199119487`).
 - [x] Latest documentation/backend-status commit `dd7dfba4c67fb287dda1bdcdf7e566095e6d04a8` completed successfully in GitHub Pages build/deployment (run `45201992767`).
-- [ ] Confirm the newest PWA and security-test commits finish the branch-based Pages build.
+- [ ] Confirm the newest PWA, security-test and admin-plan commits finish the branch-based Pages build.
 - [ ] Verify the published URL in a browser on desktop and mobile.
-- Expected public URL: `https://iyenagbegodswillgodswill-debug.github.io/-adventure-social/`.
 - [x] Removed the duplicate custom Pages workflow; branch-based GitHub Pages publishing is the single intended deployment path.
+
+## Admin Control Centre
+
+- [x] Scope and security requirements documented.
+- [ ] Implement private server-managed administrator roles and authorization.
+- [ ] Build owner-only dashboard shell; no sensitive data until backend authorization succeeds.
+- [ ] Add audited member support and private report review.
+- [ ] Test owner, moderator, member and anonymous access boundaries.
 
 ## Current limitations
 
@@ -54,7 +62,7 @@ Last updated: 2026-11-23
 2. Configure and test email verification, password recovery and signup abuse controls before exposing registration.
 3. Build account screens and profile editing, then connect discovery and follow actions to the secured tables.
 4. Implement avatar storage with per-user path restrictions and safe file limits.
-5. Implement trusted moderator authorization, private report review, suspension and audit trail.
+5. Implement private server-managed administrator roles, the Admin Control Centre, report review, suspension and audit logging.
 6. Run anonymous and two-account security tests, then re-run Supabase advisors.
 7. Verify the public site on desktop and mobile.
 8. Start with a small invite-only pilot only after safety controls and an accountable report reviewer are operational.
