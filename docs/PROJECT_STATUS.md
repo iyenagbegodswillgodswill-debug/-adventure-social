@@ -57,8 +57,8 @@ Last updated: 2026-11-23
 
 - [x] GitHub Pages configured to publish from `main` / root.
 - [x] Earlier Pages deployment succeeded (run `45202483011`, commit `1ee4812ab22a1db265d5bff31daffbee73946e08`).
-- [ ] Verify the newest admin dashboard and database documentation commits finish deployment.
-- [ ] Verify the published site in a browser on desktop and mobile.
+- [x] Latest admin dashboard, member account, discovery, follow, report and block source build/deployment completed successfully in Pages run `45207770527` for commit `cfe65c2a5cbc728e9a801d5d5339a32e84cf90ab`.
+- [ ] Verify the published site visually in a browser on desktop and mobile; the automated deployment succeeded, but direct browser verification is still outstanding.
 - Expected public URL: `https://iyenagbegodswillgodswill-debug.github.io/-adventure-social/`.
 
 ## Safety and cost guardrails
