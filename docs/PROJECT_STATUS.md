@@ -24,6 +24,8 @@ Last updated: 2026-11-23
 - [x] Signup trigger moved to a non-exposed private schema with restricted execute permissions.
 - [x] Versioned SQL migrations saved under `supabase/migrations/`.
 - [x] Supabase security advisor re-check returned no security lints.
+- [x] Repeatable SQL security assertions in `supabase/tests/security_checks.sql` passed against the live Adventure database.
+- [x] Local migration filenames now match the five migration versions applied to the Adventure project.
 - [x] Supabase performance advisor reported only unused-index notices on the empty new database; no missing foreign-key indexes remain.
 
 ## Deployment status
@@ -31,7 +33,7 @@ Last updated: 2026-11-23
 - [x] GitHub Pages source enabled from `main` / root.
 - [x] Previous published version completed successfully in GitHub Pages build/deployment (run `45199119487`).
 - [x] Latest documentation/backend-status commit `dd7dfba4c67fb287dda1bdcdf7e566095e6d04a8` completed successfully in GitHub Pages build/deployment (run `45201992767`).
-- [ ] Confirm the newest PWA frontend commit finishes the branch-based Pages build.
+- [ ] Confirm the newest PWA and security-test commits finish the branch-based Pages build.
 - [ ] Verify the published URL in a browser on desktop and mobile.
 - Expected public URL: `https://iyenagbegodswillgodswill-debug.github.io/-adventure-social/`.
 - [x] Removed the duplicate custom Pages workflow; branch-based GitHub Pages publishing is the single intended deployment path.
