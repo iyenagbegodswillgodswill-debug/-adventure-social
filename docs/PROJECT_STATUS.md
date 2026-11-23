@@ -1,6 +1,6 @@
 # Adventure — Project Status
 
-Last updated: 2026-11-22
+Last updated: 2026-11-23
 
 ## Current milestone: Adventurers page foundation
 
@@ -13,25 +13,27 @@ Last updated: 2026-11-22
 
 ## Deployment status
 
-- [ ] First GitHub Pages deployment completed and public URL verified.
+- [x] GitHub Pages source enabled from `main` / root.
+- [x] First GitHub Pages deployment completed successfully (run `45195713110`, all three jobs successful).
+- [ ] Verify the public URL in a browser on desktop and mobile.
 - The workflow runs on pushes to `main` and can also be started manually from the repository Actions tab.
-- GitHub Pages may still require the repository's Pages site to be enabled. The first workflow run will show whether GitHub permits setup through the workflow or requires a one-time repository setting change.
-- Do not announce the site as live until a successful deployment and public URL check.
+- Expected public URL: `https://iyenagbegodswillgodswill-debug.github.io/-adventure-social/`.
 
 ## Current limitations
 
 - Profile data is illustrative demo content, not real members.
-- Follow state is held only in the current browser session; it is not saved to an account.
+- Follow state is saved in local browser storage on the current device only; it is not linked to an account or synced across devices.
+- Main navigation items other than Adventurers and notifications are placeholders; the interface now labels these as planned rather than pretending the pages exist.
+- No real account or personal information is collected by this prototype.
 - No authentication, database, profile editing, posts, messaging, moderation or privacy controls yet.
 
 ## Next steps
 
-1. Check the GitHub Actions run for the Pages deployment workflow.
-2. If it succeeds, verify the published URL and test on mobile.
-3. If GitHub blocks deployment because Pages is not enabled, resolve that one-time repository setting.
-4. Design the actual member profile and registration flow.
-5. Before connecting a database, choose the Supabase organization/project and confirm any costs.
-6. Add authentication, member profiles and persistent follow relationships only after the data model and privacy rules are reviewed.
+1. Verify the public URL and test the page on desktop and mobile.
+2. Design the real member profile and registration flow.
+3. Define the first release scope for posts, follows and discovery.
+4. Before connecting a database, choose the Supabase organization/project and confirm any costs.
+5. Review the data model, authentication, privacy rules and moderation before storing real member information.
 
 ## Safety and scope
 
