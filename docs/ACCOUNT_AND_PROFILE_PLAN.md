@@ -1,7 +1,7 @@
 # Adventure — Account and Adventurer Profile Plan
 
 Last updated: 2026-11-23
-Status: Design proposal — not yet connected to authentication or a database.
+Status: Partially implemented. Auth schema and member sign-in/profile editor UI exist; public registration remains closed and live account tests are pending.
 
 ## Purpose
 
@@ -102,6 +102,13 @@ Do not put real member data into the current static demo.
 - Whether the initial public launch is invite-only or open registration.
 - Which moderation contact/process will handle reports.
 
+## Implemented foundation
+
+- Separate Supabase Auth and the `profiles` table are connected as the account foundation.
+- `account.html` provides email/password sign-in, password-reset request and an authenticated profile editor.
+- The editor writes only the approved profile columns through RLS and supports display name, username, country, bio, interests and opt-in discoverability.
+- Public registration is intentionally not exposed until report/block controls, moderation response, deletion and live security tests are ready.
+
 ## Current truth
 
-The deployed Adventurers page is still a static prototype with sample profiles. It has no real accounts, backend, persistent social graph, moderation or private member data. Keep the preview notice until the real system is built and tested.
+The public Adventurers directory remains a labelled sample-profile preview with local-only demo follows. The member sign-in/profile editor is committed but has not been tested with real Auth users. There is no public registration, real social graph connection, avatar upload, member report/block UI, suspension workflow or public posting. Keep the preview notice and registration closed until the full launch gates pass.
