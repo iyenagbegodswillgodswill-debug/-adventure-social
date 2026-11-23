@@ -9,7 +9,7 @@ Last updated: 2026-11-23
 - [x] African-inspired green/cream brand direction with restrained warm accent.
 - [x] Featured profile cards, search, interest filters and demo Follow interactions.
 - [x] Responsive layout for phone and desktop.
-- [x] GitHub Actions Pages deployment workflow configured.
+- [x] GitHub Pages configured to publish from `main` / root.
 - [x] Early-preview notice clarifies that profiles are illustrative and Follow state is local to the current browser.
 - [x] Account/profile MVP plan documented in `docs/ACCOUNT_AND_PROFILE_PLAN.md`.
 - [x] Proposed database model, RLS intent, storage safeguards and security tests documented in `docs/DATA_MODEL_AND_RLS_REVIEW.md`.
@@ -19,10 +19,11 @@ Last updated: 2026-11-23
 ## Deployment status
 
 - [x] GitHub Pages source enabled from `main` / root.
-- [x] Commit `0329813fe3150d23d38fe96250514283a9a7ee4b` completed successfully in the project workflow (run `45198140505`) and GitHub Pages build/deployment (run `45198140138`).
+- [x] Commit `0329813fe3150d23d38fe96250514283a9a7ee4b` completed successfully in GitHub Pages build/deployment (run `45198140138`).
 - [ ] Verify the published URL in a browser on desktop and mobile.
 - Expected public URL: `https://iyenagbegodswillgodswill-debug.github.io/-adventure-social/`.
-- The community-safety documentation commit is newer than the last confirmed successful deployment; check Actions before claiming it is live.
+- [x] Removed the duplicate custom Pages workflow after confirming it competed with the branch-based Pages deployment and caused an artifact race.
+- [ ] Confirm the branch-based Pages build completes for the latest commit after the duplicate workflow removal.
 
 ## Current limitations
 
@@ -31,7 +32,7 @@ Last updated: 2026-11-23
 - Main navigation items other than Adventurers and notifications are placeholders and labelled as planned.
 - No real account or personal information is collected by this prototype.
 - No authentication, database, profile editing, real follows, posts, messaging, moderation or privacy controls are implemented.
-- The data model, RLS design and community-safety plan are proposals only. No Adventure database, migration, bucket, auth provider or moderation workflow has been created or changed.
+- The data model, RLS design and community-safety plan are proposals only. No Adventure database, migration, bucket, auth provider or moderation workflow has been created or changed. The duplicate custom deployment workflow has been removed; branch-based GitHub Pages publishing remains the single intended deployment path.
 
 ## Next steps
 
