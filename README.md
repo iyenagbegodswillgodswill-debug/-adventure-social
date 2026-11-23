@@ -14,6 +14,10 @@ A private administrator console is available in the source at [admin.html](./adm
 
 The first owner account is not provisioned yet. Follow [docs/ADMIN_OWNER_BOOTSTRAP.md](docs/ADMIN_OWNER_BOOTSTRAP.md) to create and approve the owner account from the Adventure Supabase Dashboard. No public admin registration is provided.
 
+## Member account
+
+A member sign-in and profile settings page is available at [account.html](./account.html). Signed-in members can edit their display name, username, country, bio, interests and discovery privacy setting. Public registration remains closed while safety controls and real-account testing are completed. An Auth user must be provisioned before sign-in can be tested.
+
 ## Install on a phone
 
 Adventure includes a web app manifest and offline app-shell support.
