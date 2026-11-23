@@ -14,7 +14,7 @@ main{padding:25px 22px 40px}.intro{display:flex;justify-content:space-between;al
 .heading{display:flex;align-items:center;justify-content:space-between;margin-bottom:13px}.heading h2{font-size:19px;margin:0}.heading small{color:var(--muted)}
 .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:28px}.person{border:1px solid var(--line);border-radius:16px;padding:14px;background:#fff;min-width:0}.person-top{display:flex;align-items:center;gap:10px}.avatar{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;background:#e7efe7;font-size:22px;flex-shrink:0}.person strong{display:block;font-size:14px}.handle{font-size:12px;color:var(--muted)}.person p{font-size:12px;color:#58665d;margin:11px 0;min-height:34px}.follow{border:0;border-radius:10px;background:var(--green);color:white;padding:9px 13px;font-size:12px;font-weight:750;width:100%}.follow.following{background:#e9efe9;color:var(--green);border:1px solid #d5e1d7}
 .filters{display:flex;gap:8px;overflow:auto;margin-bottom:14px}.chip{border:1px solid var(--line);border-radius:30px;background:white;padding:8px 13px;color:#647168;font-size:12px;white-space:nowrap}.chip.active{background:#e9f1eb;color:var(--green);border-color:#c9ddce;font-weight:750}
-.list{display:grid;grid-template-columns:repeat(2,1fr);gap:11px}.list .person{display:flex;align-items:center;gap:11px}.list .person p{margin:3px 0;min-height:0}.list .follow{width:auto;margin-left:auto;flex-shrink:0}.empty{display:none;text-align:center;padding:25px;color:var(--muted)}
+.list{display:grid;grid-template-columns:repeat(2,1fr);gap:11px}.list .person{display:flex;align-items:center;gap:11px}.list .person p{margin:3px 0;min-height:0}.list .follow{width:auto;margin-left:auto;flex-shrink:0}.empty{display:none;text-align:center;padding:25px;color:var(--muted)}.card-actions{display:flex;flex-direction:column;gap:7px}.profile-actions{display:flex;gap:6px}.profile-actions button{border:1px solid var(--line);border-radius:8px;background:#fff;color:var(--green);padding:7px 8px;font-size:11px;font-weight:750}.profile-actions button.block-profile{color:#8b3933}.modal{position:fixed;inset:0;background:#10251f99;z-index:20;display:grid;place-items:center;padding:18px}.modal-card{width:min(100%,440px);background:#fff;border-radius:17px;padding:22px;box-shadow:0 20px 70px #0004}.modal-card h2{margin:0 0 5px}.modal-card p{color:var(--muted);font-size:13px}.modal-card label{display:block;font-size:12px;font-weight:750;margin:13px 0 6px}.modal-card select,.modal-card textarea{width:100%;border:1px solid var(--line);border-radius:9px;padding:10px;font:inherit}.modal-card textarea{min-height:100px;resize:vertical}.modal-actions{display:flex;justify-content:flex-end;gap:8px;margin-top:14px}.modal-actions button{border-radius:9px;padding:9px 13px;font-weight:750;border:1px solid var(--line);background:#fff}.modal-actions .submit-report{background:var(--green);color:#fff;border-color:var(--green)}
 .preview-note{margin:-13px 0 25px;padding:12px 14px;border:1px solid #e8e9e1;border-radius:12px;background:#fbfcf8;color:#59665e;font-size:12px}.preview-note strong{color:var(--green)}.toast{position:fixed;left:50%;bottom:22px;transform:translate(-50%,12px);background:#173f33;color:#fff;padding:11px 16px;border-radius:12px;box-shadow:0 8px 28px #0002;font-size:13px;opacity:0;pointer-events:none;transition:.2s;z-index:5;max-width:calc(100% - 32px);text-align:center}.toast.show{opacity:1;transform:translate(-50%,0)}nav button:disabled{opacity:.72;cursor:not-allowed}
 footer{border-top:1px solid var(--line);padding:17px;text-align:center;color:var(--muted);font-size:12px}.admin-link{color:var(--green);font-weight:700;text-decoration:none}.admin-link:hover{text-decoration:underline}.hero-cta{display:inline-flex;margin-top:15px;padding:9px 13px;border-radius:10px;background:#fff;color:var(--dark);font-size:12px;font-weight:800;text-decoration:none}.hero-cta:hover{background:var(--cream)}@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{transition:none!important;animation:none!important}}
 @media(max-width:650px){header{padding:16px 16px 0}main{padding:21px 16px 34px}.intro{display:block}.search{width:100%;margin-top:15px}.grid{grid-template-columns:1fr}.person p{min-height:0}.list{grid-template-columns:1fr}.hero{margin-top:17px}}
@@ -27,7 +27,7 @@ footer{border-top:1px solid var(--line);padding:17px;text-align:center;color:var
 <section class="preview-note" role="note"><strong>Early preview</strong> — These are sample profiles, not real members. Follow choices are saved only in this browser; no account or personal information is collected.</section>
 <section><div class="heading"><h2>Featured Adventurers</h2><small>Community spotlights</small></div><div class="grid" id="featured"></div></section>
 <section id="discover"><div class="heading"><h2>Discover people</h2><small id="count">Suggested profiles</small></div><div class="filters"><button class="chip active" data-filter="all" aria-pressed="true">For you</button><button class="chip" data-filter="culture" aria-pressed="false">Culture</button><button class="chip" data-filter="travel" aria-pressed="false">Travel</button><button class="chip" data-filter="creativity" aria-pressed="false">Creativity</button><button class="chip" data-filter="community" aria-pressed="false">Community</button></div><div class="list" id="people"></div><div class="empty" id="empty">No profiles match that search yet.</div></section>
-</main><div class="toast" id="toast" role="status" aria-live="polite"></div><footer>Adventure is just beginning · Built to connect Africa and the world. · <a class="admin-link" href="./admin.html">Admin access</a></footer></div>
+</main><div id="report-modal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="report-title"><div class="modal-card"><h2 id="report-title">Report this profile</h2><p>Tell the Adventure safety team what concerns you. Reports are private.</p><label for="report-reason">Reason</label><select id="report-reason"><option value="harassment">Harassment or bullying</option><option value="impersonation">Impersonation</option><option value="spam_or_scam">Spam or scam</option><option value="privacy_violation">Privacy violation</option><option value="hateful_content">Hateful content</option><option value="dangerous_content">Dangerous content</option><option value="other">Other</option></select><label for="report-details">Additional details (optional)</label><textarea id="report-details" maxlength="1000" placeholder="Describe what happened…"></textarea><div class="modal-actions"><button id="cancel-report" type="button">Cancel</button><button class="submit-report" id="submit-report" type="button">Send report</button></div></div></div><div class="toast" id="toast" role="status" aria-live="polite"></div><footer>Adventure is just beginning · Built to connect Africa and the world. · <a class="admin-link" href="./admin.html">Admin access</a></footer></div>
 <script type="module">
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2.57.0';
 const supabase=createClient('https://fhjhbkbyglchiiunwohy.supabase.co','sb_publishable_hAnq_0mwuXZowP77K-xluA_yHRhlyhq',{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:true}});
@@ -38,7 +38,7 @@ const sampleProfiles=[
 {name:"Tunde A.",handle:"@tundeconnects",emoji:"🤝",bio:"Building community and creating room for new voices.",tag:"community"},
 {name:"Nia B.",handle:"@niasees",emoji:"📷",bio:"Finding beauty in places people often pass by.",tag:"travel"},
 {name:"Kwame S.",handle:"@kwamesounds",emoji:"🎵",bio:"Music, local stories and the sounds around us.",tag:"culture"}];
-let profiles=sampleProfiles;let liveMode=false;let currentUser=null;let following=new Set();let filter="all";let toastTimer;
+let profiles=sampleProfiles;let liveMode=false;let currentUser=null;let following=new Set();let filter="all";let toastTimer;let reportTarget=null;
 try{const saved=JSON.parse(localStorage.getItem("adventure-demo-follows")||"[]");if(Array.isArray(saved))following=new Set(saved.filter(x=>typeof x==="string"));}catch(e){following=new Set();}
 function escapeHtml(value){return String(value??'').replace(/[&<>"']/g,ch=>{if(ch==='&')return '&amp;';if(ch==='<')return '&lt;';if(ch==='>')return '&gt;';if(ch==='"')return '&quot;';return '&#39;';});}
 function showToast(message){const el=document.querySelector("#toast");if(!el)return;el.textContent=message;el.classList.add("show");clearTimeout(toastTimer);toastTimer=setTimeout(()=>el.classList.remove("show"),2600);}
@@ -48,7 +48,8 @@ function makeCard(p,featured){
  const isFollowing=following.has(id);const action=liveMode?(currentUser?(isFollowing?"Following":"Follow"):"Sign in to follow"):(isFollowing?"Following":"Follow");
  const bio=liveMode?(p.bio||"An Adventurer discovering the world.") : p.bio;
  const extra=liveMode?(p.country||"Adventure member"):handle;
- return '<article class="person"><div class="person-top"><div class="avatar">'+escapeHtml(emoji)+'</div><div><strong>'+escapeHtml(name)+'</strong><div class="handle">'+escapeHtml(extra)+'</div></div></div>'+(featured?'<p>'+escapeHtml(bio)+'</p>':'<div style="flex:1;min-width:0"><p>'+escapeHtml(bio)+'</p></div>')+'<button class="follow '+(isFollowing?'following':'')+'" data-user="'+escapeHtml(id)+'">'+action+'</button></article>';
+ const safetyActions=liveMode&&currentUser?'<div class="profile-actions"><button class="report-profile" data-user="'+escapeHtml(id)+'">Report</button><button class="block-profile" data-user="'+escapeHtml(id)+'">Block</button></div>':'';
+ return '<article class="person"><div class="person-top"><div class="avatar">'+escapeHtml(emoji)+'</div><div><strong>'+escapeHtml(name)+'</strong><div class="handle">'+escapeHtml(extra)+'</div></div></div>'+(featured?'<p>'+escapeHtml(bio)+'</p>':'<div style="flex:1;min-width:0"><p>'+escapeHtml(bio)+'</p></div>')+'<div class="card-actions"><button class="follow '+(isFollowing?'following':'')+'" data-user="'+escapeHtml(id)+'">'+action+'</button>'+safetyActions+'</div></article>';
 }
 function render(){
  document.querySelector('#featured').innerHTML=profiles.slice(0,3).map(p=>makeCard(p,true)).join('');
@@ -91,6 +92,26 @@ document.addEventListener("click",async e=>{
   document.querySelectorAll(".chip").forEach(b=>{b.classList.remove("active");b.setAttribute("aria-pressed","false")});
   e.target.classList.add("active");e.target.setAttribute("aria-pressed","true");filter=e.target.dataset.filter;render();
  }
+});
+document.addEventListener("click",async e=>{
+ if(e.target.matches(".report-profile")){
+  if(!currentUser){location.href="./account.html";return;}
+  reportTarget=e.target.dataset.user;document.querySelector("#report-details").value="";document.querySelector("#report-modal").classList.remove("hidden");document.querySelector("#report-reason").focus();
+ }
+ if(e.target.matches(".block-profile")){
+  if(!currentUser){location.href="./account.html";return;}
+  const id=e.target.dataset.user;if(!confirm("Block this Adventurer? Their profile will disappear from your discovery and any follow between you will be removed."))return;
+  e.target.disabled=true;const result=await supabase.from("blocks").insert({blocker_id:currentUser.id,blocked_id:id});
+  if(result.error){showToast("Could not block this account. Please try again.");e.target.disabled=false;}else{showToast("This account has been blocked.");await loadDirectory();}
+ }
+});
+document.querySelector("#cancel-report").addEventListener("click",()=>{reportTarget=null;document.querySelector("#report-modal").classList.add("hidden");});
+document.querySelector("#submit-report").addEventListener("click",async()=>{
+ if(!currentUser||!reportTarget)return;const b=document.querySelector("#submit-report");b.disabled=true;b.textContent="Sending…";
+ const result=await supabase.from("reports").insert({reporter_id:currentUser.id,reported_user_id:reportTarget,reason:document.querySelector("#report-reason").value,details:document.querySelector("#report-details").value.trim()});
+ b.disabled=false;b.textContent="Send report";
+ if(result.error){showToast("Your report could not be sent. Please try again.");return;}
+ reportTarget=null;document.querySelector("#report-modal").classList.add("hidden");showToast("Thank you. Your report was sent privately to the safety team.");
 });
 document.querySelector("#search").addEventListener("input",render);
 document.querySelectorAll("nav button:disabled").forEach(b=>b.addEventListener("click",()=>showToast(b.textContent+" is planned for a later Adventure update.")));
