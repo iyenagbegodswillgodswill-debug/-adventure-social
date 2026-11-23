@@ -31,7 +31,7 @@ Stores a private report record with reporter, reported account, allowlisted reas
 ## Admin-only tables and functions
 
 ### `private.admin_users`
-Server-managed role registry keyed by Auth user UUID. Supported roles are `owner`, `moderator` and `support`. The table is in the non-exposed `private` schema, has RLS enabled, has no client table grants and has explicit deny policies. No public RPC or client action can grant administrator status. The first owner is provisioned by the trusted project owner through the Supabase SQL Editor; see `docs/ADMIN_OWNER_BOOTSTRAP.md`.
+Server-managed role registry keyed by Auth user UUID. Supported roles are `owner` and `moderator` only. Additional support roles are deferred until a separate least-privilege view is designed. The table is in the non-exposed `private` schema, has RLS enabled, has no client table grants and has explicit deny policies. No public RPC or client action can grant administrator status. The first owner is provisioned by the trusted project owner through the Supabase SQL Editor; see `docs/ADMIN_OWNER_BOOTSTRAP.md`.
 
 ### `private.admin_audit_log`
 Private append-only audit records for privileged changes. Direct client table access is denied. Report status changes are written by a database trigger with actor, action, target, timestamp and old/new status.
