@@ -23,7 +23,10 @@ Last updated: 2026-11-23
 - [x] Admin overview RPCs and RLS policies implemented for administrator-only profile/report access.
 - [x] Report status updates restricted to moderators/owners and recorded in the audit log.
 - [x] Admin dashboard page created with sign-in, overview metrics, report queue, member lookup and audit activity.
-- [x] Public preview footer now links to the private admin sign-in page.
+- [x] Public preview footer links to the private admin sign-in page.
+- [x] Member account page added with sign-in, password-reset request and profile editing for pre-provisioned Auth users.
+- [x] Profile editor supports display name, username, country, bio, interests and explicit discoverability opt-in.
+- [x] Public registration remains disabled; no unverified account creation is exposed.
 - [x] Applied admin migrations saved under `supabase/migrations/` with exact live version prefixes.
 - [x] Supabase Security Advisor returned zero security lints after admin implementation.
 - [x] Performance Advisor no longer reports missing FK indexes or multiple permissive profile policies; remaining unused-index notices are expected on a nearly empty database.
@@ -38,8 +41,9 @@ Last updated: 2026-11-23
 ## Main Adventure experience — remaining work
 
 - [ ] Connect public discovery to real approved/discoverable profiles.
-- [ ] Build safe member registration, email verification, login and password recovery.
-- [ ] Build profile creation/editing and connect real follow/unfollow actions.
+- [ ] Provision test Auth users and verify member sign-in, profile read/write and password recovery end-to-end.
+- [ ] Build controlled member registration and email verification after safety gates pass.
+- [ ] Connect public discovery and real follow/unfollow actions to the database.
 - [ ] Add report and block controls to member profiles.
 - [ ] Implement avatar storage with per-user path restrictions and safe file limits.
 - [ ] Publish privacy information, community rules, retention and account deletion process.
