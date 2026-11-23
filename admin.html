@@ -127,7 +127,7 @@ document.querySelectorAll('[data-view]').forEach(b=>b.addEventListener('click',(
 document.querySelectorAll('[data-jump]').forEach(b=>b.addEventListener('click',()=>showView(b.dataset.jump)));
 $('#reports-list').addEventListener('click',async e=>{const id=e.target.dataset.save;if(!id)return;const select=document.querySelector('[data-status="'+CSS.escape(id)+'"]');if(!select)return;e.target.disabled=true;e.target.textContent='Saving';const {error}=await supabase.from('reports').update({status:select.value}).eq('id',id);if(error){alert('Could not update report: '+error.message);}else{await loadData();}e.target.disabled=false;e.target.textContent='Save';});
 $('#member-search').addEventListener('input',()=>{const q=$('#member-search').value.toLowerCase();$('#members-list').innerHTML=memberRows(members.filter(m=>[m.display_name,m.username,m.country].join(' ').toLowerCase().includes(q)));});
-supabase.auth.onAuthStateChange((_event,session)=>{if(session?.user){checkAccess(session.user);}else{showScreen('login');}});
+supabase.auth.onAuthStateChange((event)=>{if(event==='SIGNED_OUT'){showScreen('login');}});
 const {data:{session}}=await supabase.auth.getSession();if(session?.user){await checkAccess(session.user);}else{showScreen('login');}
 </script>
 </body></html>
