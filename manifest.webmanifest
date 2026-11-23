@@ -1,0 +1,19 @@
+{
+  "name": "Adventure — Your world. Your adventure.",
+  "short_name": "Adventure",
+  "description": "Discover people, stories and fresh perspectives across Africa.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#fbf8ef",
+  "theme_color": "#145c45",
+  "icons": [
+    {
+      "src": "./assets/adventure-icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
