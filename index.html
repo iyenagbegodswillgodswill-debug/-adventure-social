@@ -28,16 +28,74 @@ footer{border-top:1px solid var(--line);padding:17px;text-align:center;color:var
 <section><div class="heading"><h2>Featured Adventurers</h2><small>Community spotlights</small></div><div class="grid" id="featured"></div></section>
 <section id="discover"><div class="heading"><h2>Discover people</h2><small id="count">Suggested profiles</small></div><div class="filters"><button class="chip active" data-filter="all" aria-pressed="true">For you</button><button class="chip" data-filter="culture" aria-pressed="false">Culture</button><button class="chip" data-filter="travel" aria-pressed="false">Travel</button><button class="chip" data-filter="creativity" aria-pressed="false">Creativity</button><button class="chip" data-filter="community" aria-pressed="false">Community</button></div><div class="list" id="people"></div><div class="empty" id="empty">No profiles match that search yet.</div></section>
 </main><div class="toast" id="toast" role="status" aria-live="polite"></div><footer>Adventure is just beginning · Built to connect Africa and the world. · <a class="admin-link" href="./admin.html">Admin access</a></footer></div>
-<script>
-const profiles=[
+<script type="module">
+import { createClient } from 'https://esm.sh/@supabase/supabase-js@2.57.0';
+const supabase=createClient('https://fhjhbkbyglchiiunwohy.supabase.co','sb_publishable_hAnq_0mwuXZowP77K-xluA_yHRhlyhq',{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:true}});
+const sampleProfiles=[
 {name:"Ama K.",handle:"@amakexplores",emoji:"🌻",bio:"Sharing Ghanaian culture, food and everyday discoveries.",tag:"culture"},
 {name:"Kofi D.",handle:"@kofiontheroad",emoji:"🌍",bio:"Curious traveller collecting stories across the continent.",tag:"travel"},
 {name:"Zuri M.",handle:"@madebyzuri",emoji:"🎨",bio:"Art, design and creative ideas inspired by Africa.",tag:"creativity"},
 {name:"Tunde A.",handle:"@tundeconnects",emoji:"🤝",bio:"Building community and creating room for new voices.",tag:"community"},
 {name:"Nia B.",handle:"@niasees",emoji:"📷",bio:"Finding beauty in places people often pass by.",tag:"travel"},
 {name:"Kwame S.",handle:"@kwamesounds",emoji:"🎵",bio:"Music, local stories and the sounds around us.",tag:"culture"}];
-let following=new Set();let filter="all";try{const saved=JSON.parse(localStorage.getItem("adventure-demo-follows")||"[]");if(Array.isArray(saved))following=new Set(saved.filter(x=>typeof x==="string"));}catch(e){following=new Set();}let toastTimer;function showToast(message){const el=document.querySelector("#toast");if(!el)return;el.textContent=message;el.classList.add("show");clearTimeout(toastTimer);toastTimer=setTimeout(()=>el.classList.remove("show"),2600);}
-function makeCard(p,featured){return '<article class="person"><div class="person-top"><div class="avatar">'+p.emoji+'</div><div><strong>'+p.name+'</strong><div class="handle">'+p.handle+'</div></div></div>'+(featured?'<p>'+p.bio+'</p>':'<div style="flex:1;min-width:0"><p>'+p.bio+'</p></div>')+'<button class="follow '+(following.has(p.handle)?'following':'')+'" data-user="'+p.handle+'">'+(following.has(p.handle)?'Following':'Follow')+'</button></article>'}
-function render(){document.querySelector('#featured').innerHTML=profiles.slice(0,3).map(p=>makeCard(p,true)).join('');const q=document.querySelector('#search').value.toLowerCase();const found=profiles.filter(p=>(filter==='all'||p.tag===filter)&&[p.name,p.handle,p.bio,p.tag].join(' ').toLowerCase().includes(q));document.querySelector('#people').innerHTML=found.map(p=>makeCard(p,false)).join('');document.querySelector('#empty').style.display=found.length?'none':'block';document.querySelector('#count').textContent=found.length+' suggested profiles'}
-document.addEventListener("click",e=>{if(e.target.matches(".follow")){const u=e.target.dataset.user;following.has(u)?following.delete(u):following.add(u);try{localStorage.setItem("adventure-demo-follows",JSON.stringify([...following]));}catch(err){}render();showToast(following.has(u)?"Added to your local following list.":"Removed from your local following list.");}if(e.target.matches(".chip")){document.querySelectorAll(".chip").forEach(b=>{b.classList.remove("active");b.setAttribute("aria-pressed","false")});e.target.classList.add("active");e.target.setAttribute("aria-pressed","true");filter=e.target.dataset.filter;render();}});document.querySelector("#search").addEventListener("input",render);document.querySelectorAll("nav button:disabled").forEach(b=>b.addEventListener("click",()=>showToast(b.textContent+" is planned for a later Adventure update.")));document.querySelector('[aria-label="Notifications"]').addEventListener("click",()=>showToast("Notifications will be available when member accounts are built."));let installPrompt=null;window.addEventListener("beforeinstallprompt",e=>{e.preventDefault();installPrompt=e;});document.querySelector("#install-app").addEventListener("click",async()=>{if(installPrompt){installPrompt.prompt();await installPrompt.userChoice;installPrompt=null;}else{showToast("On iPhone: open in Safari, tap Share, then Add to Home Screen. On Android: open the browser menu and choose Install app or Add to Home screen.");}});if("serviceWorker" in navigator){window.addEventListener("load",()=>navigator.serviceWorker.register("./service-worker.js").catch(()=>{}));}render();
+let profiles=sampleProfiles;let liveMode=false;let currentUser=null;let following=new Set();let filter="all";let toastTimer;
+try{const saved=JSON.parse(localStorage.getItem("adventure-demo-follows")||"[]");if(Array.isArray(saved))following=new Set(saved.filter(x=>typeof x==="string"));}catch(e){following=new Set();}
+function showToast(message){const el=document.querySelector("#toast");if(!el)return;el.textContent=message;el.classList.add("show");clearTimeout(toastTimer);toastTimer=setTimeout(()=>el.classList.remove("show"),2600);}
+function matchesFilter(p){if(filter==="all")return true;const hay=[p.tag,p.bio,p.country,...(p.interests||[])].join(" ").toLowerCase();return hay.includes(filter);}
+function makeCard(p,featured){
+ const id=liveMode?p.id:p.handle;const name=liveMode?p.display_name:p.name;const handle=liveMode?(p.username?"@"+p.username:"Adventure member"):p.handle;const emoji=liveMode?"🌍":p.emoji;
+ const isFollowing=following.has(id);const action=liveMode?(currentUser?(isFollowing?"Following":"Follow"):"Sign in to follow"):(isFollowing?"Following":"Follow");
+ const bio=liveMode?(p.bio||"An Adventurer discovering the world.") : p.bio;
+ const extra=liveMode?(p.country||"Adventure member"):handle;
+ return '<article class="person"><div class="person-top"><div class="avatar">'+emoji+'</div><div><strong>'+name+'</strong><div class="handle">'+extra+'</div></div></div>'+(featured?'<p>'+bio+'</p>':'<div style="flex:1;min-width:0"><p>'+bio+'</p></div>')+'<button class="follow '+(isFollowing?'following':'')+'" data-user="'+id+'">'+action+'</button></article>';
+}
+function render(){
+ document.querySelector('#featured').innerHTML=profiles.slice(0,3).map(p=>makeCard(p,true)).join('');
+ const q=document.querySelector('#search').value.toLowerCase();
+ const found=profiles.filter(p=>matchesFilter(p)&&[p.display_name,p.username,p.name,p.handle,p.bio,p.country,p.tag,...(p.interests||[])].join(' ').toLowerCase().includes(q));
+ document.querySelector('#people').innerHTML=found.map(p=>makeCard(p,false)).join('');
+ document.querySelector('#empty').style.display=found.length?'none':'block';
+ document.querySelector('#count').textContent=found.length+(liveMode?' real member profiles':' suggested profiles');
+ document.querySelector('.preview-note').classList.toggle('hidden',liveMode);
+}
+async function loadDirectory(){
+ const {data:{session}}=await supabase.auth.getSession();currentUser=session?.user||null;
+ const {data,error}=await supabase.from('profiles').select('id,username,display_name,bio,country,interests').eq('is_discoverable',true).order('created_at',{ascending:false}).limit(60);
+ if(!error&&data&&data.length){
+  liveMode=true;profiles=data.filter(p=>!currentUser||p.id!==currentUser.id);
+  following=new Set();
+  if(currentUser){
+   const result=await supabase.from('follows').select('followed_id').eq('follower_id',currentUser.id);
+   if(!result.error)following=new Set((result.data||[]).map(x=>x.followed_id));
+  }
+ }else{liveMode=false;profiles=sampleProfiles;}
+ render();
+}
+document.addEventListener("click",async e=>{
+ if(e.target.matches(".follow")){
+  const id=e.target.dataset.user;
+  if(liveMode){
+   if(!currentUser){location.href="./account.html";return;}
+   const already=following.has(id);e.target.disabled=true;
+   const result=already?await supabase.from('follows').delete().eq('follower_id',currentUser.id).eq('followed_id',id):await supabase.from('follows').insert({follower_id:currentUser.id,followed_id:id});
+   if(result.error){showToast("That follow could not be saved. Please try again.");e.target.disabled=false;return;}
+   if(already)following.delete(id);else following.add(id);render();showToast(already?"You unfollowed this Adventurer.":"You're now following this Adventurer.");
+  }else{
+   following.has(id)?following.delete(id):following.add(id);
+   try{localStorage.setItem("adventure-demo-follows",JSON.stringify([...following]));}catch(err){}
+   render();showToast(following.has(id)?"Added to your local demo following list.":"Removed from your local demo following list.");
+  }
+ }
+ if(e.target.matches(".chip")){
+  document.querySelectorAll(".chip").forEach(b=>{b.classList.remove("active");b.setAttribute("aria-pressed","false")});
+  e.target.classList.add("active");e.target.setAttribute("aria-pressed","true");filter=e.target.dataset.filter;render();
+ }
+});
+document.querySelector("#search").addEventListener("input",render);
+document.querySelectorAll("nav button:disabled").forEach(b=>b.addEventListener("click",()=>showToast(b.textContent+" is planned for a later Adventure update.")));
+document.querySelector('[aria-label="Notifications"]').addEventListener("click",()=>showToast("Notifications will be available when member accounts are built."));
+let installPrompt=null;window.addEventListener("beforeinstallprompt",e=>{e.preventDefault();installPrompt=e;});
+document.querySelector("#install-app").addEventListener("click",async()=>{if(installPrompt){installPrompt.prompt();await installPrompt.userChoice;installPrompt=null;}else{showToast("On iPhone: open in Safari, tap Share, then Add to Home Screen. On Android: open the browser menu and choose Install app or Add to Home screen.");}});
+if("serviceWorker" in navigator){window.addEventListener("load",()=>navigator.serviceWorker.register("./service-worker.js").catch(()=>{}));}
+render();loadDirectory().catch(()=>{liveMode=false;profiles=sampleProfiles;render();});
 </script></body></html>
