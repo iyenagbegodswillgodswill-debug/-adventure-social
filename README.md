@@ -30,7 +30,7 @@ The first visit needs an internet connection. The cached preview shell can then 
 
 ## Backend and safety
 
-The separate Adventure Supabase project contains the initial profiles, follows, blocks and reports schema. RLS and least-privilege API grants are enabled. Administrator roles and audit records live in a non-exposed private schema. Registration is not yet connected to the public website; profile editing, avatar uploads, member-facing report/block flows and account suspension are still under development. Do not invite members or enter real personal information yet.
+The separate Adventure Supabase project contains the initial profiles, follows, blocks and reports schema. RLS and least-privilege API grants are enabled. Administrator roles and audit records live in a non-exposed private schema. Public registration remains closed. The member account editor, real discovery/follow flow, profile report/block controls and first admin report queue are implemented but still need authenticated end-to-end tests. Avatar uploads, suspension, account deletion and staffed moderation remain outstanding. Do not invite members or enter real personal information yet.
 
 Database migrations live in `supabase/migrations/`; repeatable configuration checks are in `supabase/tests/security_checks.sql`.
 
