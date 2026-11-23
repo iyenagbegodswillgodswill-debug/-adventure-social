@@ -27,6 +27,8 @@ Last updated: 2026-11-23
 - [x] Member account page added with sign-in, password-reset request and profile editing for pre-provisioned Auth users.
 - [x] Adventurers directory queries real profiles that explicitly opted into discovery, with a clearly labelled sample fallback when no public member profiles exist.
 - [x] Signed-in members can follow and unfollow real profiles through the database; anonymous visitors are directed to member sign-in.
+- [x] Signed-in members can report and block discoverable profiles; database block rules remove existing follows and hide blocked profiles.
+- [x] Admin report status values are aligned with the database allowlist and legacy status constraint was removed.
 - [x] Profile editor supports display name, username, country, bio, interests and explicit discoverability opt-in.
 - [x] Public registration remains disabled; no unverified account creation is exposed.
 - [x] Applied admin migrations saved under `supabase/migrations/` with exact live version prefixes.
@@ -45,7 +47,7 @@ Last updated: 2026-11-23
 - [ ] Connect public discovery to real approved/discoverable profiles.
 - [ ] Provision test Auth users and verify member sign-in, profile read/write and password recovery end-to-end.
 - [ ] Build controlled member registration and email verification after safety gates pass.
-- [ ] Test live discovery and follow/unfollow with two real Auth test accounts, including block and privacy edge cases.
+- [ ] Test live discovery, follow/unfollow, report submission and block behaviour with two real Auth test accounts, including privacy edge cases.
 - [ ] Add report and block controls to member profiles.
 - [ ] Implement avatar storage with per-user path restrictions and safe file limits.
 - [ ] Publish privacy information, community rules, retention and account deletion process.
