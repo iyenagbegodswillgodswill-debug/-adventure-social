@@ -40,14 +40,14 @@ const sampleProfiles=[
 {name:"Kwame S.",handle:"@kwamesounds",emoji:"🎵",bio:"Music, local stories and the sounds around us.",tag:"culture"}];
 let profiles=sampleProfiles;let liveMode=false;let currentUser=null;let following=new Set();let filter="all";let toastTimer;
 try{const saved=JSON.parse(localStorage.getItem("adventure-demo-follows")||"[]");if(Array.isArray(saved))following=new Set(saved.filter(x=>typeof x==="string"));}catch(e){following=new Set();}
-function showToast(message){const el=document.querySelector("#toast");if(!el)return;el.textContent=message;el.classList.add("show");clearTimeout(toastTimer);toastTimer=setTimeout(()=>el.classList.remove("show"),2600);}
+function escapeHtml(value){return String(value??'').replace(/[&<>\"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','\"':'&quot;',\"'\":'&#39;'}[ch]));}\nfunction showToast(message){const el=document.querySelector("#toast");if(!el)return;el.textContent=message;el.classList.add("show");clearTimeout(toastTimer);toastTimer=setTimeout(()=>el.classList.remove("show"),2600);}
 function matchesFilter(p){if(filter==="all")return true;const hay=[p.tag,p.bio,p.country,...(p.interests||[])].join(" ").toLowerCase();return hay.includes(filter);}
 function makeCard(p,featured){
  const id=liveMode?p.id:p.handle;const name=liveMode?p.display_name:p.name;const handle=liveMode?(p.username?"@"+p.username:"Adventure member"):p.handle;const emoji=liveMode?"🌍":p.emoji;
  const isFollowing=following.has(id);const action=liveMode?(currentUser?(isFollowing?"Following":"Follow"):"Sign in to follow"):(isFollowing?"Following":"Follow");
  const bio=liveMode?(p.bio||"An Adventurer discovering the world.") : p.bio;
  const extra=liveMode?(p.country||"Adventure member"):handle;
- return '<article class="person"><div class="person-top"><div class="avatar">'+emoji+'</div><div><strong>'+name+'</strong><div class="handle">'+extra+'</div></div></div>'+(featured?'<p>'+bio+'</p>':'<div style="flex:1;min-width:0"><p>'+bio+'</p></div>')+'<button class="follow '+(isFollowing?'following':'')+'" data-user="'+id+'">'+action+'</button></article>';
+ return '<article class="person"><div class="person-top"><div class="avatar">'+escapeHtml(emoji)+'</div><div><strong>'+escapeHtml(name)+'</strong><div class="handle">'+escapeHtml(extra)+'</div></div></div>'+(featured?'<p>'+escapeHtml(bio)+'</p>':'<div style="flex:1;min-width:0"><p>'+escapeHtml(bio)+'</p></div>')+'<button class="follow '+(isFollowing?'following':'')+'" data-user="'+escapeHtml(id)+'">'+action+'</button></article>';
 }
 function render(){
  document.querySelector('#featured').innerHTML=profiles.slice(0,3).map(p=>makeCard(p,true)).join('');
