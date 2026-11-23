@@ -32,6 +32,12 @@ begin
   if not has_column_privilege('authenticated','public.reports','status','update') then
     raise exception 'FAIL: moderators need status-only update permission';
   end if;
+  if not exists (select 1 from pg_constraint where conrelid='public.reports'::regclass and conname='reports_status_allowed') then
+    raise exception 'FAIL: report status allowlist must be present';
+  end if;
+  if exists (select 1 from pg_constraint where conrelid='public.reports'::regclass and conname='reports_status_check') then
+    raise exception 'FAIL: obsolete report status constraint remains';
+  end if;
   if not has_schema_privilege('anon','private','usage') or not has_function_privilege('anon','private.is_admin()','execute') then
     raise exception 'FAIL: anonymous discovery helper execution must remain available';
   end if;
