@@ -45,7 +45,7 @@ function notice(el,text,error){el.textContent=text;el.classList.remove('hidden')
 function showProfile(show){$('#login-card').classList.toggle('hidden',show);$('#profile-card').classList.toggle('hidden',!show);}
 let currentUser=null;
 async function loadProfile(user){
- currentUser=user;$('#signed-in-as').textContent=user.email||'Signed-in member';
+ currentUser=user;showProfile(true);$('#signed-in-as').textContent=user.email||'Signed-in member';
  const {data,error}=await supabase.from('profiles').select('display_name,username,country,bio,interests,is_discoverable').eq('id',user.id).single();
  if(error){notice($('#profile-message'),'Your profile could not be loaded: '+error.message,true);return;}
  $('#display-name').value=data.display_name||'';$('#username').value=data.username||'';$('#country').value=data.country||'';$('#bio').value=data.bio||'';$('#interests').value=(data.interests||[]).join(', ');$('#discoverable').checked=!!data.is_discoverable;
