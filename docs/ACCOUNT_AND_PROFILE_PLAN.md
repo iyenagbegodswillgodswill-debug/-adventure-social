@@ -106,9 +106,10 @@ Do not put real member data into the current static demo.
 
 - Separate Supabase Auth and the `profiles` table are connected as the account foundation.
 - `account.html` provides email/password sign-in, password-reset request and an authenticated profile editor.
+- The Adventurers directory queries profiles that opted into discovery and persists follow/unfollow actions for signed-in members. It falls back to illustrative local demo profiles when no discoverable member records exist.
 - The editor writes only the approved profile columns through RLS and supports display name, username, country, bio, interests and opt-in discoverability.
 - Public registration is intentionally not exposed until report/block controls, moderation response, deletion and live security tests are ready.
 
 ## Current truth
 
-The public Adventurers directory remains a labelled sample-profile preview with local-only demo follows. The member sign-in/profile editor is committed but has not been tested with real Auth users. There is no public registration, real social graph connection, avatar upload, member report/block UI, suspension workflow or public posting. Keep the preview notice and registration closed until the full launch gates pass.
+The public Adventurers directory remains a labelled sample-profile preview with local-only demo follows. The member sign-in/profile editor is committed but has not been tested with real Auth users. There is no public registration, multi-account end-to-end verification, avatar upload, member report/block UI, suspension workflow or public posting. Keep the preview notice and registration closed until the full launch gates pass.
