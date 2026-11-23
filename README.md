@@ -6,7 +6,7 @@ An Africa-first social platform connecting people, cultures, communities and opp
 
 ## Preview
 
-The current public preview is a mobile-first Adventurers directory with sample profiles, search, interest filters and local-only demo Follow interactions. Sample profiles are illustrative, not real members.
+The mobile-first Adventurers directory now loads real profiles that have opted into discovery and stores follow/unfollow actions for signed-in members. If no discoverable member profiles exist yet, it clearly falls back to illustrative sample profiles and local-only demo follows.
 
 ## Admin Control Centre
 
