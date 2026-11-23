@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#145c45"><meta name="robots" content="noindex,nofollow">
+<title>My Adventure Account</title>
+<style>
+:root{--green:#145c45;--dark:#103d32;--gold:#e8b94f;--cream:#fbf8ef;--ink:#1d2924;--muted:#738078;--line:#e8e9e1}
+*{box-sizing:border-box}body{margin:0;background:#f3f5ef;color:var(--ink);font:15px/1.5 system-ui,-apple-system,sans-serif}button,input,textarea{font:inherit}button,a{cursor:pointer}button:focus-visible,input:focus-visible,textarea:focus-visible,a:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+header{background:var(--green);color:#fff;padding:18px max(18px,calc((100% - 960px)/2));display:flex;justify-content:space-between;align-items:center}.brand{font-size:25px;font-weight:850;letter-spacing:-1px}.brand span{color:var(--gold)}.tag{font-size:11px;color:#d8e8de}header a{color:white;text-decoration:none;font-size:13px;font-weight:700}
+main{width:min(100% - 28px,760px);margin:30px auto 55px}.card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:25px;margin-bottom:18px;box-shadow:0 8px 28px #173f3308}.eyebrow{font-size:10px;text-transform:uppercase;letter-spacing:1.3px;color:var(--green);font-weight:850}.card h1{font-size:27px;letter-spacing:-.8px;margin:4px 0 5px}.muted{color:var(--muted);font-size:13px;margin:0 0 18px}.field{display:grid;gap:6px;margin:14px 0}.field label{font-size:12px;font-weight:750}.field input,.field textarea{width:100%;border:1px solid var(--line);border-radius:10px;padding:11px 12px;background:#fcfdf9;color:var(--ink)}.field textarea{min-height:90px;resize:vertical}.primary{border:0;border-radius:10px;background:var(--green);color:#fff;padding:12px 17px;font-weight:800}.secondary{border:1px solid var(--line);background:#fff;color:var(--dark);padding:10px 14px;border-radius:10px;font-weight:750}.row{display:flex;align-items:center;gap:10px;flex-wrap:wrap}.notice{background:#f5f7f1;color:#5d695f;border-radius:10px;padding:12px 14px;font-size:12px;margin:14px 0}.notice.error{background:#fff0ee;color:#8e3029}.hidden{display:none!important}.privacy{display:flex;gap:10px;align-items:flex-start;padding:13px;border:1px solid var(--line);border-radius:11px;background:#fbfcf8;margin:15px 0}.privacy input{margin-top:4px;accent-color:var(--green)}.privacy strong{display:block;font-size:13px}.privacy span{font-size:12px;color:var(--muted)}.profile-top{display:flex;justify-content:space-between;align-items:center;gap:12px}.profile-badge{background:#eaf2eb;color:var(--green);padding:6px 10px;border-radius:30px;font-size:11px;font-weight:800}.footer{text-align:center;color:var(--muted);font-size:12px}.footer a{color:var(--green)}@media(max-width:550px){header{padding:15px 16px}main{margin:18px auto 35px}.card{padding:19px}.card h1{font-size:24px}}
+</style></head>
+<body>
+<header><div><div class="brand">adventure<span>.</span></div><div class="tag">Your world. Your adventure.</div></div><a href="./index.html">← Back to discovery</a></header>
+<main>
+<section id="login-card" class="card">
+ <div class="eyebrow">Member access</div><h1>Welcome to your Adventure</h1><p class="muted">Sign in to manage your member profile and privacy settings.</p>
+ <div id="login-message" class="notice hidden" role="alert"></div>
+ <form id="login-form">
+  <div class="field"><label for="email">Email address</label><input id="email" type="email" required autocomplete="username"></div>
+  <div class="field"><label for="password">Password</label><input id="password" type="password" required autocomplete="current-password"></div>
+  <div class="row"><button class="primary" id="login-button" type="submit">Sign in</button><button class="secondary" id="forgot" type="button">Reset password</button></div>
+ </form>
+ <div class="notice">New member registration is not open yet. We're completing account safety, privacy and moderation checks before inviting members.</div>
+</section>
+<section id="profile-card" class="card hidden">
+ <div class="profile-top"><div><div class="eyebrow">Your profile</div><h1>Make it yours</h1><p class="muted" id="signed-in-as"></p></div><span class="profile-badge">Member account</span></div>
+ <div id="profile-message" class="notice hidden" role="status"></div>
+ <form id="profile-form">
+  <div class="field"><label for="display-name">Display name</label><input id="display-name" maxlength="80" required></div>
+  <div class="field"><label for="username">Username</label><input id="username" maxlength="24" pattern="[a-z0-9_]{3,24}" placeholder="e.g. ama_explores"><small class="muted">3–24 characters: lowercase letters, numbers or underscores.</small></div>
+  <div class="field"><label for="country">Country</label><input id="country" maxlength="80" placeholder="e.g. Ghana"></div>
+  <div class="field"><label for="bio">About you</label><textarea id="bio" maxlength="280" placeholder="Tell the community a little about yourself."></textarea><small class="muted">Up to 280 characters.</small></div>
+  <div class="field"><label for="interests">Interests</label><input id="interests" maxlength="300" placeholder="Culture, travel, music"><small class="muted">Separate interests with commas. Up to 10.</small></div>
+  <label class="privacy"><input id="discoverable" type="checkbox"><span><strong>Show my profile in discovery</strong>Your profile is private by default. Turn this on only when you're ready to be discovered.</span></label>
+  <div class="row"><button class="primary" id="save-profile" type="submit">Save profile</button><button class="secondary" id="logout" type="button">Sign out</button></div>
+ </form>
+</section>
+<div class="footer">Adventure is just beginning. <a href="./admin.html">Administrator access</a></div>
+</main>
+<script type="module">
+import { createClient } from 'https://esm.sh/@supabase/supabase-js@2.57.0';
+const supabase=createClient('https://fhjhbkbyglchiiunwohy.supabase.co','sb_publishable_hAnq_0mwuXZowP77K-xluA_yHRhlyhq',{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:true}});
+const $=s=>document.querySelector(s);
+function notice(el,text,error){el.textContent=text;el.classList.remove('hidden');el.classList.toggle('error',!!error);}
+function showProfile(show){$('#login-card').classList.toggle('hidden',show);$('#profile-card').classList.toggle('hidden',!show);}
+let currentUser=null;
+async function loadProfile(user){
+ currentUser=user;$('#signed-in-as').textContent=user.email||'Signed-in member';
+ const {data,error}=await supabase.from('profiles').select('display_name,username,country,bio,interests,is_discoverable').eq('id',user.id).single();
+ if(error){notice($('#profile-message'),'Your profile could not be loaded: '+error.message,true);return;}
+ $('#display-name').value=data.display_name||'';$('#username').value=data.username||'';$('#country').value=data.country||'';$('#bio').value=data.bio||'';$('#interests').value=(data.interests||[]).join(', ');$('#discoverable').checked=!!data.is_discoverable;
+ showProfile(true);
+}
+$('#login-form').addEventListener('submit',async e=>{e.preventDefault();const b=$('#login-button');b.disabled=true;b.textContent='Signing in…';$('#login-message').classList.add('hidden');
+ const {data,error}=await supabase.auth.signInWithPassword({email:$('#email').value.trim(),password:$('#password').value});
+ if(error){notice($('#login-message'),error.message,true);}else{await loadProfile(data.user);}
+ b.disabled=false;b.textContent='Sign in';
+});
+$('#forgot').addEventListener('click',async()=>{const email=$('#email').value.trim();if(!email){notice($('#login-message'),'Enter your email address first.',true);return;}
+ const {error}=await supabase.auth.resetPasswordForEmail(email,{redirectTo:location.origin+location.pathname});
+ notice($('#login-message'),error?error.message:'If the address belongs to an account, password reset instructions will be sent.',!!error);
+});
+$('#profile-form').addEventListener('submit',async e=>{e.preventDefault();if(!currentUser)return;const b=$('#save-profile');b.disabled=true;b.textContent='Saving…';$('#profile-message').classList.add('hidden');
+ const interests=$('#interests').value.split(',').map(x=>x.trim()).filter(Boolean);
+ if(interests.length>10){notice($('#profile-message'),'Please choose no more than 10 interests.',true);b.disabled=false;b.textContent='Save profile';return;}
+ const username=$('#username').value.trim().toLowerCase()||null;
+ const payload={display_name:$('#display-name').value.trim(),username,country:$('#country').value.trim()||null,bio:$('#bio').value.trim(),interests,is_discoverable:$('#discoverable').checked};
+ const {error}=await supabase.from('profiles').update(payload).eq('id',currentUser.id);
+ if(error){notice($('#profile-message'),error.message,true);}else{notice($('#profile-message'),'Your profile has been saved.');}
+ b.disabled=false;b.textContent='Save profile';
+});
+async function signOut(){await supabase.auth.signOut();currentUser=null;showProfile(false);}
+$('#logout').addEventListener('click',signOut);
+supabase.auth.onAuthStateChange(event=>{if(event==='SIGNED_OUT'){currentUser=null;showProfile(false);}});
+const {data:{session}}=await supabase.auth.getSession();if(session?.user){await loadProfile(session.user);}else{showProfile(false);}
+</script></body></html>
