@@ -113,7 +113,7 @@ async function loadData(){
  $('#load-message').classList.add('hidden');
  const [overview,reportsResult,membersResult,activityResult]=await Promise.all([
   supabase.rpc('admin_overview'),
-  supabase.from('reports').select('id,reason,details,status,created_at,reported_user_id,reporter_id,reported_post_id,reported_comment_id').order('created_at',{ascending:false}).limit(100),
+  supabase.from('reports').select('id,reason,details,status,created_at,reported_user_id,reporter_id,reported_post_id,reported_comment_id,reported_content_snapshot').order('created_at',{ascending:false}).limit(100),
   supabase.rpc('admin_list_members',{p_limit:300}),
   supabase.rpc('admin_recent_activity',{p_limit:50})
  ]);
@@ -126,11 +126,7 @@ async function loadData(){
  const open=Number(stats.reports_new||0)+Number(stats.reports_reviewing||0);
  $('#m-open').textContent=open.toLocaleString();$('#m-report-total').textContent='All reports: '+Number(stats.reports_total||0).toLocaleString();
  reports=reportsResult.data||[];members=membersResult.data||[];activity=activityResult.data||[];
- const postIds=reports.map(r=>r.reported_post_id).filter(Boolean),commentIds=reports.map(r=>r.reported_comment_id).filter(Boolean);
- const contentById={};
- if(postIds.length){const result=await supabase.from('posts').select('id,body').in('id',postIds);(result.data||[]).forEach(x=>contentById['post:'+x.id]=x.body);}
- if(commentIds.length){const result=await supabase.from('post_comments').select('id,body').in('id',commentIds);(result.data||[]).forEach(x=>contentById['comment:'+x.id]=x.body);}
- reports=reports.map(r=>({...r,reported_content:r.reported_post_id?contentById['post:'+r.reported_post_id]:r.reported_comment_id?contentById['comment:'+r.reported_comment_id]:null}));
+ reports=reports.map(r=>({...r,reported_content:r.reported_content_snapshot||null}));
  $('#overview-reports').innerHTML=reportRows(reports.filter(r=>r.status==='new'||r.status==='reviewing').slice(0,5),true);
  $('#reports-list').innerHTML=reportRows(reports,false);
  $('#members-list').innerHTML=memberRows(members);
