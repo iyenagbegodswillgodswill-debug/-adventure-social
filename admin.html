@@ -213,13 +213,13 @@ async function savePolicy(){
   let penalties;try{penalties=JSON.parse($('#policy-penalties').value||'[]');if(!Array.isArray(penalties))throw new Error();}catch{alert('Penalty levels must be a valid JSON array.');return;}
   Object.assign(payload,{description:$('#policy-description').value.trim(),examples:$('#policy-examples').value.split('\n').map(v=>v.trim()).filter(Boolean),severity:$('#policy-severity').value,penalty_levels:penalties,status:$('#policy-status').value});
   if(!payload.description){alert('Rule description is required.');return;}
-  if(JSON.stringify(penalties)!==JSON.stringify(x.penalty_levels||[])||payload.description!==(x.description||'')||JSON.stringify(payload.examples)!==JSON.stringify(x.examples||[])||payload.severity!==x.severity)payload.version=x.version+1;
+  if(title!==(x.title||'')||payload.description!==(x.description||'')||JSON.stringify(payload.examples)!==JSON.stringify(x.examples||[])||payload.severity!==x.severity||JSON.stringify(penalties)!==JSON.stringify(x.penalty_levels||[]))payload.version=x.version+1;
  }else{
-  Object.assign(payload,{summary:$('#policy-summary').value.trim(),body:$('#policy-body').value.trim()});
+  Object.assign(payload,{summary:$('#policy-summary').value.trim(),body:$('#policy-body').value.trim(),status:$('#policy-status').value});
   if(!payload.summary||!payload.body){alert('Policy summary and full text are required.');return;}
-  if(payload.summary!==(x.summary||'')||payload.body!==(x.body||''))payload.version=x.version+1;
+  if(title!==(x.title||'')||payload.summary!==(x.summary||'')||payload.body!==(x.body||''))payload.version=x.version+1;
  }
- if(payload.status==='active'&&x._kind==='rule'&&!confirm('Make this rule active and visible to members? This does not enable automatic penalties.'))return;
+ if(payload.status==='active'&&!confirm('Make this record active and visible to members? This does not enable automatic penalties.'))return;
  if(payload.status==='retired'&&!confirm('Retire this record? It will no longer appear on the public policies page.'))return;
  const button=$('#policy-save');button.disabled=true;button.textContent='Saving…';
  const table=x._kind==='rule'?'community_rules':'policy_documents';
