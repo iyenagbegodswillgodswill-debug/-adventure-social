@@ -21,7 +21,7 @@ Last updated: 2026-11-24
 
 ### Security review — still open
 - [ ] Review and tighten the `private` schema USAGE grants for anon/authenticated without breaking existing RLS policy helper calls or public wrapper functions. Current inspection confirms both roles have USAGE; do not revoke until dependencies are mapped and regression-tested.
-- [ ] Review exposure of private helper functions, especially `member_is_suspended`, and ensure the public discovery policy still works for anonymous visitors after any hardening.
+- [x] Removed the public RPC wrapper for `member_is_suspended`; the discovery RLS policy now calls the private helper directly. Verified the public wrapper is absent and the policy expression uses the private helper.\n- [ ] Finish review of private-schema USAGE and helper execution grants; anonymous discovery regression test is still outstanding.
 - [ ] Enable Supabase leaked-password protection after reviewing the available Auth setting and testing sign-in/reset behaviour. Security Advisor currently reports this one warning.
 - [ ] Complete authenticated owner, ordinary-member and anonymous smoke tests using dedicated test accounts.
 - [ ] Verify restriction, expiry and reinstatement behaviour end-to-end with a non-owner test account. Do not test by restricting a real member.
