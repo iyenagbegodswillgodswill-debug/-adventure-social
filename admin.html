@@ -42,6 +42,7 @@
    <button data-view="members">♙ &nbsp; Members</button>
    <button data-view="activity">◷ &nbsp; Audit activity</button>
    <button data-view="ai-operations">✦ &nbsp; AI Operations</button>
+   <button data-view="policies">⚖ &nbsp; Rules & policies</button>
   </div></div>
   <div class="side-foot">Private operations area<br><a href="./index.html">View public Adventure</a></div>
  </aside>
@@ -63,6 +64,22 @@
    <section id="view-reports" class="hidden"><div class="welcome"><div><div class="eyebrow">Community protection</div><h1>Reports & safety</h1><p>Review member reports and record the outcome.</p></div><button class="refresh" id="reports-refresh">↻ Refresh</button></div><div class="notice">Report details are confidential. Only the designated owner can access this queue. Status changes are written to the audit log.</div><div class="panel"><div id="reports-list" class="empty">Loading reports…</div></div></section>
    <section id="view-members" class="hidden"><div class="welcome"><div><div class="eyebrow">Community directory</div><h1>Members</h1><p>Review registered profiles and their discovery setting.</p></div><button class="refresh" id="members-refresh">↻ Refresh</button></div><div class="panel"><div class="field"><label for="member-search">Search members</label><input id="member-search" type="search" placeholder="Search display name, username or country"></div><div id="members-list" class="empty">Loading members…</div></div></section>
    <section id="view-ai-operations" class="hidden"><div class="welcome"><div><div class="eyebrow">Owner-assist intelligence</div><h1>AI Operations Manager</h1><p>Recommendations only. You remain in control of every moderation decision.</p></div><button class="refresh" id="ai-refresh">↻ Check status</button></div><div class="notice" id="ai-status">Checking AI service…</div><div class="metrics"><div class="metric"><small>AI mode</small><strong id="ai-mode">—</strong><span class="note">Provider-backed assistance</span></div><div class="metric"><small>Recent reports</small><strong id="ai-report-count">—</strong><span class="note">Latest 100 reports considered</span></div><div class="metric"><small>New reports</small><strong id="ai-new-count">—</strong><span class="note">Awaiting review</span></div><div class="metric"><small>AI runs</small><strong id="ai-runs">—</strong><span class="note">Audit history</span></div></div><div class="panel"><div class="panel-head"><div><h2>Owner briefing</h2><p>Summarise report workload and suggested priorities.</p></div><button class="primary" id="ai-briefing">Generate briefing</button></div><div id="ai-briefing-result" class="empty">No briefing generated in this session.</div></div><div class="panel"><div class="panel-head"><div><h2>Report triage suggestions</h2><p>AI can suggest categories and urgency; it cannot resolve reports or suspend members.</p></div><button class="primary" id="ai-triage">Analyse report queue</button></div><div id="ai-triage-result" class="empty">No triage analysis generated in this session.</div></div><div class="panel"><h2>Safety controls</h2><p class="muted">AI has no permission to ban members, change verification status, message members, or alter reports. All generated outputs are logged. Provider calls remain unavailable until an owner-approved API secret is configured.</p></div><div class="panel"><div class="panel-head"><div><h2>AI run history</h2><p>Private record of owner-requested AI analyses.</p></div><button class="refresh" id="ai-history-refresh">↻ Refresh history</button></div><div id="ai-history" class="empty">No AI runs recorded.</div></div></section>
+   <section id="view-policies" class="hidden">
+    <div class="welcome"><div><div class="eyebrow">Community governance</div><h1>Rules & policies</h1><p>Edit rule penalties and policy drafts. Every change is audit logged.</p></div><button class="refresh" id="policy-refresh">↻ Refresh</button></div>
+    <div class="notice">Member-facing documents remain drafts until explicitly published. Terms and Privacy cannot be activated here because their legal and data-handling details still need final review. Rule penalties are proposed guidance; this dashboard does not automatically punish members.</div>
+    <div class="panel"><div class="panel-head"><div><h2>Catalogue</h2><p>Select a community rule or policy document to edit.</p></div></div><div class="field"><label for="policy-record">Choose record</label><select id="policy-record" style="width:100%;padding:11px;border:1px solid var(--line);border-radius:9px"><option value="">Loading catalogue…</option></select></div><div id="policy-editor" class="hidden">
+     <div class="field"><label for="policy-title">Title</label><input id="policy-title" maxlength="160"></div>
+     <div class="field"><label for="policy-summary">Summary (documents)</label><input id="policy-summary" maxlength="500"></div>
+     <div class="field"><label for="policy-description">Description (rules)</label><textarea id="policy-description" rows="4" style="width:100%;padding:11px;border:1px solid var(--line);border-radius:9px"></textarea></div>
+     <div class="field"><label for="policy-body">Full document text (documents)</label><textarea id="policy-body" rows="9" style="width:100%;padding:11px;border:1px solid var(--line);border-radius:9px"></textarea></div>
+     <div class="field"><label for="policy-examples">Rule examples (one per line)</label><textarea id="policy-examples" rows="3" style="width:100%;padding:11px;border:1px solid var(--line);border-radius:9px"></textarea></div>
+     <div class="field"><label for="policy-severity">Rule severity</label><select id="policy-severity"><option>low</option><option>medium</option><option>high</option><option>critical</option></select></div>
+     <div class="field"><label for="policy-penalties">Penalty levels (JSON)</label><textarea id="policy-penalties" rows="6" style="width:100%;padding:11px;border:1px solid var(--line);border-radius:9px;font-family:monospace"></textarea></div>
+     <div class="field"><label for="policy-status">Status</label><select id="policy-status"><option value="preview">Preview draft</option><option value="active">Active / visible</option><option value="retired">Retired</option></select></div>
+     <p class="muted" id="policy-version"></p><button class="primary" id="policy-save">Save changes</button><span id="policy-save-message" class="muted" style="margin-left:10px"></span>
+    </div></div>
+    <div class="panel"><h2>Current records</h2><div id="policy-list" class="empty">Loading catalogue…</div></div>
+   </section>
    <section id="view-activity" class="hidden"><div class="welcome"><div><div class="eyebrow">Accountability</div><h1>Audit activity</h1><p>Review the recorded administrative changes.</p></div><button class="refresh" id="activity-refresh">↻ Refresh</button></div><div class="panel"><div id="activity-list" class="empty">Loading activity…</div></div></section>
    <div class="smallprint">Adventure Admin · Privileged actions are enforced by the database, not by this page's visibility.</div>
   </div>
@@ -114,7 +131,7 @@ async function checkAccess(user){
  $('#admin-email').textContent=user.email||'Owner';
  const {data,error}=await supabase.rpc('admin_overview');
  if(error||!data){$('#denied-message').textContent='This account is not currently approved as an Adventure administrator. No private information was opened.';showScreen('denied');return;}
- showScreen('app');await loadData();
+ showScreen('app');await loadData();await loadPolicyCatalogue();
 }
 $('#login-form').addEventListener('submit',async e=>{e.preventDefault();const btn=$('#login-button');btn.disabled=true;btn.textContent='Checking access…';$('#login-message').classList.add('hidden');
  const {data,error}=await supabase.auth.signInWithPassword({email:$('#email').value.trim(),password:$('#password').value});
@@ -160,6 +177,61 @@ $('#ai-triage').addEventListener('click',()=>runAiOperation('report_triage'));
 $('#ai-refresh').addEventListener('click',()=>{message($('#ai-status'),'Secure AI endpoint is deployed. Provider readiness is checked when you request an analysis.',false);$('#ai-mode').textContent='Awaiting key';loadAiHistory();});$('#ai-history-refresh').addEventListener('click',loadAiHistory);
 
 $('#members-list').addEventListener('click',async e=>{const id=e.target.dataset.memberSave;if(!id)return;const status=document.querySelector('[data-member-status="'+CSS.escape(id)+'"]').value;const reason=document.querySelector('[data-member-reason="'+CSS.escape(id)+'"]').value.trim();const expiryValue=document.querySelector('[data-member-expiry="'+CSS.escape(id)+'"]').value;const expiresAt=expiryValue?new Date(expiryValue).toISOString():null;if(status!=='active'&&reason.length<3){alert('Please enter a clear reason (at least 3 characters).');return;}if(!confirm('Apply '+status+' status to this member? This action will be recorded in the owner audit log.'))return;e.target.disabled=true;e.target.textContent='Saving…';const {error}=await supabase.rpc('admin_set_member_status',{p_user_id:id,p_status:status,p_reason:reason||null,p_expires_at:expiresAt});if(error){alert('Could not update member: '+error.message);}else{await loadData();}e.target.disabled=false;e.target.textContent='Apply';});
+
+let policyRules=[],policyDocs=[],selectedPolicy=null;
+function policyKey(row,kind){return kind+':'+row.id}
+async function loadPolicyCatalogue(){
+ const picker=$('#policy-record');picker.innerHTML='<option value="">Loading…</option>';
+ const [r,d]=await Promise.all([supabase.from('community_rules').select('*').order('sort_order'),supabase.from('policy_documents').select('*').order('id')]);
+ if(r.error||d.error){$('#policy-list').textContent='Could not load catalogue: '+(r.error||d.error).message;return;}
+ policyRules=r.data||[];policyDocs=d.data||[];
+ const records=[...policyRules.map(x=>({...x,_kind:'rule'})),...policyDocs.map(x=>({...x,_kind:'document'}))];
+ picker.innerHTML='<option value="">Select a record…</option>'+records.map(x=>'<option value="'+escapeHtml(policyKey(x,x._kind))+'">'+escapeHtml((x._kind==='rule'?'Rule · ':'Document · ')+x.title+' ('+x.status+')')+'</option>').join('');
+ $('#policy-list').innerHTML=records.length?'<div class="table-wrap"><table><thead><tr><th>Type</th><th>Title</th><th>Status</th><th>Version</th><th>Updated</th></tr></thead><tbody>'+records.map(x=>'<tr><td>'+escapeHtml(x._kind)+'</td><td>'+escapeHtml(x.title)+'</td><td>'+statusPill(x.status)+'</td><td>'+escapeHtml(x.version)+'</td><td>'+escapeHtml(dateText(x.updated_at))+'</td></tr>').join('')+'</tbody></table></div>':'<div class="empty">No records found.</div>';
+ $('#policy-editor').classList.add('hidden');selectedPolicy=null;
+}
+function selectPolicy(key){
+ const [kind,...parts]=key.split(':');const id=parts.join(':');
+ const row=(kind==='rule'?policyRules:policyDocs).find(x=>x.id===id);selectedPolicy=row?{...row,_kind:kind}:null;
+ if(!selectedPolicy){$('#policy-editor').classList.add('hidden');return;}
+ const x=selectedPolicy;$('#policy-editor').classList.remove('hidden');
+ $('#policy-title').value=x.title||'';$('#policy-summary').value=x.summary||'';
+ $('#policy-description').value=x.description||'';$('#policy-body').value=x.body||'';
+ $('#policy-examples').value=(x.examples||[]).join('\n');$('#policy-severity').value=x.severity||'medium';
+ $('#policy-penalties').value=JSON.stringify(x.penalty_levels||[],null,2);
+ $('#policy-status').value=x.status||'preview';
+ $('#policy-status').disabled=x._kind==='document'&&['terms-of-service','privacy-policy'].includes(x.id);
+ $('#policy-version').textContent='Current version: '+x.version+'. A saved content change automatically increments the version.';
+ $('#policy-save-message').textContent='';
+}
+async function savePolicy(){
+ const x=selectedPolicy;if(!x)return;
+ const title=$('#policy-title').value.trim();if(!title){alert('A title is required.');return;}
+ let payload={title,updated_at:new Date().toISOString()};
+ const changed=title!==(x.title||'');
+ if(x._kind==='rule'){
+  let penalties;try{penalties=JSON.parse($('#policy-penalties').value||'[]');if(!Array.isArray(penalties))throw new Error();}catch{alert('Penalty levels must be a valid JSON array.');return;}
+  Object.assign(payload,{description:$('#policy-description').value.trim(),examples:$('#policy-examples').value.split('\n').map(v=>v.trim()).filter(Boolean),severity:$('#policy-severity').value,penalty_levels:penalties,status:$('#policy-status').value});
+  if(!payload.description){alert('Rule description is required.');return;}
+  if(JSON.stringify(penalties)!==JSON.stringify(x.penalty_levels||[])||payload.description!==(x.description||'')||JSON.stringify(payload.examples)!==JSON.stringify(x.examples||[])||payload.severity!==x.severity)payload.version=x.version+1;
+ }else{
+  Object.assign(payload,{summary:$('#policy-summary').value.trim(),body:$('#policy-body').value.trim()});
+  if(!payload.summary||!payload.body){alert('Policy summary and full text are required.');return;}
+  if(payload.summary!==(x.summary||'')||payload.body!==(x.body||''))payload.version=x.version+1;
+ }
+ if(payload.status==='active'&&x._kind==='rule'&&!confirm('Make this rule active and visible to members? This does not enable automatic penalties.'))return;
+ if(payload.status==='retired'&&!confirm('Retire this record? It will no longer appear on the public policies page.'))return;
+ const button=$('#policy-save');button.disabled=true;button.textContent='Saving…';
+ const table=x._kind==='rule'?'community_rules':'policy_documents';
+ const {error}=await supabase.from(table).update(payload).eq('id',x.id);
+ button.disabled=false;button.textContent='Save changes';
+ if(error){$('#policy-save-message').textContent='Save failed: '+error.message;return;}
+ $('#policy-save-message').textContent='Saved and audit logged.';await loadPolicyCatalogue();
+}
+$('#policy-record').addEventListener('change',e=>selectPolicy(e.target.value));
+$('#policy-save').addEventListener('click',savePolicy);
+$('#policy-refresh').addEventListener('click',loadPolicyCatalogue);
+
 supabase.auth.onAuthStateChange((event)=>{if(event==='SIGNED_OUT'){showScreen('login');}});
 const {data:{session}}=await supabase.auth.getSession();if(session?.user){await checkAccess(session.user);}else{showScreen('login');}
 </script>
