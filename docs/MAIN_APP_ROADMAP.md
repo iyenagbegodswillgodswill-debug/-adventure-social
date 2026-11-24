@@ -72,3 +72,18 @@ Adventure is an Africa-first social platform connecting people, cultures, commun
 ## Current scope limits
 
 The Feed is text-only. Private voice messaging and one-to-one audio/video calling foundations are in place but require authenticated two-member browser testing. Calls currently rely on STUN and require both members to have Messages open; TURN and push notifications are not configured. Photo uploads, avatar uploads, Shorts/video and Communities remain future work. No AI provider is configured. The owner dashboard's AI features remain advisory-only and inactive without explicit provider approval.
+ 
+
+## Africa-first expansion — initial roadmap
+- [x] Create owner-reviewed marketplace listing foundation with pending/active/rejected/sold statuses and favourites data model.
+- [x] Create owner-reviewed business profile foundation.
+- [x] Create owner-reviewed public community and event submission foundations.
+- [x] Create Marketplace, News discovery and Explore Africa pages; connect main navigation.
+- [ ] Add secure listing photos, product detail views, favourites and seller contact workflow.
+- [ ] Add community member join/leave, private groups, community posts and group moderation.
+- [ ] Add event RSVP, organiser contact, event reporting and calendar integration.
+- [ ] Add verified business profile workflow, business insights and sponsored placements only after audience and disclosure controls exist.
+- [ ] Build publisher-attributed, source-linked News feed with licensed/approved feeds and region/category filters.
+- [ ] Add multilingual interface and translation only with explicit privacy and cost review.
+- [ ] Add country-specific currency formatting and location filters; no precise location collection without consent.
+- [ ] Add transactional payments, escrow, buyer protection and delivery partners only after legal, refund, fraud and provider-cost review.
