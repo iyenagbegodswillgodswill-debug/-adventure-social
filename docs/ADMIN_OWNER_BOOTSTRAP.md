@@ -8,27 +8,19 @@ The Admin Control Centre is implemented at `admin.html`. It is connected to the 
 - **Access model:** one owner only; no moderator accounts and no public admin registration.
 - The email is prefilled on the private sign-in page. The database independently verifies the signed-in user's UUID against `private.admin_users` and the `owner` role. The email check in the page is an extra convenience check, not the security boundary.
 
-## One-time owner setup
-
-1. Open the **Adventure** Supabase project.
-2. Go to **Authentication → Users**.
-3. Create an Auth user using `allenjamesl1014@gmail.com`, set a strong unique password, and complete email verification if required.
-4. Copy that user's UUID from the Auth Users list.
-5. Open **SQL Editor** in the Adventure project and run this statement, replacing the placeholder with the exact UUID:
-
-```sql
-insert into private.admin_users (user_id, role)
-values ('REPLACE-WITH-OWNER-USER-UUID', 'owner')
-on conflict (user_id) do update set role = 'owner';
-```
-
-6. Visit `https://iyenagbegodswillgodswill-debug.github.io/-adventure-social/admin.html` and sign in with the owner email and the password you created.
-
 ## Current setup status
 
-The owner Auth account has **not** been created yet. A database lookup confirmed that `allenjamesl1014@gmail.com` is not currently present in this project's Auth users. I cannot create the Auth identity through the connected project tools, and I will not invent a password or write credentials into the repository.
+<badge>Completed</badge>
 
-If the Supabase Dashboard says you do not have access to the Adventure project, first make sure you are signed into the Supabase account that owns the Adventure organization/project. Do not create a different project or invite another admin as a workaround.
+The designated owner Auth account and its single `private.admin_users` owner row are already provisioned in the Adventure project. A live database check confirms exactly one owner row. Do not repeat the one-time insert, create another owner, or add moderator/admin accounts.
+
+To access the console, visit:
+
+`https://iyenagbegodswillgodswill-debug.github.io/-adventure-social/admin.html`
+
+Sign in with the existing designated owner account. Use the password already held by the owner; never store it in this repository or share it in chat.
+
+If owner access is ever lost, recover the existing Auth account through Supabase Auth first. Do not create a second owner as a workaround.
 
 ## Security safeguards
 
