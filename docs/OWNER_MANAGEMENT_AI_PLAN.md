@@ -88,7 +88,7 @@ Build a practical owner control centre for Adventure, supported by an AI Operati
 - [x] Add private case notes, resolution summary, owner-recorded decisions and audit history.
 - [x] Add appeal database and owner review/decision workflow with written reasons.
 - [x] Route report status changes through owner-checked audit-logged RPCs.
-- [ ] Connect member appeal submission and appeal-status display in the main Adventure app.
+- [x] Connect member appeal submission and appeal-status display in the member account page.
 - [ ] Add member notices and proportionate reversible enforcement only after end-to-end review. No automatic permanent bans.
 
 ### Phase 3 — verification centre (deferred for privacy design)
@@ -107,7 +107,7 @@ Build a practical owner control centre for Adventure, supported by an AI Operati
 
 ### Phase 5 — communications and analytics
 - [x] Add owner announcements manager with draft, publish and archive controls and database audit trail.
-- [ ] Connect public announcement display in the main Adventure app.
+- [x] Connect public announcement display in the landing page.
 - [x] Add aggregate 7-day/30-day activity metrics and database governance checks.
 - [ ] Add additional health alerts and deployment monitoring.
 
@@ -133,3 +133,9 @@ Remaining dashboard-to-main-app connections: member appeal submission/status, pu
 
 
 The owner dashboard now includes aggregate analytics and database governance checks. Analytics are limited to counts and activity totals; no private member content is surfaced.
+
+
+## Main app progress — 2026-11-24
+The first main-app feature phase is implemented: a signed-in text Feed with public/followers visibility, likes, comments, post reporting and account-restriction-aware controls. Like/comment counters are maintained by database triggers; clients cannot update them directly. Members with an active restriction can see their own reason/expiry and submit an appeal, while the owner reviews appeals in the dashboard. Published announcements now appear on the landing page.
+
+Remaining main-app phases are tracked in `docs/MAIN_APP_ROADMAP.md`: richer profiles/media, Communities, Adventure Shorts, messaging/notifications and Discover Africa. Keep registration closed until real authenticated browser tests, privacy/legal completion and release gates pass.
