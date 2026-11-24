@@ -24,7 +24,7 @@ Follows store follower/followed account pairs with a composite primary key and n
 Blocks store blocker/blocked pairs with a composite primary key and no-self-block constraint. Members can inspect and manage only blocks they created. A database trigger removes follows in both directions when a block is created. Discovery, post visibility and follow creation check block relationships in both directions.
 
 ### `posts`
-Stores member-authored text posts (1–2,000 characters), author, visibility (`public` or `followers`), publication state and server-maintained like/comment counts. Public posts are visible to signed-in members only when the author has enabled discovery. Followers-only posts are visible to the author's followers. Authors can edit their own post content/visibility while their account is allowed to interact, and can delete their own posts. Owners can inspect posts referenced by reports.
+Stores member-authored text posts (1–2,000 characters), author, visibility (`public` or `followers`), publication state server-maintained like/comment counts and owner moderation metadata. Owners can reversibly hide/restore reported posts through an owner-checked RPC; members cannot edit moderation fields. Public posts are visible to signed-in members only when the author has enabled discovery. Followers-only posts are visible to the author's followers. Authors can edit their own post content/visibility while their account is allowed to interact, and can delete their own posts. Owners can inspect posts referenced by reports.
 
 Suspended authors' posts are hidden from other members. Restricted or suspended accounts cannot create or edit posts. No photo/video upload is enabled yet.
 
@@ -32,7 +32,7 @@ Suspended authors' posts are hidden from other members. Restricted or suspended 
 One row per post/member pair. Members can read their own like rows, add a like to a visible published post and remove only their own like. They cannot directly edit the server-maintained count. A private-schema trigger updates `posts.likes_count`.
 
 ### `post_comments`
-Stores comments (1–1,000 characters) on visible posts. Members can read comments only when they can read the parent post, add comments only while their account can interact, and delete only their own comments. Suspended authors' comments are hidden from other members. A private-schema trigger updates `posts.comments_count`.
+Stores comments (1–1,000 characters) on visible posts. Members can read comments only when they can read the parent post, add comments only while their account can interact, and delete only their own comments. Owners can reversibly hide/restore reported comments; members cannot edit moderation fields. Suspended authors' comments are hidden from other members. A private-schema trigger updates `posts.comments_count`.
 
 ### `reports`
 Stores a private report record with reporter, reported member, optional reported post/comment target, report-time content snapshot, allowlisted reason, bounded details, status and timestamp. The snapshot is captured by a private database trigger and cannot be supplied or edited by a member, so owner review retains the reported text if the original post is later deleted. Authenticated active members can submit a report as themselves. Members cannot read, update or delete report records. Only the owner can review the report queue and case evidence; status changes use owner-checked RPCs and audit records.
@@ -65,13 +65,13 @@ Private history for the owner-only advisory AI operations. The deployed Edge Fun
 - `private.member_can_interact()` blocks write actions for restricted/suspended accounts.
 - `private.member_is_suspended()` and `private.is_blocked_with()` support visibility enforcement.
 - `public.member_can_interact()`, `public.member_can_appeal()` and `public.member_account_status()` are SECURITY INVOKER self-service wrappers; account status returns only the caller's own restriction data.
-- Owner report, appeal, announcement, policy and analytics RPCs use SECURITY INVOKER public wrappers calling owner-checked private helpers.
+- Owner report, appeal, announcement, policy, analytics and reversible content-moderation RPCs use SECURITY INVOKER public wrappers calling owner-checked private helpers.
 
 ## Security implemented
 
 - RLS is enabled on every public table; the database check currently reports zero public tables without RLS.
 - Anonymous users have no access to member posts, likes, comments or appeals. Published announcements and opted-in discoverable profiles are public-readable.
-- Authenticated users cannot directly update post counters, likes or comments.
+- Authenticated users cannot directly set post counters, moderation fields, reaction rows, comment rows, report status or report evidence snapshots.
 - Private report notes, admin roles, audit records and AI operation history remain in the private schema.
 - Account restrictions are enforced in the database for profile edits, follows, blocks, reports, posts, likes and comments.
 - Suspended accounts' content is hidden from other members; blocked relationships suppress discovery and post visibility.
