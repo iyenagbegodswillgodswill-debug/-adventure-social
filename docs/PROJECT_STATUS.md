@@ -52,14 +52,14 @@ Last updated: 2026-11-24 (Owner Rules & Policies Manager added)
 - [ ] Member-facing appeal submission must be connected in the main Adventure app.
 - [ ] Public announcements display must be connected in the main Adventure app.
 - [ ] Verification remains intentionally deferred until consent, non-sensitive collection, private storage, retention/deletion and appeal design are approved. Do not collect identity documents or biometrics yet.
-- [ ] Add aggregate analytics/system-health panel and policy acceptance/version gates before enabling registration.
+- [x] Add aggregate analytics and database governance checks; [ ] add policy acceptance/version gates before enabling registration.
 - [ ] Complete authenticated owner, ordinary-member and anonymous end-to-end browser tests.
 - [ ] Finalise legal Terms and Privacy details before launch.
 
 ## Deployment and release
 - [x] GitHub Pages configured from `main` / root.
 - [x] Latest known deployment run `45491662650` succeeded for commit `312339308f868897003d61c743f4538ae2fbc66e`.
-- [ ] Verify the latest owner dashboard deployment after commits `28bd2a08fe40a517f01b283ed9065478b9768039` and `2355056a477ed479c3bb3beb059d3400be657073`; visually inspect desktop/mobile and complete authenticated owner/non-owner smoke tests.
+- [ ] Verify the latest owner dashboard deployment after latest owner dashboard commit `d41d8cbc8a74dae20300a71bae83a331d2784c10`; visually inspect desktop/mobile and complete authenticated owner/non-owner smoke tests.
 - [ ] Keep public registration closed and the site in preview until security, privacy, moderation and release checks pass.
 
 ## Safety and cost guardrails
@@ -98,7 +98,10 @@ Never place service-role keys, database passwords, AI provider keys or other sec
 - [x] Reworked exposed owner RPCs as SECURITY INVOKER wrappers calling owner-checking private SECURITY DEFINER helpers; Supabase Security Advisor no longer flags those five public RPCs.
 - [x] Split catalogue SELECT and owner write policies to avoid duplicate permissive SELECT policies.
 - [x] Added supporting indexes for new foreign keys.
-- [x] Verified one owner, eight rules, three policy documents, five owner RPCs, RLS on new public tables, and no remaining security findings except leaked-password protection.
+- [x] Added aggregate 7-day/30-day activity metrics and owner-only database governance checks; no individual member content is exposed in analytics.
+- [x] Verified one owner, eight rules, three policy documents, five case/appeal RPCs plus analytics RPC, RLS on new public tables, and no remaining security findings except leaked-password protection.
 - [ ] Live authenticated UI smoke tests still required; a source/database check is not a substitute for signing in as owner and non-owner.
 - [ ] The public GitHub Pages URL could not be inspected with the available page reader in this session; confirm latest Pages deployment before relying on live UI.
 - [ ] Latest performance advisor reports only unused-index notices in the current low-traffic database; no unindexed foreign keys remain.
+
+- [x] Analytics migration `20261124223619_adventure_owner_analytics_health.sql` saved in GitHub and applied to Supabase.
