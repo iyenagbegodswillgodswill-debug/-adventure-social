@@ -23,7 +23,9 @@ begin
   or has_column_privilege('authenticated','public.posts','likes_count','update')
   or has_column_privilege('authenticated','public.posts','comments_count','update')
   or has_column_privilege('authenticated','public.posts','moderation_status','update')
+  or has_column_privilege('authenticated','public.posts','moderation_reason','update')
   or has_column_privilege('authenticated','public.post_comments','moderation_status','update')
+  or has_column_privilege('authenticated','public.post_comments','moderation_reason','update')
   or has_table_privilege('authenticated','public.post_likes','update')
   or has_table_privilege('authenticated','public.post_comments','update') then
   raise exception 'Post counters or reaction/comment rows have unsafe direct update grants';
