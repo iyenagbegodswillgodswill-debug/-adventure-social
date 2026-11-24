@@ -135,7 +135,7 @@ async function checkAccess(user){
  $('#admin-email').textContent=user.email||'Owner';
  const {data,error}=await supabase.rpc('admin_overview');
  if(error||!data){$('#denied-message').textContent='This account is not currently approved as an Adventure administrator. No private information was opened.';showScreen('denied');return;}
- showScreen('app');await loadData();await loadPolicyCatalogue();await loadAppeals();await loadAnnouncements();
+ showScreen('app');await loadData();await loadPolicyCatalogue();await loadReportCases();await loadAppeals();await loadAnnouncements();
 }
 $('#login-form').addEventListener('submit',async e=>{e.preventDefault();const btn=$('#login-button');btn.disabled=true;btn.textContent='Checking access…';$('#login-message').classList.add('hidden');
  const {data,error}=await supabase.auth.signInWithPassword({email:$('#email').value.trim(),password:$('#password').value});
