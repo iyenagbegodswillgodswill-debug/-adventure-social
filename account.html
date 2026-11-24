@@ -34,7 +34,7 @@ main{width:min(100% - 28px,760px);margin:30px auto 55px}.card{background:#fff;bo
   <label class="privacy"><input id="discoverable" type="checkbox"><span><strong>Show my profile in discovery</strong>Your profile is private by default. Turn this on only when you're ready to be discovered.</span></label>
   <div class="row"><button class="primary" id="save-profile" type="submit">Save profile</button><button class="secondary" id="logout" type="button">Sign out</button></div>
  </form>
- <section id="appeal-panel" style="border-top:1px solid var(--line);margin-top:22px;padding-top:20px"><div class="eyebrow">Account review</div><h2 style="font-size:19px;margin:5px 0">Appeal a restriction</h2><p class="muted">If your account has an active restriction or suspension and you believe it was a mistake, you can ask the owner to review it. An appeal does not automatically restore account access.</p><div id="appeal-message" class="notice">Checking appeal eligibility…</div><form id="appeal-form" class="hidden"><div class="field"><label for="appeal-reason">Why should this decision be reviewed?</label><textarea id="appeal-reason" maxlength="2000" minlength="10" required placeholder="Explain your situation respectfully…"></textarea></div><button class="primary" id="appeal-submit" type="submit">Submit appeal</button></form><div id="appeal-history"></div></section>
+ <section id="appeal-panel" style="border-top:1px solid var(--line);margin-top:22px;padding-top:20px"><div class="eyebrow">Account review</div><h2 style="font-size:19px;margin:5px 0">Appeal a restriction</h2><p class="muted">If your account has an active restriction or suspension and you believe it was a mistake, you can ask the owner to review it. An appeal does not automatically restore account access.</p><div id="appeal-message" class="notice">Checking appeal eligibility…</div><form id="appeal-form" class="hidden"><div class="field"><label for="appeal-reason">Why should this decision be reviewed?</label><textarea id="appeal-reason" maxlength="2000" minlength="10" required placeholder="Explain your situation respectfully…"></textarea></div><button class="primary" id="appeal-submit" type="submit">Submit appeal</button></form><div id="appeal-history"></div></section><section id="blocked-panel" style="border-top:1px solid var(--line);margin-top:22px;padding-top:20px"><div class="eyebrow">Privacy controls</div><h2 style="font-size:19px;margin:5px 0">Blocked accounts</h2><p class="muted">Review accounts you have blocked. Unblocking restores the possibility of seeing each other, but does not automatically recreate a follow.</p><div id="blocked-list" class="notice">Loading blocked accounts…</div></section>
 </section>
 <div class="footer">Adventure is just beginning. <a href="./admin.html">Administrator access</a></div>
 </main>
@@ -44,6 +44,24 @@ const supabase=createClient('https://fhjhbkbyglchiiunwohy.supabase.co','sb_publi
 const $=s=>document.querySelector(s);
 function notice(el,text,error){el.textContent=text;el.classList.remove('hidden');el.classList.toggle('error',!!error);}
 function escapeHtml(v){return String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+async function loadBlockedAccounts(user){
+ const {data,error}=await supabase.rpc('member_list_blocked');
+ const host=$('#blocked-list');
+ if(error){notice(host,'Blocked accounts could not be loaded: '+error.message,true);return;}
+ const rows=data||[];
+ if(!rows.length){notice(host,'You have not blocked any accounts.');return;}
+ host.classList.remove('hidden');host.classList.remove('error');
+ host.innerHTML=rows.map(x=>'<div style="display:flex;align-items:center;justify-content:space-between;gap:12px;padding:7px 0"><div><strong>'+escapeHtml(x.display_name||'Adventure member')+'</strong><div class="muted">'+(x.username?'@'+escapeHtml(x.username):'Blocked member')+'</div></div><button class="primary" style="width:auto;padding:9px 13px" data-unblock-user="'+escapeHtml(x.blocked_id)+'">Unblock</button></div>').join('');
+}
+$('#blocked-list').addEventListener('click',async e=>{
+ const button=e.target.closest('[data-unblock-user]');if(!button||!currentUser)return;
+ const id=button.dataset.unblockUser;
+ if(!confirm('Unblock this account?'))return;
+ button.disabled=true;
+ const {error}=await supabase.from('blocks').delete().eq('blocker_id',currentUser.id).eq('blocked_id',id);
+ if(error){notice($('#blocked-list'),'Could not unblock this account: '+error.message,true);return;}
+ await loadBlockedAccounts(currentUser);
+});
 async function loadMemberAppeals(user){
  const [eligibility,history,accountStatus]=await Promise.all([
   supabase.rpc('member_can_appeal'),
@@ -65,7 +83,7 @@ async function loadProfile(user){
  const {data,error}=await supabase.from('profiles').select('display_name,username,country,bio,interests,is_discoverable').eq('id',user.id).single();
  if(error){notice($('#profile-message'),'Your profile could not be loaded: '+error.message,true);return;}
  $('#display-name').value=data.display_name||'';$('#username').value=data.username||'';$('#country').value=data.country||'';$('#bio').value=data.bio||'';$('#interests').value=(data.interests||[]).join(', ');$('#discoverable').checked=!!data.is_discoverable;
- showProfile(true);await loadMemberAppeals(user);
+ showProfile(true);await loadMemberAppeals(user);await loadBlockedAccounts(user);
 }
 $('#login-form').addEventListener('submit',async e=>{e.preventDefault();const b=$('#login-button');b.disabled=true;b.textContent='Signing in…';$('#login-message').classList.add('hidden');
  const {data,error}=await supabase.auth.signInWithPassword({email:$('#email').value.trim(),password:$('#password').value});
