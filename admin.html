@@ -45,6 +45,7 @@
    <button data-view="policies">⚖ &nbsp; Rules & policies</button>
    <button data-view="appeals">↗ &nbsp; Appeals</button>
    <button data-view="announcements">▣ &nbsp; Announcements</button>
+   <button data-view="analytics">◫ &nbsp; Analytics & health</button>
   </div></div>
   <div class="side-foot">Private operations area<br><a href="./index.html">View public Adventure</a></div>
  </aside>
@@ -84,6 +85,7 @@
    </section>
    <section id="view-appeals" class="hidden"><div class="welcome"><div><div class="eyebrow">Fair review process</div><h1>Member appeals</h1><p>Review appeals against account restrictions or suspensions.</p></div><button class="refresh" id="appeals-refresh">↻ Refresh</button></div><div class="notice">Appeal decisions are made by the owner. Approval or rejection requires a written reason; appeals do not automatically change account status.</div><div class="panel"><div id="appeals-list" class="empty">Loading appeals…</div></div></section>
    <section id="view-announcements" class="hidden"><div class="welcome"><div><div class="eyebrow">Platform communication</div><h1>Announcements</h1><p>Prepare updates for members. Drafts remain private until published.</p></div><button class="refresh" id="announcements-refresh">↻ Refresh</button></div><div class="panel"><h2>Create announcement</h2><div class="field"><label for="announcement-title">Title</label><input id="announcement-title" maxlength="160"></div><div class="field"><label for="announcement-body">Message</label><textarea id="announcement-body" rows="5" maxlength="5000" style="width:100%;padding:10px;border:1px solid var(--line);border-radius:8px"></textarea></div><div class="field"><label for="announcement-status">Status</label><select id="announcement-status"><option value="draft">Save as draft</option><option value="published">Publish now</option></select></div><button class="primary" id="announcement-create">Save announcement</button><span id="announcement-message" class="muted"></span></div><div class="panel"><h2>Announcement history</h2><div id="announcements-list" class="empty">Loading announcements…</div></div></section>
+   <section id="view-analytics" class="hidden"><div class="welcome"><div><div class="eyebrow">Platform overview</div><h1>Analytics & system checks</h1><p>Aggregate activity only; no private member content is shown here.</p></div><button class="refresh" id="analytics-refresh">↻ Refresh</button></div><div class="notice" id="analytics-health">Checking database safeguards…</div><div class="metrics"><div class="metric"><small>Members joined · 7 days</small><strong id="an-members7">—</strong><span class="note" id="an-members30">30 days: —</span></div><div class="metric"><small>Follows · 7 days</small><strong id="an-follows7">—</strong><span class="note" id="an-follows30">30 days: —</span></div><div class="metric"><small>Open reports</small><strong id="an-reports">—</strong><span class="note" id="an-reportstotal">Total: —</span></div><div class="metric"><small>Pending appeals</small><strong id="an-appeals">—</strong><span class="note" id="an-announcements">Published announcements: —</span></div></div><div class="panel"><h2>Governance and security checks</h2><div id="analytics-checks" class="empty">Loading checks…</div></div></section>
    <section id="view-activity" class="hidden"><div class="welcome"><div><div class="eyebrow">Accountability</div><h1>Audit activity</h1><p>Review the recorded administrative changes.</p></div><button class="refresh" id="activity-refresh">↻ Refresh</button></div><div class="panel"><div id="activity-list" class="empty">Loading activity…</div></div></section>
    <div class="smallprint">Adventure Admin · Privileged actions are enforced by the database, not by this page's visibility.</div>
   </div>
@@ -135,7 +137,7 @@ async function checkAccess(user){
  $('#admin-email').textContent=user.email||'Owner';
  const {data,error}=await supabase.rpc('admin_overview');
  if(error||!data){$('#denied-message').textContent='This account is not currently approved as an Adventure administrator. No private information was opened.';showScreen('denied');return;}
- showScreen('app');await loadData();await loadPolicyCatalogue();await loadReportCases();await loadAppeals();await loadAnnouncements();
+ showScreen('app');await loadData();await loadPolicyCatalogue();await loadReportCases();await loadAppeals();await loadAnnouncements();await loadAnalytics();
 }
 $('#login-form').addEventListener('submit',async e=>{e.preventDefault();const btn=$('#login-button');btn.disabled=true;btn.textContent='Checking access…';$('#login-message').classList.add('hidden');
  const {data,error}=await supabase.auth.signInWithPassword({email:$('#email').value.trim(),password:$('#password').value});
@@ -182,6 +184,29 @@ $('#ai-refresh').addEventListener('click',()=>{message($('#ai-status'),'Secure A
 
 $('#members-list').addEventListener('click',async e=>{const id=e.target.dataset.memberSave;if(!id)return;const status=document.querySelector('[data-member-status="'+CSS.escape(id)+'"]').value;const reason=document.querySelector('[data-member-reason="'+CSS.escape(id)+'"]').value.trim();const expiryValue=document.querySelector('[data-member-expiry="'+CSS.escape(id)+'"]').value;const expiresAt=expiryValue?new Date(expiryValue).toISOString():null;if(status!=='active'&&reason.length<3){alert('Please enter a clear reason (at least 3 characters).');return;}if(!confirm('Apply '+status+' status to this member? This action will be recorded in the owner audit log.'))return;e.target.disabled=true;e.target.textContent='Saving…';const {error}=await supabase.rpc('admin_set_member_status',{p_user_id:id,p_status:status,p_reason:reason||null,p_expires_at:expiresAt});if(error){alert('Could not update member: '+error.message);}else{await loadData();}e.target.disabled=false;e.target.textContent='Apply';});
 
+
+
+async function loadAnalytics(){
+ const {data,error}=await supabase.rpc('admin_platform_analytics');
+ if(error){message($('#analytics-health'),'Analytics could not be loaded: '+error.message,true);return;}
+ const d=data||{};
+ const fmt=v=>Number(v||0).toLocaleString();
+ $('#an-members7').textContent=fmt(d.members_7d);$('#an-members30').textContent='30 days: '+fmt(d.members_30d);
+ $('#an-follows7').textContent=fmt(d.follows_7d);$('#an-follows30').textContent='30 days: '+fmt(d.follows_30d);
+ $('#an-reports').textContent=fmt(d.reports_open);$('#an-reportstotal').textContent='Total: '+fmt(d.reports_total);
+ $('#an-appeals').textContent=fmt(d.appeals_pending);$('#an-announcements').textContent='Published announcements: '+fmt(d.announcements_published);
+ const checks=[
+  ['Owner accounts',d.owner_count===1?'PASS':'CHECK · '+fmt(d.owner_count)],
+  ['Public tables without RLS',Number(d.public_tables_without_rls)===0?'PASS':'CHECK · '+fmt(d.public_tables_without_rls)],
+  ['Community rules awaiting review',fmt(d.rules_preview)],
+  ['Policy documents awaiting review',fmt(d.policies_preview)],
+  ['AI operation runs',fmt(d.ai_runs)]
+ ];
+ $('#analytics-checks').innerHTML='<div class="table-wrap"><table><tbody>'+checks.map(x=>'<tr><td>'+escapeHtml(x[0])+'</td><td><strong>'+escapeHtml(x[1])+'</strong></td></tr>').join('')+'</tbody></table></div>';
+ const safe=d.owner_count===1&&Number(d.public_tables_without_rls)===0;
+ message($('#analytics-health'),safe?'Database governance checks passed: one owner and RLS enabled on all public tables. This is not a substitute for live account testing.':'A database governance check needs owner attention. Review the checks below.',!safe);
+}
+$('#analytics-refresh').addEventListener('click',loadAnalytics);
 
 let reportCases=[];
 async function loadReportCases(){
