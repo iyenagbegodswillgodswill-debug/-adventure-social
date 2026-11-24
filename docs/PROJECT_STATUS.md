@@ -1,6 +1,6 @@
 # Adventure — Project Status
 
-Last updated: 2026-11-24
+Last updated: 2026-11-24 (Terms & Policies preview added)
 
 ## Current milestone: Owner Control Centre hardening
 
@@ -66,3 +66,16 @@ Never place service-role keys, database passwords, AI provider keys or other sec
 ## Working documents
 - Owner AI roadmap: `docs/OWNER_MANAGEMENT_AI_PLAN.md`
 - Owner bootstrap guide: `docs/ADMIN_OWNER_BOOTSTRAP.md`
+
+
+## Community Rules & Terms/Policies — preview foundation added
+- [x] Created public `policies.html`, linked from the homepage footer.
+- [x] Added a database-backed Community Guidelines catalogue with eight stable rule IDs, severity labels, examples, versions and rule-specific graduated penalty ladders.
+- [x] Added versioned Terms of Service, Privacy Policy and Community Guidelines document records.
+- [x] Public policy tables are read-only for members/anonymous visitors; owner-only database policies govern management.
+- [x] All policy records currently have `preview` status. The page clearly states that these are drafts, not effective member contracts or automatic enforcement settings.
+- [ ] Finalise and owner-approve legal Terms and Privacy details before launch, including controller/contact details, retention, deletion, lawful bases and jurisdiction.
+- [ ] Add member acceptance records and require acceptance of the current policy version before member features/registration are enabled.
+- [ ] Add rule-linked evidence review, AI classification recommendations, proportionate reversible enforcement, appeals, repeat-offender handling and audit history.
+- [ ] Do not enable automatic penalties until rule wording, thresholds, appeal handling and false-positive safeguards are approved and tested.
+- [ ] Keep public registration closed.
