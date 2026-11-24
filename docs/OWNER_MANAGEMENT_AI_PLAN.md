@@ -63,13 +63,15 @@ Build a practical owner control centre for Adventure, supported by an AI Operati
 ### Phase 1 — owner member operations and governance
 - [x] Implement member directory account statuses.
 - [x] Implement owner-checked restriction/suspension/reinstatement with reason, optional expiry and audit logging.
-- [x] Add Rules & Policies Manager with owner-only editing, publication safeguards and audit trail.\n- [ ] Add member notifications, appeal workflow and automated expiry handling.\n- [ ] Add policy acceptance records and version gates before opening registration.
+- [x] Add Rules & Policies Manager with owner-only editing, publication safeguards and audit trail.
+- [ ] Add member notifications and automated expiry handling.
+- [ ] Add policy acceptance records and version gates before opening registration.
 - [ ] Complete owner, ordinary-member and anonymous end-to-end tests.
 
-### Phase 2 — reports, appeals and verification centre\n- [ ] Link reports to specific community rule IDs and evidence metadata.\n- [ ] Add private case notes, escalation, appeal submissions and owner decisions.\n- [ ] Add proportionate reversible enforcement recommendations; no automatic permanent bans.\n\n### Phase 3 — verification centre
-- [ ] Define categories, consent, criteria, retention and appeal rules.
-- [ ] Implement private evidence submission/storage and strict access controls.
-- [ ] Build application queue, review history, owner decision and member notifications.
+### Phase 2 — reports and appeals (owner workflow implemented; member connection pending)\n- [x] Link report cases to community rule IDs and priority. Evidence uploads are deliberately not supported yet; no sensitive evidence is collected.\n- [x] Add private case notes, resolution summary, owner-recorded decisions and audit history.\n- [x] Add appeal database and owner review/decision workflow with written reasons.\n- [x] Route report status changes through owner-checked audit-logged RPCs.\n- [ ] Connect member appeal submission and appeal-status display in the main Adventure app.\n- [ ] Add member notices and proportionate reversible enforcement only after end-to-end review. No automatic permanent bans.\n\n### Phase 3 — verification centre (deferred for privacy design)
+- [ ] Define categories, consent, criteria, retention and appeal rules before collecting verification data.
+- [ ] Do not collect identity documents, biometric data or sensitive evidence until private storage, access controls and deletion/retention are designed and tested.
+- [ ] Build application queue, review history, owner decision and member notifications after the privacy design is approved.
 - [ ] Test unauthorized evidence access and deletion/retention.
 
 ### Phase 4 — AI Operations Manager
@@ -81,7 +83,8 @@ Build a practical owner control centre for Adventure, supported by an AI Operati
 - [ ] Add global pause switch; recommendations only at first.
 
 ### Phase 5 — communications and analytics
-- [ ] Build owner-approved announcements and delivery records.
+- [x] Add owner announcements manager with draft, publish and archive controls and database audit trail.
+- [ ] Connect public announcement display in the main Adventure app.
 - [ ] Add aggregate analytics and health alerts.
 
 ### Phase 6 — release readiness
@@ -95,3 +98,11 @@ Build a practical owner control centre for Adventure, supported by an AI Operati
 - Do not modify Mktradehome, Data2Coin or BIGMK Furniture.
 - Do not claim a phase complete until deployed and verified.
 - Do not incur paid costs or send member data to an AI provider without explicit approval.
+
+
+## Dashboard delivery update — 2026-11-24
+The owner dashboard now includes the report case workflow, appeals review queue and announcements manager. Report and appeal operations use owner-checked private helpers behind SECURITY INVOKER public RPCs. Case notes stay in the private schema; appeal members can only read their own records; published announcements are public-read while drafts remain owner-only. Report status, case changes, appeal decisions and announcement changes are audit logged.
+
+The five exposed owner RPCs were changed to SECURITY INVOKER wrappers after the Supabase Security Advisor flagged public SECURITY DEFINER entrypoints. A fresh security check no longer reports those functions. The remaining Security Advisor warning is leaked-password protection being disabled; this setting still needs an owner-side Auth configuration review.
+
+Remaining dashboard-to-main-app connections: member appeal submission/status, public announcements display, policy acceptance/version gates and aggregate analytics. Verification is deliberately deferred until consent, evidence handling, retention and deletion safeguards are designed. No paid AI provider has been enabled, and registration remains closed.
