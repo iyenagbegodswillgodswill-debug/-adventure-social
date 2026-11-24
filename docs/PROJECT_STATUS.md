@@ -133,3 +133,13 @@ Never place service-role keys, database passwords, AI provider keys or other sec
 - [ ] Public registration remains closed; no AI provider or paid service has been enabled.
 
 Roadmap: `docs/MAIN_APP_ROADMAP.md`. Data model review: `docs/DATA_MODEL_AND_RLS_REVIEW.md`.
+
+
+### Private voice messaging — foundation added (2026-11-24)
+- [x] Added `message_type`, private media path and duration metadata to direct messages; existing text messages remain compatible.
+- [x] Created private `adventure-voice` Storage bucket with a 3 MB upload limit and audio-only MIME allowlist.
+- [x] Storage upload/listen/delete policies scope files to conversation participants and the sender's own upload path.
+- [x] Messages page adds microphone recording, local playback preview, discard, voice-note send/playback and optional browser speech-to-text.
+- [x] Voice-to-text is optional and asks before using the browser speech-recognition service; no AI provider key or paid AI calls were added.
+- [ ] Test real two-member voice upload/playback, blocked-member access, browser microphone permissions and speech-to-text on supported browsers before calling this production-ready.
+- [ ] Full AI-powered transcription, translation or message rewrite remains inactive until the owner approves an AI provider, data-sharing scope and any usage budget.
