@@ -98,12 +98,12 @@ Build a practical owner control centre for Adventure, supported by an AI Operati
 - [ ] Test unauthorized evidence access and deletion/retention.
 
 ### Phase 4 — AI Operations Manager
-- [ ] Confirm provider, data-sharing boundaries and acceptable cost with owner.
-- [ ] Implement provider-neutral server-side function and secrets configuration.
-- [ ] Start with report classification, duplicate suggestions, case summaries and daily owner briefings.
-- [ ] Add owner review/approval and AI audit events.
-- [ ] Evaluate false positives, missed severe cases, prompt injection, privacy and cost.
-- [ ] Add global pause switch; recommendations only at first.
+- [x] Deploy owner-gated JWT-protected server-side operations function and private run history.
+- [x] Add advisory daily briefing and report-triage operations; no member/account changes are permitted.
+- [x] Keep reports as untrusted input and log operation outcomes privately.
+- [ ] Confirm provider, data-sharing boundaries and acceptable cost with owner before configuring a provider key.
+- [ ] Evaluate false positives, missed severe cases, prompt injection, privacy and cost before any broader use.
+- [ ] Keep owner approval and a global pause switch; recommendations only.
 
 ### Phase 5 — communications and analytics
 - [x] Add owner announcements manager with draft, publish and archive controls and database audit trail.
@@ -129,7 +129,7 @@ The owner dashboard now includes the report case workflow, appeals review queue 
 
 The five exposed owner RPCs were changed to SECURITY INVOKER wrappers after the Supabase Security Advisor flagged public SECURITY DEFINER entrypoints. A fresh security check no longer reports those functions. The remaining Security Advisor warning is leaked-password protection being disabled; this setting still needs an owner-side Auth configuration review.
 
-Remaining dashboard-to-main-app connections: member appeal submission/status, public announcements display, policy acceptance/version gates and aggregate analytics. Verification is deliberately deferred until consent, evidence handling, retention and deletion safeguards are designed. No paid AI provider has been enabled, and registration remains closed.
+Member appeal submission/status, public announcements display and aggregate analytics are now connected. Remaining dashboard/release connections are policy acceptance/version gates, complete legal/privacy details, the verification privacy design and authenticated end-to-end testing. Verification is deliberately deferred until consent, evidence handling, retention and deletion safeguards are designed. No paid AI provider has been enabled, and registration remains closed.
 
 
 The owner dashboard now includes aggregate analytics and database governance checks. Analytics are limited to counts and activity totals; no private member content is surfaced.
