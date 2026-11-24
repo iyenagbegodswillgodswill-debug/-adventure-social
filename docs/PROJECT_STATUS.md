@@ -40,6 +40,8 @@ Last updated: 2026-11-24
 - [x] Database role checks now accept only the `owner` role; a unique partial index enforces a single owner row.
 - [x] Report review, admin overview and audit activity authorization are owner-only at the database layer.
 - [x] Owner-only access migration saved as `supabase/migrations/20261124204517_adventure_owner_only_admin_access.sql` and applied to the Adventure database.
+- [x] Simulated non-owner authenticated access: owner checks returned false and report visibility returned zero rows.
+- [x] Supabase Security Advisor returned zero security lints after owner-only hardening.
 - [ ] Create and provision the first owner Auth account using `docs/ADMIN_OWNER_BOOTSTRAP.md`.
 - [ ] Run authenticated owner, ordinary-member and anonymous access tests after the owner Auth account is provisioned.
 - [ ] Verify report status update and audit trail end-to-end using a real test report after owner login is available.
