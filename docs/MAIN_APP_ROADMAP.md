@@ -8,7 +8,7 @@ Adventure is an Africa-first social platform connecting people, cultures, commun
 
 - [x] Adventurers directory with discoverable real member profiles and clearly labelled sample fallback for anonymous preview visitors.
 - [x] Member sign-in and profile editing; new registration remains disabled.
-- [x] Follow/unfollow, block and profile reporting.
+- [x] Follow/unfollow, block and profile reporting, plus account-page unblock management.
 - [x] Text Feed for signed-in members.
 - [x] Create text posts up to 2,000 characters.
 - [x] Public or followers-only post visibility, enforced by RLS.
