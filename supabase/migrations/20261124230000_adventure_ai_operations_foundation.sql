@@ -22,3 +22,24 @@ as $$
 $$;
 revoke all on function private.ai_operations_is_owner() from public, anon;
 grant execute on function private.ai_operations_is_owner() to authenticated;
+
+grant select on private.ai_operations_runs to authenticated;
+create policy ai_operations_owner_read on private.ai_operations_runs for select to authenticated
+using (private.ai_operations_is_owner());
+create or replace function private.admin_ai_operations_recent(p_limit integer default 10)
+returns table(id uuid, operation text, status text, model text, output jsonb, created_at timestamptz)
+language plpgsql security definer set search_path = ''
+as $$
+begin
+  if not private.ai_operations_is_owner() then raise exception 'owner access required' using errcode = '42501'; end if;
+  return query select r.id,r.operation,r.status,r.model,r.output,r.created_at from private.ai_operations_runs r order by r.created_at desc limit greatest(1,least(coalesce(p_limit,10),50));
+end;
+$$;
+revoke all on function private.admin_ai_operations_recent(integer) from public, anon;
+grant execute on function private.admin_ai_operations_recent(integer) to authenticated;
+create or replace function public.admin_ai_operations_recent(p_limit integer default 10)
+returns table(id uuid, operation text, status text, model text, output jsonb, created_at timestamptz)
+language sql stable security invoker set search_path = ''
+as $$ select * from private.admin_ai_operations_recent(p_limit); $$;
+revoke all on function public.admin_ai_operations_recent(integer) from public, anon;
+grant execute on function public.admin_ai_operations_recent(integer) to authenticated;
