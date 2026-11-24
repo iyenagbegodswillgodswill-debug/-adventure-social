@@ -55,7 +55,7 @@ Last updated: 2026-11-24 (Owner Rules & Policies Manager added)
 ## Deployment and release
 - [x] GitHub Pages configured from `main` / root.
 - [x] Latest known deployment run `45491662650` succeeded for commit `312339308f868897003d61c743f4538ae2fbc66e`.
-- [ ] Visually inspect the live owner dashboard on desktop and mobile and complete authenticated smoke tests.
+- [ ] Verify the latest owner dashboard deployment after the Rules & Policies Manager commits; visually inspect desktop/mobile and complete authenticated owner/non-owner smoke tests.
 - [ ] Keep public registration closed and the site in preview until security, privacy, moderation and release checks pass.
 
 ## Safety and cost guardrails
@@ -72,7 +72,7 @@ Never place service-role keys, database passwords, AI provider keys or other sec
 - [x] Created public `policies.html`, linked from the homepage footer.
 - [x] Added a database-backed Community Guidelines catalogue with eight stable rule IDs, severity labels, examples, versions and rule-specific graduated penalty ladders.
 - [x] Added versioned Terms of Service, Privacy Policy and Community Guidelines document records.
-- [x] Public policy tables are read-only for members/anonymous visitors; owner-only database policies govern management.\n- [x] Added Rules & Policies Manager inside the existing owner dashboard: edit rules, examples, severity, penalty ladders and policy drafts; publish/retire supported records.\n- [x] Policy catalogue changes create private owner audit entries through a database trigger.\n- [x] Terms and Privacy activation is deliberately locked until their missing legal/privacy details are finalised.
+- [x] Public policy tables are read-only for members/anonymous visitors; owner-only database policies govern management.\n- [x] Added Rules & Policies Manager inside the existing owner dashboard: edit rules, examples, severity, penalty ladders and policy drafts; publish/retire supported records.\n- [x] Policy catalogue changes create private owner audit entries through a database trigger.\n- [x] Audit trigger migration is saved in `supabase/migrations/20261124235000_adventure_policy_catalogue_audit.sql`.\n- [x] Terms and Privacy activation is deliberately locked until their missing legal/privacy details are finalised.
 - [x] All policy records currently have `preview` status. The page clearly states that these are drafts, not effective member contracts or automatic enforcement settings.
 - [ ] Finalise and owner-approve legal Terms and Privacy details before launch, including controller/contact details, retention, deletion, lawful bases and jurisdiction.
 - [ ] Add member acceptance records and require acceptance of the current policy version before member features/registration are enabled.\n- [ ] Add report-to-rule linking, evidence handling, appeals and reviewed enforcement.
