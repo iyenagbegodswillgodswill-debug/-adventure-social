@@ -1,0 +1,1 @@
+create index direct_conversations_created_by_idx on public.direct_conversations(created_by);
