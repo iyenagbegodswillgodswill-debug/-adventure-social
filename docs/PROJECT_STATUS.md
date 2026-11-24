@@ -128,8 +128,9 @@ Never place service-role keys, database passwords, AI provider keys or other sec
 - [x] Added indexes for the two content-moderation actor foreign keys; the performance advisor now reports zero unindexed foreign keys.
 - [x] JavaScript syntax checks passed for `index.html`, `account.html` and `admin.html`; static UI reference checks passed.
 - [ ] Real owner/member browser tests and a two-member privacy/block/follow test remain outstanding.
-- [ ] Latest Pages workflow is queued; confirm successful deployment and perform mobile/desktop smoke tests.
-- [ ] Photo/avatar uploads, Shorts/video, Communities, messaging and real-time notifications are not implemented yet.
+- [ ] Complete real owner/member browser tests and mobile/desktop smoke tests against the current Pages deployment.
+- [x] Private one-to-one text and voice messaging foundation; audio/video calling UI and private WebRTC signalling added, pending two-member call tests.
+- [ ] Photo/avatar uploads, Shorts/video, Communities and push notifications remain future work.
 - [ ] Public registration remains closed; no AI provider or paid service has been enabled.
 
 Roadmap: `docs/MAIN_APP_ROADMAP.md`. Data model review: `docs/DATA_MODEL_AND_RLS_REVIEW.md`.
@@ -144,6 +145,18 @@ Roadmap: `docs/MAIN_APP_ROADMAP.md`. Data model review: `docs/DATA_MODEL_AND_RLS
 - [ ] Test real two-member voice upload/playback, blocked-member access, browser microphone permissions and speech-to-text on supported browsers before calling this production-ready.
 - [ ] Full AI-powered transcription, translation or message rewrite remains inactive until the owner approves an AI provider, data-sharing scope and any usage budget.
 
-- [x] Voice-message migration is aligned: 38 live Supabase migrations and 38 repository migration files, with no missing voice migration.
+- [x] Voice-message migration is aligned with the live migration history.
 - [x] Voice schema, private bucket, 3 Storage policies and message metadata verified in the live database; Messages JavaScript syntax and static DOM selectors pass.
-- [ ] Latest Pages workflow run `45508580168` is still in progress; do not treat the new voice UI as deployed until it succeeds.
+- [x] Voice messaging Pages deployment workflow `45508580168` completed successfully.
+
+
+### Private audio/video calls — foundation added (2026-11-24)
+- [x] Added one-to-one audio and video call controls to the Messages conversation header.
+- [x] Added incoming-call screen with accept/decline, outgoing-call timeout, mute, camera toggle and hang-up controls.
+- [x] Added WebRTC peer connection and Supabase private Realtime broadcast signalling for offers, answers, ICE candidates and call state.
+- [x] Added four Realtime RLS policies scoped to the conversation participants, active member status and block checks; call invitation policy is separately hardened against blocked members.
+- [x] Call signalling policies and migration history are present in the live Supabase database; messages.html JavaScript syntax and static selector checks pass.
+- [ ] Confirm Supabase Realtime Allow public access is disabled so private-channel RLS is enforced.
+- [ ] Test actual two-member incoming/outgoing calls, microphone/camera permissions, decline, busy, disconnect and blocked-member denial on mobile and desktop.
+- [ ] Current WebRTC configuration uses STUN only. A TURN relay may be needed for restrictive mobile/Wi-Fi networks; do not add a paid relay without owner approval.
+- [ ] Calls require both members to have Adventure Messages open; background/push incoming-call notifications are not implemented.
