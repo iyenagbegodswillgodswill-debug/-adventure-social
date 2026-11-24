@@ -52,12 +52,13 @@ begin
 
  if not has_function_privilege('authenticated','public.member_can_interact()','execute')
   or not has_function_privilege('authenticated','public.member_can_appeal()','execute')
-  or not has_function_privilege('authenticated','public.member_account_status()','execute') then
+  or not has_function_privilege('authenticated','public.member_account_status()','execute')
+  or not has_function_privilege('authenticated','public.member_list_blocked()','execute') then
   raise exception 'Member self-service status functions are not available to authenticated users';
  end if;
 
  if exists(select 1 from pg_proc p join pg_namespace n on n.oid=p.pronamespace
-  where n.nspname='public' and p.proname in ('member_can_interact','member_can_appeal','member_account_status','admin_save_report_case','admin_list_report_cases','admin_review_appeal','admin_list_appeals','admin_update_report_status','admin_platform_analytics','admin_moderate_reported_content') and p.prosecdef) then
+  where n.nspname='public' and p.proname in ('member_can_interact','member_can_appeal','member_account_status','admin_save_report_case','admin_list_report_cases','admin_review_appeal','admin_list_appeals','admin_update_report_status','admin_platform_analytics','admin_moderate_reported_content','member_list_blocked') and p.prosecdef) then
   raise exception 'An exposed public RPC is unexpectedly SECURITY DEFINER';
  end if;
 
