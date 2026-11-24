@@ -1,6 +1,6 @@
 # Adventure — Project Status
 
-Last updated: 2026-11-23
+Last updated: 2026-11-24
 
 ## Current milestone: Admin foundation and member experience
 
@@ -37,9 +37,11 @@ Last updated: 2026-11-23
 
 ## Admin Control Centre — remaining work
 
+- [x] Database role checks now accept only the `owner` role; a unique partial index enforces a single owner row.
+- [x] Report review, admin overview and audit activity authorization are owner-only at the database layer.
 - [ ] Create and provision the first owner Auth account using `docs/ADMIN_OWNER_BOOTSTRAP.md`.
-- [ ] Run authenticated owner, ordinary-member and anonymous access tests.
-- [ ] Verify report status update and audit trail end-to-end using a real test report.
+- [ ] Run authenticated owner, ordinary-member and anonymous access tests after the owner Auth account is provisioned.
+- [ ] Verify report status update and audit trail end-to-end using a real test report after owner login is available.
 - [ ] Add member suspension/reinstatement only after the status and appeal model is designed.
 
 ## Main Adventure experience — remaining work
