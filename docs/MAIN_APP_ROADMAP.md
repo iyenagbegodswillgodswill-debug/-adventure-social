@@ -13,7 +13,8 @@ Adventure is an Africa-first social platform connecting people, cultures, commun
 - [x] Create text posts up to 2,000 characters.
 - [x] Public or followers-only post visibility, enforced by RLS.
 - [x] Like/unlike and comments, with database-maintained counters.
-- [x] Post reporting connected to the private owner report queue.
+- [x] Post reporting connected to the private owner report queue, retaining a private snapshot of reported content.
+- [x] Owner can reversibly hide/restore reported posts and comments with a written reason and audit log.
 - [x] Restricted/suspended account interaction rules enforced by database policies.
 - [x] Suspended authors' posts/comments hidden from other members.
 - [x] Member account page displays own restriction reason/expiry and allows eligible members to submit an appeal.
