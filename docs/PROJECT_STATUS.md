@@ -97,5 +97,8 @@ Never put service-role keys, database passwords or other secrets in browser code
 - [x] Added owner-checked server functions to list member status and apply/reinstate member restrictions.
 - [x] Every account status change records the previous/new status, reason and optional expiry in the private admin audit log.
 - [x] Updated the Admin Dashboard member directory with Active / Restricted / Suspended controls, reason and optional expiry fields.
-- [ ] Verify owner and non-owner RPC access, run database advisors, and complete a live owner-dashboard smoke test.
-- [ ] Finish verification review, AI Operations Manager, announcements, analytics and final release checks. Registration remains closed.
+- [x] Verified private controls have RLS enabled, no direct table access for anon/authenticated, and owner-only RPC grants; confirmed exactly one owner row.
+- [x] Database security advisor no longer reports an RLS-without-policy issue for the new private table; leaked-password protection remains a separate Auth warning.
+- [ ] Complete a live owner-dashboard smoke test and verify the restriction/reinstatement flows using a non-owner test account.
+- [ ] Build the verification review workflow, AI Operations Manager (requires an approved provider/key and cost limit), announcements and analytics.
+- [ ] Complete end-to-end owner/non-owner tests, mobile checks and final release review. Registration remains closed.
