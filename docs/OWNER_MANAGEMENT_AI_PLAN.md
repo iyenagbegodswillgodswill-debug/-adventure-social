@@ -14,7 +14,7 @@ Build a practical owner control centre for Adventure, supported by an AI Operati
 - Public registration remains disabled.
 - The latest Pages workflow for commit `312339308f868897003d61c743f4538ae2fbc66e` succeeded (run `45491662650`).
 - **AI is not implemented or live.** No Edge Functions are deployed and no provider credential is configured.
-- A security review remains open for private-schema USAGE grants and helper-function exposure. Do not claim the current configuration is fully hardened until this is resolved and regression-tested.
+- The public `member_is_suspended` RPC wrapper was removed; profile discovery RLS now calls the private helper directly. Private-schema USAGE and helper execution grants still need a full dependency review and anonymous discovery regression test.
 - Supabase Security Advisor currently reports leaked-password protection disabled.
 
 ## Target owner workspace
