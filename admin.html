@@ -41,6 +41,7 @@
    <button data-view="reports">⚑ &nbsp; Reports & safety</button>
    <button data-view="members">♙ &nbsp; Members</button>
    <button data-view="activity">◷ &nbsp; Audit activity</button>
+   <button data-view="ai-operations">✦ &nbsp; AI Operations</button>
   </div></div>
   <div class="side-foot">Private operations area<br><a href="./index.html">View public Adventure</a></div>
  </aside>
@@ -61,6 +62,7 @@
    </section>
    <section id="view-reports" class="hidden"><div class="welcome"><div><div class="eyebrow">Community protection</div><h1>Reports & safety</h1><p>Review member reports and record the outcome.</p></div><button class="refresh" id="reports-refresh">↻ Refresh</button></div><div class="notice">Report details are confidential. Only the designated owner can access this queue. Status changes are written to the audit log.</div><div class="panel"><div id="reports-list" class="empty">Loading reports…</div></div></section>
    <section id="view-members" class="hidden"><div class="welcome"><div><div class="eyebrow">Community directory</div><h1>Members</h1><p>Review registered profiles and their discovery setting.</p></div><button class="refresh" id="members-refresh">↻ Refresh</button></div><div class="panel"><div class="field"><label for="member-search">Search members</label><input id="member-search" type="search" placeholder="Search display name, username or country"></div><div id="members-list" class="empty">Loading members…</div></div></section>
+   <section id="view-ai-operations" class="hidden"><div class="welcome"><div><div class="eyebrow">Owner-assist intelligence</div><h1>AI Operations Manager</h1><p>Recommendations only. You remain in control of every moderation decision.</p></div><button class="refresh" id="ai-refresh">↻ Check status</button></div><div class="notice" id="ai-status">Checking AI service…</div><div class="metrics"><div class="metric"><small>AI mode</small><strong id="ai-mode">—</strong><span class="note">Provider-backed assistance</span></div><div class="metric"><small>Recent reports</small><strong id="ai-report-count">—</strong><span class="note">Latest 100 reports considered</span></div><div class="metric"><small>New reports</small><strong id="ai-new-count">—</strong><span class="note">Awaiting review</span></div><div class="metric"><small>AI runs</small><strong id="ai-runs">—</strong><span class="note">Audit history</span></div></div><div class="panel"><div class="panel-head"><div><h2>Owner briefing</h2><p>Summarise report workload and suggested priorities.</p></div><button class="primary" id="ai-briefing">Generate briefing</button></div><div id="ai-briefing-result" class="empty">No briefing generated in this session.</div></div><div class="panel"><div class="panel-head"><div><h2>Report triage suggestions</h2><p>AI can suggest categories and urgency; it cannot resolve reports or suspend members.</p></div><button class="primary" id="ai-triage">Analyse report queue</button></div><div id="ai-triage-result" class="empty">No triage analysis generated in this session.</div></div><div class="panel"><h2>Safety controls</h2><p class="muted">AI has no permission to ban members, change verification status, message members, or alter reports. All generated outputs are logged. Provider calls remain unavailable until an owner-approved API secret is configured.</p></div></section>
    <section id="view-activity" class="hidden"><div class="welcome"><div><div class="eyebrow">Accountability</div><h1>Audit activity</h1><p>Review the recorded administrative changes.</p></div><button class="refresh" id="activity-refresh">↻ Refresh</button></div><div class="panel"><div id="activity-list" class="empty">Loading activity…</div></div></section>
    <div class="smallprint">Adventure Admin · Privileged actions are enforced by the database, not by this page's visibility.</div>
   </div>
@@ -130,6 +132,26 @@ document.querySelectorAll('[data-view]').forEach(b=>b.addEventListener('click',(
 document.querySelectorAll('[data-jump]').forEach(b=>b.addEventListener('click',()=>showView(b.dataset.jump)));
 $('#reports-list').addEventListener('click',async e=>{const id=e.target.dataset.save;if(!id)return;const select=document.querySelector('[data-status="'+CSS.escape(id)+'"]');if(!select)return;e.target.disabled=true;e.target.textContent='Saving';const {error}=await supabase.from('reports').update({status:select.value}).eq('id',id);if(error){alert('Could not update report: '+error.message);}else{await loadData();}e.target.disabled=false;e.target.textContent='Save';});
 $('#member-search').addEventListener('input',()=>{const q=$('#member-search').value.toLowerCase();$('#members-list').innerHTML=memberRows(members.filter(m=>[m.display_name,m.username,m.country,m.account_status].join(' ').toLowerCase().includes(q)));});
+
+async function runAiOperation(operation){
+ const status=$('#ai-status');message(status,'Sending a secure owner-only request…',false);
+ const target=operation==='daily_briefing'?$('#ai-briefing-result'):$('#ai-triage-result');
+ target.textContent='Working…';
+ const {data,error}=await supabase.functions.invoke('adventure-ai-operations',{body:{operation}});
+ if(error||data?.error){
+  const code=data?.error||error?.message||'request_failed';
+  const friendly=code==='ai_provider_not_configured'?'The secure AI service is installed, but it needs an owner-approved OpenAI API key before it can analyse reports.':code;
+  target.textContent=friendly;message(status,friendly,true);$('#ai-mode').textContent='Setup needed';return;
+ }
+ const out=data.output||{};
+ target.innerHTML='<pre style="white-space:pre-wrap;overflow-wrap:anywhere;font:12px/1.6 system-ui;margin:0">'+escapeHtml(JSON.stringify(out,null,2))+'</pre>';
+ $('#ai-mode').textContent='Active';$('#ai-report-count').textContent=Number(data.summary?.total_reports_loaded||0);$('#ai-new-count').textContent=Number(data.summary?.new_reports||0);
+ message(status,'AI analysis completed and recorded. Recommendations only; no member or report actions were taken.',false);
+}
+$('#ai-briefing').addEventListener('click',()=>runAiOperation('daily_briefing'));
+$('#ai-triage').addEventListener('click',()=>runAiOperation('report_triage'));
+$('#ai-refresh').addEventListener('click',()=>{message($('#ai-status'),'Secure AI endpoint is deployed. Provider readiness is checked when you request an analysis.',false);$('#ai-mode').textContent='Awaiting key';});
+
 $('#members-list').addEventListener('click',async e=>{const id=e.target.dataset.memberSave;if(!id)return;const status=document.querySelector('[data-member-status="'+CSS.escape(id)+'"]').value;const reason=document.querySelector('[data-member-reason="'+CSS.escape(id)+'"]').value.trim();const expiryValue=document.querySelector('[data-member-expiry="'+CSS.escape(id)+'"]').value;const expiresAt=expiryValue?new Date(expiryValue).toISOString():null;if(status!=='active'&&reason.length<3){alert('Please enter a clear reason (at least 3 characters).');return;}if(!confirm('Apply '+status+' status to this member? This action will be recorded in the owner audit log.'))return;e.target.disabled=true;e.target.textContent='Saving…';const {error}=await supabase.rpc('admin_set_member_status',{p_user_id:id,p_status:status,p_reason:reason||null,p_expires_at:expiresAt});if(error){alert('Could not update member: '+error.message);}else{await loadData();}e.target.disabled=false;e.target.textContent='Apply';});
 supabase.auth.onAuthStateChange((event)=>{if(event==='SIGNED_OUT'){showScreen('login');}});
 const {data:{session}}=await supabase.auth.getSession();if(session?.user){await checkAccess(session.user);}else{showScreen('login');}
