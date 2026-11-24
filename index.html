@@ -155,10 +155,10 @@ function renderFeed(){
  if(!visible.length){host.innerHTML='<div class="feed-note">No posts to show here yet. Be the first to share something with Adventure.</div>';return;}
  host.innerHTML=visible.map(p=>{
   const author=feedProfiles[p.author_id]||{},own=currentUser&&p.author_id===currentUser.id,comments=feedComments.filter(c=>c.post_id===p.id);
-  const commentHtml=comments.slice(0,4).map(c=>{const person=feedProfiles[c.author_id]||{};return '<div class="comment"><strong>'+escapeHtml(person.display_name||'Adventure member')+'</strong>'+escapeHtml(c.body)+'</div>';}).join('');
+  const commentHtml=comments.slice(0,4).map(c=>{const person=feedProfiles[c.author_id]||{};return '<div class="comment"><strong>'+escapeHtml(person.display_name||'Adventure member')+'</strong>'+escapeHtml(c.body)+(c.moderation_status==='hidden'&&currentUser&&c.author_id===currentUser.id?'<div class="feed-note">This comment is hidden from other members. Review reason: '+escapeHtml(c.moderation_reason||'Owner moderation')+'</div>':'')+'</div>';}).join('');
   const actions=(feedCanInteract?'<button class="'+(feedLiked.has(p.id)?'liked':'')+'" data-like-post="'+escapeHtml(p.id)+'">'+(feedLiked.has(p.id)?'♥ Liked':'♡ Like')+' · '+Number(p.likes_count||0)+'</button><button type="button" data-focus-comment="'+escapeHtml(p.id)+'">Comments · '+Number(p.comments_count||0)+'</button><button type="button" class="report-post" data-post="'+escapeHtml(p.id)+'" data-author="'+escapeHtml(p.author_id)+'">Report</button>':'<span class="post-time">'+Number(p.likes_count||0)+' likes · '+Number(p.comments_count||0)+' comments</span>')+(own?'<button type="button" data-delete-post="'+escapeHtml(p.id)+'">Delete</button>':'');
   const commentForm=feedCanInteract?'<form class="comment-form" data-comment-post="'+escapeHtml(p.id)+'"><input name="comment" maxlength="1000" placeholder="Write a respectful comment…" required><button type="submit">Send</button></form>':'';
-  return '<article class="post-card"><div class="post-head"><div class="post-author"><strong>'+escapeHtml(author.display_name||'Adventure member')+'</strong><small>'+(author.username?'@'+escapeHtml(author.username):escapeHtml(author.country||'Community member'))+' · '+escapeHtml(new Date(p.created_at).toLocaleString())+'</small></div><small class="post-time">'+(p.visibility==='followers'?'Followers':'All members')+'</small></div><p class="post-body">'+escapeHtml(p.body)+'</p><div class="post-actions">'+actions+'</div><div class="comments">'+(commentHtml||'<div class="muted">No comments yet.</div>')+commentForm+'</div></article>';
+  return '<article class="post-card">'+(own&&p.moderation_status==='hidden'?'<div class="feed-note">This post is hidden from other members after an owner review. Reason: '+escapeHtml(p.moderation_reason||'Owner moderation')+'</div>':'')+'<div class="post-head"><div class="post-author"><strong>'+escapeHtml(author.display_name||'Adventure member')+'</strong><small>'+(author.username?'@'+escapeHtml(author.username):escapeHtml(author.country||'Community member'))+' · '+escapeHtml(new Date(p.created_at).toLocaleString())+'</small></div><small class="post-time">'+(p.visibility==='followers'?'Followers':'All members')+'</small></div><p class="post-body">'+escapeHtml(p.body)+'</p><div class="post-actions">'+actions+'</div><div class="comments">'+(commentHtml||'<div class="muted">No comments yet.</div>')+commentForm+'</div></article>';
  }).join('');
 }
 async function loadFeed(){
@@ -169,13 +169,13 @@ async function loadFeed(){
  const [eligibility,followResult]=await Promise.all([supabase.rpc('member_can_interact'),supabase.from('follows').select('followed_id').eq('follower_id',currentUser.id)]);feedCanInteract=!!eligibility.data&&!eligibility.error;if(!followResult.error)following=new Set((followResult.data||[]).map(x=>x.followed_id));
  const feedMessage=document.querySelector('#feed-message');feedMessage.classList.toggle('hidden',feedCanInteract);if(!feedCanInteract)feedMessage.textContent='Your account currently has interaction restrictions. You can still read the Feed; use the account page to appeal if you believe this is a mistake.';composer.classList.toggle('hidden',!feedCanInteract);
  host.innerHTML='<div class="feed-note">Loading the latest posts…</div>';
- const {data,error}=await supabase.from('posts').select('id,author_id,body,visibility,status,likes_count,comments_count,created_at').eq('status','published').order('created_at',{ascending:false}).limit(40);
+ const {data,error}=await supabase.from('posts').select('id,author_id,body,visibility,status,moderation_status,moderation_reason,likes_count,comments_count,created_at').eq('status','published').order('created_at',{ascending:false}).limit(40);
  if(error){host.innerHTML='<div class="feed-note">The Feed could not load: '+escapeHtml(error.message)+'</div>';return;}
  feedPosts=data||[];
  if(!feedPosts.length){feedProfiles={};feedComments=[];feedLiked.clear();renderFeed();return;}
  const ids=feedPosts.map(p=>p.id),userIds=[...new Set(feedPosts.map(p=>p.author_id))];
  const [commentsResult,likesResult,profilesResult]=await Promise.all([
-  supabase.from('post_comments').select('id,post_id,author_id,body,created_at').in('post_id',ids).order('created_at',{ascending:false}).limit(120),
+  supabase.from('post_comments').select('id,post_id,author_id,body,moderation_status,moderation_reason,created_at').in('post_id',ids).order('created_at',{ascending:false}).limit(120),
   supabase.from('post_likes').select('post_id').eq('user_id',currentUser.id).in('post_id',ids),
   supabase.from('profiles').select('id,display_name,username,country').in('id',userIds)
  ]);
