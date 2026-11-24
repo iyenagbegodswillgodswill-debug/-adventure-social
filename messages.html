@@ -48,5 +48,5 @@ $('#block-member').addEventListener('click',async()=>{if(!activePerson||!confirm
 $('#report-member').addEventListener('click',async()=>{if(!activePerson||!confirm('Send a private report about this member to the Adventure safety team?'))return;const {error}=await supabase.from('reports').insert({reporter_id:user.id,reported_user_id:activePerson.id,reason:'other',details:'Reported from a private message conversation.'});if(error){toast('Report could not be sent.');return;}toast('Your report was sent privately.');});
 async function init(){const {data:{session}}=await supabase.auth.getSession();user=session?.user||null;if(!user){$('#auth-notice').classList.remove('hidden');return;}$('#layout').classList.remove('hidden');const eligibility=await supabase.rpc('member_can_interact');canInteract=!!eligibility.data&&!eligibility.error;if(!canInteract)$('#restricted-notice').classList.remove('hidden');await loadConversations();}
 init().catch(()=>toast('Adventure Messages could not start. Please refresh.'));
-supabase.auth.onAuthStateChange(()=>{location.reload();});
+supabase.auth.onAuthStateChange((event)=>{if(event==='SIGNED_OUT'){location.href='./account.html';}});
 </script></body></html>
