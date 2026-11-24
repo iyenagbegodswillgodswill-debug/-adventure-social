@@ -10,7 +10,7 @@ The Admin Control Centre is implemented at `admin.html`. It is connected to the 
 
 ## Current setup status
 
-<badge>Completed</badge>
+**Status: Completed**
 
 The designated owner Auth account and its single `private.admin_users` owner row are already provisioned in the Adventure project. A live database check confirms exactly one owner row. Do not repeat the one-time insert, create another owner, or add moderator/admin accounts.
 
