@@ -3,64 +3,38 @@
 Last updated: 2026-11-24
 
 ## Product goal
+Build a practical owner control centre for Adventure, supported by an AI Operations Manager that reduces routine workload while keeping the owner in control. This document distinguishes shipped functionality from planned functionality.
 
-Build a practical owner control centre for Adventure, supported by an AI Operations Manager that reduces routine workload while keeping the owner in control of consequential decisions.
-
-This is a phased implementation plan, not a claim that the features below already exist.
-
-## Current verified baseline
-
-- The owner-only Admin Control Centre is deployed in the repository as `admin.html`.
-- Current dashboard views: Overview, Reports & Safety, Members, Audit Activity.
-- Current database tables include `public.profiles`, `public.follows`, `public.blocks`, `public.reports`, `private.admin_users`, and `private.admin_audit_log`.
-- The database has one owner row and enforces owner-only privileged access.
+## Verified current state
+- Owner-only Admin Control Centre is deployed in `admin.html`.
+- Dashboard views: Overview, Reports & Safety, Members, Audit Activity.
+- Owner-only database authorization and single-owner constraint are in place.
+- Member account status controls are implemented in the database and dashboard: Active, Restricted, Suspended; reason, optional expiry and audit logging.
+- Restriction enforcement currently covers profile updates, follows, blocks and report submission. Suspended profiles are excluded from public discovery.
 - Public registration remains disabled.
-- No verification workflow, account suspension workflow, announcement centre, or AI operations service is currently implemented.
-- Current profile/member tooling is read-only apart from report status changes. Do not present unimplemented controls as functional.
+- The latest Pages workflow for commit `312339308f868897003d61c743f4538ae2fbc66e` succeeded (run `45491662650`).
+- **AI is not implemented or live.** No Edge Functions are deployed and no provider credential is configured.
+- A security review remains open for private-schema USAGE grants and helper-function exposure. Do not claim the current configuration is fully hardened until this is resolved and regression-tested.
+- Supabase Security Advisor currently reports leaked-password protection disabled.
 
 ## Target owner workspace
+1. **Overview & platform health:** member totals, new members, discovery, report queue, verification queue, activity and service health; visibly flag stale/unavailable data.
+2. **Member management:** profile detail, account status, reports, blocks, moderation history, expiry, notification and appeal support. Never silently delete member data as moderation.
+3. **Verification centre:** consent-based applications, clear categories and criteria, private evidence storage, strict access, short retention, deletion and appeals. AI can check completeness but cannot decide identity authenticity.
+4. **Reports & safety:** severity, duplicate grouping, context, case notes, escalation and appeal. AI can classify, prioritize and recommend; the owner decides serious or irreversible enforcement.
+5. **Announcements:** draft, preview, target, schedule and send, with owner confirmation and delivery/failure records.
+6. **Analytics:** aggregate growth, activity, discovery/follow trends, report rates and verification turnaround; avoid unnecessary individual-level exposure.
+7. **Audit & governance:** who/what initiated an action, when, target, reason, outcome and whether AI suggested or performed it; provider status, automation settings and pause switch.
 
-1. **Overview & platform health**
-   - Member totals, new members, discoverability, report queue, verification queue, recent activity, service health.
-   - Clear warnings when data is stale or an integration is unavailable.
+## AI Operations Manager boundaries
 
-2. **Member management**
-   - Search and inspect member profiles, account status, reports, blocks and moderation history.
-   - Add controlled suspend, restrict, reinstate and appeal workflows only after status rules, member notifications, expiry, audit logging and appeal safeguards are designed.
-   - Never silently delete member data as a moderation shortcut.
-
-3. **Verification centre**
-   - Member-submitted applications, category, reason, evidence checklist, review status and decision history.
-   - Distinguish basic email/account verification from optional profile authenticity badges (for example public figure, creator, or organization), with clear published criteria.
-   - Private evidence storage with least-privilege access, short retention, explicit consent, and deletion after the review/appeal retention period.
-   - AI may check application completeness and flag inconsistencies for human review. AI must not autonomously decide identity authenticity or approve sensitive verification.
-
-4. **Reports & safety**
-   - Keep existing report queue and audit trail.
-   - Add severity, duplicate grouping, evidence/context, case notes, escalation and appeal support in tested increments.
-   - AI may classify and prioritize reports, explain uncertainty, and draft recommendations. The owner makes decisions on serious or irreversible enforcement.
-
-5. **Announcements & member communications**
-   - Draft, preview, target, schedule and send platform notices.
-   - Require owner confirmation before broad sends; maintain delivery and failure records.
-
-6. **Analytics**
-   - Member growth, active usage, discovery/follow trends, report rates, verification turnaround and retention indicators.
-   - Aggregate by default; avoid unnecessary exposure of individual member data.
-
-7. **Audit & governance**
-   - Record who/what initiated each privileged action, when, target, reason, outcome and whether AI suggested or performed it.
-   - Provide owner-visible AI activity log, model/provider status, automation settings, and pause switch.
-
-## AI Operations Manager: operating boundaries
-
-### Permitted automation after testing
-- Routine platform health checks and aggregate summaries.
-- Report categorization, duplicate suggestions and urgency recommendations.
-- Verification application completeness checks (not identity approval).
-- Spam/scam pattern alerts with supporting signals and confidence/uncertainty.
+### Permitted after testing
+- Aggregate platform health checks and summaries.
+- Report categorization, duplicate suggestions, urgency recommendations and case summaries.
+- Verification application completeness checks only.
+- Spam/scam pattern alerts with supporting signals and uncertainty.
 - Drafting member notices and owner briefings.
-- Low-risk housekeeping that is reversible, logged and explicitly enabled.
+- Narrow, reversible housekeeping only after explicit enablement and evaluation.
 
 ### Always require owner approval
 - Permanent bans or irreversible account actions.
@@ -68,56 +42,56 @@ This is a phased implementation plan, not a claim that the features below alread
 - Removal of disputed content in serious cases.
 - Bulk member messaging.
 - Access to or disclosure of private evidence.
-- Changes to privacy, security, billing, retention or platform-wide settings.
+- Privacy, security, billing, retention or platform-wide settings.
 
 ### Security and privacy requirements
-- AI provider credentials stay server-side in secrets, never in browser JavaScript or GitHub.
-- Use least-privilege service access and server-side authorization; never trust client-supplied role or AI output.
-- Treat member content and uploaded evidence as untrusted input, not instructions.
-- Send an AI provider only the minimum data needed; redact identifiers where possible.
-- Log AI recommendations and actions, retain an explanation and allow the owner to pause automation.
-- No automated facial recognition, biometric matching, or claims that AI can prove a person's identity.
-- No paid AI provider, plan upgrade or metered service without the owner's explicit approval.
+- Provider credentials remain server-side secrets, never in browser JavaScript or GitHub.
+- Use least privilege and server-side authorization; never trust client-supplied roles or model output.
+- Treat member content and evidence as untrusted input, not instructions.
+- Send only minimum necessary data; redact identifiers where possible.
+- Log recommendations and actions, retain explanations, and provide a global pause switch.
+- No facial recognition, biometric matching or AI claims of proving identity.
+- No paid provider, plan upgrade or metered service without explicit owner approval.
 
 ## Delivery phases
 
-### Phase 0 — foundation and design
-- [x] Inspect current dashboard and database baseline.
-- [x] Record this roadmap in the repository.
-- [ ] Define moderation/account states, verification categories and retention/appeal rules before schema changes.
-- [ ] Create a separate test plan and backup/rollback approach.
+### Phase 0 — foundation
+- [x] Inspect dashboard and database baseline.
+- [x] Record phased roadmap and safety boundaries.
+- [ ] Complete security grant/helper review, test plan and rollback plan.
 
 ### Phase 1 — owner member operations
-- [ ] Improve member directory with safe profile detail view and filters.
-- [ ] Design and implement reversible restriction/suspension and reinstatement with reason, expiry, notification, appeal and audit records.
-- [ ] Test owner, ordinary member and anonymous access.
+- [x] Implement member directory account statuses.
+- [x] Implement owner-checked restriction/suspension/reinstatement with reason, optional expiry and audit logging.
+- [ ] Add member notifications, appeal workflow and automated expiry handling.
+- [ ] Complete owner, ordinary-member and anonymous end-to-end tests.
 
 ### Phase 2 — verification centre
-- [ ] Publish verification criteria and member consent flow.
-- [ ] Implement private evidence submission/storage and strict access/retention rules.
-- [ ] Build application queue, review history, owner decision and member notification.
-- [ ] Test unauthorized evidence access and deletion/retention behaviour.
+- [ ] Define categories, consent, criteria, retention and appeal rules.
+- [ ] Implement private evidence submission/storage and strict access controls.
+- [ ] Build application queue, review history, owner decision and member notifications.
+- [ ] Test unauthorized evidence access and deletion/retention.
 
-### Phase 3 — AI Operations Manager (assist-first)
-- [ ] Define server-side AI service boundary and provider-neutral interface.
+### Phase 3 — AI Operations Manager
+- [ ] Confirm provider, data-sharing boundaries and acceptable cost with owner.
+- [ ] Implement provider-neutral server-side function and secrets configuration.
 - [ ] Start with report classification, duplicate suggestions, case summaries and daily owner briefings.
-- [ ] Add owner review/approve controls and AI audit events.
-- [ ] Evaluate false positives, missed severe cases, prompt-injection resistance, privacy and cost before any automation.
-- [ ] Add a global pause switch. Begin with recommendations only; enable narrow reversible automation only after evaluation.
+- [ ] Add owner review/approval and AI audit events.
+- [ ] Evaluate false positives, missed severe cases, prompt injection, privacy and cost.
+- [ ] Add global pause switch; recommendations only at first.
 
 ### Phase 4 — communications and analytics
-- [ ] Build owner-approved announcements and notification delivery records.
+- [ ] Build owner-approved announcements and delivery records.
 - [ ] Add aggregate analytics and health alerts.
 
 ### Phase 5 — release readiness
-- [ ] Complete end-to-end security, privacy, moderation, accessibility and mobile tests.
+- [ ] Complete security, privacy, moderation, accessibility and mobile tests.
 - [ ] Keep public registration closed until the owner explicitly approves launch readiness.
 
-## Non-negotiable project guardrails
-
-- Preserve the existing owner-only authorization and public registration lock.
+## Non-negotiable guardrails
+- Preserve owner-only authorization and the public registration lock.
 - Make schema changes through reviewed migrations; test against Adventure only.
 - Do not weaken RLS or expose private schemas/evidence to public clients.
 - Do not modify Mktradehome, Data2Coin or BIGMK Furniture.
-- Do not claim a phase is complete until deployed and verified.
-- Do not incur paid costs without explicit owner approval.
+- Do not claim a phase complete until deployed and verified.
+- Do not incur paid costs or send member data to an AI provider without explicit approval.
