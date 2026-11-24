@@ -43,9 +43,12 @@ Adventure is an Africa-first social platform connecting people, cultures, commun
 - [ ] No paid video service or add-on without explicit approval.
 
 ### Phase 5 — Messaging and notifications
-- [ ] Design private conversations, block enforcement, spam controls, abuse reporting and message retention.
-- [ ] Add one-to-one messaging only after privacy and moderation tests.
-- [ ] Add in-app notifications for follows, comments, replies, appeals and announcements.
+- [x] Private one-to-one conversations with member discovery, block enforcement, spam controls and abuse reporting foundation.
+- [x] Private voice-note recording, preview, upload and playback groundwork; text messages remain supported.
+- [x] Optional browser speech-to-text assist with an explicit browser-processing notice; no paid AI provider is connected.
+- [ ] Complete real two-member tests for text, voice, storage access, blocked users and mobile browser microphone support.
+- [ ] Add AI-powered transcription, translation and message rewrite only after owner approval of provider, privacy boundaries and usage budget.
+- [ ] Add in-app notifications for follows, comments, replies, appeals, announcements and messages.
 - [ ] Add push notifications only after consent and delivery-provider costs are understood.
 
 ### Phase 6 — Discover Africa
@@ -65,4 +68,4 @@ Adventure is an Africa-first social platform connecting people, cultures, commun
 
 ## Current scope limits
 
-The Feed is text-only. Photo uploads, avatar uploads, Shorts/video, Communities, messaging and real-time notifications are not implemented yet. No AI provider is configured. The owner dashboard's AI features remain advisory-only and inactive without explicit provider approval.
+The Feed is text-only. Voice-message groundwork is in place but still requires authenticated browser testing. Photo uploads, avatar uploads, Shorts/video, Communities and real-time notifications remain future work. No AI provider is configured. The owner dashboard's AI features remain advisory-only and inactive without explicit provider approval.
