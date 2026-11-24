@@ -35,27 +35,29 @@ Last updated: 2026-11-24 (Owner Rules & Policies Manager added)
 - [ ] Complete authenticated owner, ordinary-member and anonymous smoke tests using dedicated test accounts.
 - [ ] Verify restriction, expiry and reinstatement behaviour end-to-end with a non-owner test account. Do not test by restricting a real member.
 
-### AI Operations Manager — not live yet
-- [ ] No AI Edge Function is deployed; Supabase currently reports zero Edge Functions.
-- [ ] No AI provider or API credential has been configured.
-- [ ] Build a provider-neutral, server-side AI service only after selecting a provider and receiving explicit approval for any API key, data sharing and possible usage cost.
-- [ ] Start with report classification, duplicate suggestions, case summaries and owner briefings; recommendations only.
-- [ ] Add AI audit records, owner review/approval, privacy minimisation, prompt-injection safeguards, evaluation and a global pause switch.
-- [ ] Keep bans, verification decisions, evidence disclosure, bulk messaging and other consequential actions owner-approved.
+### AI Operations Manager — installed, provider inactive
+- [x] JWT-protected `adventure-ai-operations` Edge Function is deployed and ACTIVE; owner gate, advisory-only operations and private run history are in place.
+- [x] Owner dashboard includes AI briefing, report-triage recommendations and AI run history.
+- [ ] No AI provider credential is configured. Provider calls remain unavailable until the owner explicitly approves provider, data-sharing boundaries and any usage cost.
+- [ ] Authenticated owner/non-owner browser tests and provider-backed test remain outstanding.
+- [x] AI cannot execute moderation, verification, member messaging or account-status actions.
 
-### Remaining product work
-- [ ] Verification centre with consent, private evidence storage, retention/deletion and appeal safeguards.
-- [ ] Announcements with owner preview/approval and delivery records.
-- [ ] Aggregate analytics and service-health monitoring.
-- [ ] Member registration and email verification only after safety gates pass.
-- [ ] Avatar storage with per-user path restrictions and safe file limits.
-- [ ] Publish privacy information, community rules, retention and account deletion process.
-- [ ] Build feed, Shorts, communities and messaging in separately tested phases.
+### Remaining dashboard and release work
+- [x] Report case records: private owner notes, rule mapping, priority, recorded decision and resolution summary.
+- [x] Report status changes now use owner-checked RPCs and write audit records.
+- [x] Appeals database and owner review centre; final decisions require written reasons and do not automatically change member account status.
+- [x] Owner announcements manager with draft/publish/archive controls and database audit trigger.
+- [ ] Member-facing appeal submission must be connected in the main Adventure app.
+- [ ] Public announcements display must be connected in the main Adventure app.
+- [ ] Verification remains intentionally deferred until consent, non-sensitive collection, private storage, retention/deletion and appeal design are approved. Do not collect identity documents or biometrics yet.
+- [ ] Add aggregate analytics/system-health panel and policy acceptance/version gates before enabling registration.
+- [ ] Complete authenticated owner, ordinary-member and anonymous end-to-end browser tests.
+- [ ] Finalise legal Terms and Privacy details before launch.
 
 ## Deployment and release
 - [x] GitHub Pages configured from `main` / root.
 - [x] Latest known deployment run `45491662650` succeeded for commit `312339308f868897003d61c743f4538ae2fbc66e`.
-- [ ] Verify the latest owner dashboard deployment after the Rules & Policies Manager commits; visually inspect desktop/mobile and complete authenticated owner/non-owner smoke tests.
+- [ ] Verify the latest owner dashboard deployment after commits `28bd2a08fe40a517f01b283ed9065478b9768039` and `2355056a477ed479c3bb3beb059d3400be657073`; visually inspect desktop/mobile and complete authenticated owner/non-owner smoke tests.
 - [ ] Keep public registration closed and the site in preview until security, privacy, moderation and release checks pass.
 
 ## Safety and cost guardrails
@@ -79,3 +81,17 @@ Never place service-role keys, database passwords, AI provider keys or other sec
 - [ ] Add rule-linked evidence review, AI classification recommendations, proportionate reversible enforcement, appeals, repeat-offender handling and audit history.
 - [ ] Do not enable automatic penalties until rule wording, thresholds, appeal handling and false-positive safeguards are approved and tested.
 - [ ] Keep public registration closed.
+
+
+## Owner dashboard expansion — 2026-11-24
+- [x] Added report case workflow with rule linkage, priority, private notes, resolution summary and owner-recorded decision.
+- [x] Added appeal review queue and written owner decisions; review does not silently reinstate or suspend a member.
+- [x] Added owner announcements manager with draft, publish and archive; announcements are public-read only when published.
+- [x] Added database audit entries for report status changes, report case edits, appeal reviews and announcement changes.
+- [x] Reworked exposed owner RPCs as SECURITY INVOKER wrappers calling owner-checking private SECURITY DEFINER helpers; Supabase Security Advisor no longer flags those five public RPCs.
+- [x] Split catalogue SELECT and owner write policies to avoid duplicate permissive SELECT policies.
+- [x] Added supporting indexes for new foreign keys.
+- [x] Verified one owner, eight rules, three policy documents, five owner RPCs, RLS on new public tables, and no remaining security findings except leaked-password protection.
+- [ ] Live authenticated UI smoke tests still required; a source/database check is not a substitute for signing in as owner and non-owner.
+- [ ] The public GitHub Pages URL could not be inspected with the available page reader in this session; confirm latest Pages deployment before relying on live UI.
+- [ ] Latest performance advisor reports only unused-index notices in the current low-traffic database; no unindexed foreign keys remain.
