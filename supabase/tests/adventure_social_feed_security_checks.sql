@@ -22,6 +22,8 @@ begin
  if not has_column_privilege('authenticated','public.posts','body','update')
   or has_column_privilege('authenticated','public.posts','likes_count','update')
   or has_column_privilege('authenticated','public.posts','comments_count','update')
+  or has_column_privilege('authenticated','public.posts','moderation_status','update')
+  or has_column_privilege('authenticated','public.post_comments','moderation_status','update')
   or has_table_privilege('authenticated','public.post_likes','update')
   or has_table_privilege('authenticated','public.post_comments','update') then
   raise exception 'Post counters or reaction/comment rows have unsafe direct update grants';
@@ -53,7 +55,7 @@ begin
  end if;
 
  if exists(select 1 from pg_proc p join pg_namespace n on n.oid=p.pronamespace
-  where n.nspname='public' and p.proname in ('member_can_interact','member_can_appeal','member_account_status','admin_save_report_case','admin_list_report_cases','admin_review_appeal','admin_list_appeals','admin_update_report_status','admin_platform_analytics') and p.prosecdef) then
+  where n.nspname='public' and p.proname in ('member_can_interact','member_can_appeal','member_account_status','admin_save_report_case','admin_list_report_cases','admin_review_appeal','admin_list_appeals','admin_update_report_status','admin_platform_analytics','admin_moderate_reported_content') and p.prosecdef) then
   raise exception 'An exposed public RPC is unexpectedly SECURITY DEFINER';
  end if;
 
@@ -61,6 +63,9 @@ begin
   raise exception 'A public table is missing RLS';
  end if;
 
+ if not has_function_privilege('authenticated','public.admin_moderate_reported_content(uuid,text,text)','execute') then
+  raise exception 'Owner content moderation RPC is not available to authenticated callers';
+ end if;
  if not exists(select 1 from pg_trigger where tgname='post_likes_counter' and not tgisinternal)
   or not exists(select 1 from pg_trigger where tgname='post_comments_counter' and not tgisinternal)
   or not exists(select 1 from pg_trigger where tgname='reports_capture_content_snapshot' and not tgisinternal) then
