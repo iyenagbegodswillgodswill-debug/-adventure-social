@@ -22,11 +22,11 @@ Last updated: 2026-11-24
 ### AI Operations Manager — foundation installed, provider activation pending
 - [x] Added the private `ai_operations_runs` audit table with RLS enabled and no direct anon/authenticated access.
 - [x] Deployed JWT-protected Supabase Edge Function `adventure-ai-operations` (active, version 2); verifies the signed-in user and owner access before processing.
-- [x] Added the AI Operations section to the owner dashboard with briefing and report-triage actions.
+- [x] Added the AI Operations section to the owner dashboard with briefing, report-triage and private AI run-history actions.
 - [x] AI prompt treats report contents as untrusted data; outputs are recommendations only and cannot change member/report status.
 - [x] Dashboard, Edge Function source and database migration are saved in GitHub.
 - [ ] AI generation is not active until the owner approves an AI provider and usage budget and the server-side `OPENAI_API_KEY` secret is configured. No provider calls are made without that secret.
-- [ ] Live authenticated owner/non-owner tests and a successful provider-backed test remain outstanding.
+- [ ] Live authenticated owner/non-owner tests and a successful provider-backed test remain outstanding. The provider setup response is safely surfaced in the dashboard.
 
 ### Security review — still open
 - [ ] Review and tighten the `private` schema USAGE grants for anon/authenticated without breaking existing RLS policy helper calls or public wrapper functions. Current inspection confirms both roles have USAGE; do not revoke until dependencies are mapped and regression-tested.
