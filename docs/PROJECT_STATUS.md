@@ -183,3 +183,5 @@ Roadmap: `docs/MAIN_APP_ROADMAP.md`. Data model review: `docs/DATA_MODEL_AND_RLS
 - [ ] Registration remains closed. No payments, paid APIs, paid AI, paid storage or paid services were enabled.
 
 - [x] Restricted business and event external links to HTTP(S) URLs at database level; migration `20261124235025_adventure_growth_external_url_validation.sql` applied.
+
+- [x] Updated PWA shell cache to v4 to include News, Marketplace and Explore Africa; repaired an existing malformed service-worker entry and confirmed JavaScript syntax.
