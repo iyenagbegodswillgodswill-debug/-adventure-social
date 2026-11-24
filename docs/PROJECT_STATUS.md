@@ -89,3 +89,13 @@ Never put service-role keys, database passwords or other secrets in browser code
 - [x] Preserved existing authentication and owner-only access logic; this commit is a visual-only change.
 - [ ] Verify the deployed GitHub Pages workflow and inspect the dashboard on desktop and mobile before calling the theme rollout complete.
 - [ ] Continue phased implementation from `docs/OWNER_MANAGEMENT_AI_PLAN.md`; no new management or AI capabilities are claimed complete by this visual update.
+
+
+## Owner member controls — 2026-11-24
+
+- [x] Added a private account-control table for member restrictions and suspensions; no public Data API access is granted.
+- [x] Added owner-checked server functions to list member status and apply/reinstate member restrictions.
+- [x] Every account status change records the previous/new status, reason and optional expiry in the private admin audit log.
+- [x] Updated the Admin Dashboard member directory with Active / Restricted / Suspended controls, reason and optional expiry fields.
+- [ ] Verify owner and non-owner RPC access, run database advisors, and complete a live owner-dashboard smoke test.
+- [ ] Finish verification review, AI Operations Manager, announcements, analytics and final release checks. Registration remains closed.
