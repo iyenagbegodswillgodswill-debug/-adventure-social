@@ -64,7 +64,7 @@ Private history for the owner-only advisory AI operations. The deployed Edge Fun
 - `private.is_admin()` checks the single owner role.
 - `private.member_can_interact()` blocks write actions for restricted/suspended accounts.
 - `private.member_is_suspended()` and `private.is_blocked_with()` support visibility enforcement.
-- `public.member_can_interact()`, `public.member_can_appeal()` and `public.member_account_status()` are SECURITY INVOKER self-service wrappers; account status returns only the caller's own restriction data.
+- `public.member_can_interact()`, `public.member_can_appeal()`, `public.member_account_status()` and `public.member_list_blocked()` are SECURITY INVOKER self-service wrappers. Account status returns only the caller's own restriction data, and the blocked-account list returns only blocks created by the caller.
 - Owner report, appeal, announcement, policy, analytics and reversible content-moderation RPCs use SECURITY INVOKER public wrappers calling owner-checked private helpers.
 
 ## Security implemented
