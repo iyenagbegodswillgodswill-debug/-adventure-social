@@ -1,7 +1,9 @@
-const CACHE_NAME = "adventure-preview-v1";
+const CACHE_NAME = "adventure-preview-v2";
 const APP_SHELL = [
   "./",
   "./index.html",
+  "./account.html",
+  "./policies.html",
   "./manifest.webmanifest",
   "./assets/adventure-icon.svg"
 ];
@@ -31,7 +33,7 @@ self.addEventListener("fetch", event => {
 
   if (event.request.mode === "navigate") {
     event.respondWith(
-      fetch(event.request).catch(() => caches.match("./index.html"))
+      fetch(event.request).catch(async () => (await caches.match(event.request, { ignoreSearch: true })) || caches.match("./index.html"))
     );
     return;
   }
