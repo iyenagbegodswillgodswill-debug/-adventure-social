@@ -17,17 +17,31 @@ main{padding:25px 22px 40px}.intro{display:flex;justify-content:space-between;al
 .list{display:grid;grid-template-columns:repeat(2,1fr);gap:11px}.list .person{display:flex;align-items:center;gap:11px}.list .person p{margin:3px 0;min-height:0}.list .card-actions{margin-left:auto;flex-shrink:0}.list .card-actions .follow{width:100%;margin-left:0;flex-shrink:0}.empty{display:none;text-align:center;padding:25px;color:var(--muted)}.card-actions{display:flex;flex-direction:column;gap:7px}.profile-actions{display:flex;gap:6px}.profile-actions button{border:1px solid var(--line);border-radius:8px;background:#fff;color:var(--green);padding:7px 8px;font-size:11px;font-weight:750}.profile-actions button.block-profile{color:#8b3933}.hidden{display:none!important}
 .modal{position:fixed;inset:0;background:#10251f99;z-index:20;display:grid;place-items:center;padding:18px}.modal-card{width:min(100%,440px);background:#fff;border-radius:17px;padding:22px;box-shadow:0 20px 70px #0004}.modal-card h2{margin:0 0 5px}.modal-card p{color:var(--muted);font-size:13px}.modal-card label{display:block;font-size:12px;font-weight:750;margin:13px 0 6px}.modal-card select,.modal-card textarea{width:100%;border:1px solid var(--line);border-radius:9px;padding:10px;font:inherit}.modal-card textarea{min-height:100px;resize:vertical}.modal-actions{display:flex;justify-content:flex-end;gap:8px;margin-top:14px}.modal-actions button{border-radius:9px;padding:9px 13px;font-weight:750;border:1px solid var(--line);background:#fff}.modal-actions .submit-report{background:var(--green);color:#fff;border-color:var(--green)}
 .preview-note{margin:-13px 0 25px;padding:12px 14px;border:1px solid #e8e9e1;border-radius:12px;background:#fbfcf8;color:#59665e;font-size:12px}.preview-note strong{color:var(--green)}.toast{position:fixed;left:50%;bottom:22px;transform:translate(-50%,12px);background:#173f33;color:#fff;padding:11px 16px;border-radius:12px;box-shadow:0 8px 28px #0002;font-size:13px;opacity:0;pointer-events:none;transition:.2s;z-index:5;max-width:calc(100% - 32px);text-align:center}.toast.show{opacity:1;transform:translate(-50%,0)}nav button:disabled{opacity:.72;cursor:not-allowed}
+.post-card,.composer,.announcement-card{border:1px solid var(--line);border-radius:15px;padding:15px;background:#fff;margin:12px 0}.composer textarea{width:100%;min-height:100px;border:1px solid var(--line);border-radius:10px;padding:11px;font:inherit;resize:vertical}.composer select{padding:9px;border:1px solid var(--line);border-radius:9px;background:#fff}.post-head{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}.post-author strong{display:block}.post-author small,.post-time{color:var(--muted);font-size:11px}.post-body{white-space:pre-wrap;overflow-wrap:anywhere;margin:13px 0}.post-actions{display:flex;gap:8px;flex-wrap:wrap;border-top:1px solid var(--line);padding-top:10px}.post-actions button,.comment-form button{border:1px solid var(--line);background:#fff;color:var(--green);border-radius:9px;padding:7px 10px;font-size:12px;font-weight:750}.post-actions button.liked{background:#e9f1eb}.comments{border-top:1px solid var(--line);margin-top:10px;padding-top:9px}.comment{padding:7px 0;font-size:12px}.comment strong{margin-right:5px}.comment-form{display:flex;gap:7px;margin-top:8px}.comment-form input{min-width:0;flex:1;border:1px solid var(--line);border-radius:9px;padding:9px}.feed-note{padding:14px;border:1px solid var(--line);border-radius:12px;background:#fbfcf8;color:var(--muted);font-size:13px}.feed-filters{display:flex;gap:7px;overflow:auto;margin:12px 0}.feed-filters button{border:1px solid var(--line);border-radius:30px;background:#fff;padding:8px 12px;color:var(--muted);white-space:nowrap}.feed-filters button.active{background:#e9f1eb;color:var(--green);font-weight:750}
 footer{border-top:1px solid var(--line);padding:17px;text-align:center;color:var(--muted);font-size:12px}.hero-cta{display:inline-flex;margin-top:15px;padding:9px 13px;border-radius:10px;background:#fff;color:var(--dark);font-size:12px;font-weight:800;text-decoration:none}.hero-cta:hover{background:var(--cream)}@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{transition:none!important;animation:none!important}}
 @media(max-width:650px){header{padding:16px 16px 0}main{padding:21px 16px 34px}.intro{display:block}.search{width:100%;margin-top:15px}.grid{grid-template-columns:1fr}.person p{min-height:0}.list{grid-template-columns:1fr}.hero{margin-top:17px}}
 </style></head>
 <body><a class="skip-link" href="#main">Skip to content</a><div class="app">
 <header><div class="top"><div><div class="brand">adventure<span>.</span></div><div class="tag">Your world. Your adventure.</div></div><div class="actions"><button class="icon" aria-label="Search" onclick="document.querySelector('#search').focus()">⌕</button><a class="icon" href="./account.html" aria-label="Member sign in" title="Member sign in" style="display:grid;place-items:center;text-decoration:none">♙</a><button class="icon" id="install-app" aria-label="Install Adventure" title="Install Adventure">↓</button><button class="icon" aria-label="Notifications">♧</button></div></div>
-<nav aria-label="Main navigation"><button class="active" aria-current="page">Adventurers</button><button type="button" disabled title="Coming soon">Feed</button><button type="button" disabled title="Coming soon">Adventure Shorts</button><button type="button" disabled title="Coming soon">Communities</button><button type="button" disabled title="Coming soon">Discover Africa</button></nav></header>
-<main id="main"><section class="intro"><div><div class="eyebrow">Find your people</div><h1>Meet the Adventurers</h1><p>Discover people, stories and fresh perspectives across Africa.</p></div><input id="search" class="search" type="search" placeholder="Search names or interests…" aria-label="Search adventurers"></section>
+<nav aria-label="Main navigation"><button class="active" aria-current="page" data-page="directory">Adventurers</button><button type="button" data-page="feed">Feed</button><button type="button" disabled title="Coming soon">Adventure Shorts</button><button type="button" disabled title="Coming soon">Communities</button><button type="button" disabled title="Coming soon">Discover Africa</button></nav></header>
+<main id="main"><div id="directory-screen"><section class="intro"><div><div class="eyebrow">Find your people</div><h1>Meet the Adventurers</h1><p>Discover people, stories and fresh perspectives across Africa.</p></div><input id="search" class="search" type="search" placeholder="Search names or interests…" aria-label="Search adventurers"></section>
 <section class="hero"><span class="badge">WELCOME TO ADVENTURE</span><h2>Every connection starts somewhere.</h2><p>Meet people who share your interests, explore new communities and discover the many stories that make our world.</p><a class="hero-cta" href="#discover">Explore Adventurers</a></section>
 <section class="preview-note" role="note"><strong>Early preview</strong> — These are sample profiles, not real members. Follow choices are saved only in this browser; no account or personal information is collected.</section>
-<section><div class="heading"><h2>Featured Adventurers</h2><small>Community spotlights</small></div><div class="grid" id="featured"></div></section>
+<section id="announcements-section" class="hidden"><div class="heading"><h2>Adventure updates</h2><small>From the team</small></div><div id="announcements-list"></div></section><section><div class="heading"><h2>Featured Adventurers</h2><small>Community spotlights</small></div><div class="grid" id="featured"></div></section>
 <section id="discover"><div class="heading"><h2>Discover people</h2><small id="count">Suggested profiles</small></div><div class="filters"><button class="chip active" data-filter="all" aria-pressed="true">For you</button><button class="chip" data-filter="culture" aria-pressed="false">Culture</button><button class="chip" data-filter="travel" aria-pressed="false">Travel</button><button class="chip" data-filter="creativity" aria-pressed="false">Creativity</button><button class="chip" data-filter="community" aria-pressed="false">Community</button></div><div class="list" id="people"></div><div class="empty" id="empty">No profiles match that search yet.</div></section>
+</div>
+<section id="feed-screen" class="hidden">
+ <div class="intro"><div><div class="eyebrow">Community conversations</div><h1>Your Adventure Feed</h1><p>Stories, thoughts and moments shared by Adventurers.</p></div></div>
+ <div id="feed-guest" class="feed-note hidden">Sign in to see member posts, like and comment. <a href="./account.html" style="color:var(--green);font-weight:750">Sign in</a></div>
+ <form id="feed-post-form" class="composer hidden">
+  <strong>Share something with the community</strong>
+  <textarea id="feed-post-body" maxlength="2000" placeholder="What's on your mind? Keep it respectful and safe…" required></textarea>
+  <div class="row" style="justify-content:space-between;margin-top:9px"><select id="feed-post-visibility" aria-label="Who can see this post"><option value="public">Public · discoverable members</option><option value="followers">Followers only</option></select><button class="follow" id="feed-post-submit" type="submit" style="width:auto">Share post</button></div>
+ </form>
+ <div class="feed-filters"><button class="active" data-feed-filter="all">Latest</button><button data-feed-filter="following">Following</button><button data-feed-filter="mine">My posts</button><button id="feed-refresh" type="button">↻ Refresh</button></div>
+ <div id="feed-message" class="feed-note hidden"></div>
+ <div id="feed-list"><div class="feed-note">Loading the community feed…</div></div>
+</section>
 </main><div id="report-modal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="report-title"><div class="modal-card"><h2 id="report-title">Report this profile</h2><p>Tell the Adventure safety team what concerns you. Reports are private.</p><label for="report-reason">Reason</label><select id="report-reason"><option value="harassment">Harassment or bullying</option><option value="impersonation">Impersonation</option><option value="spam_or_scam">Spam or scam</option><option value="privacy_violation">Privacy violation</option><option value="hateful_content">Hateful content</option><option value="dangerous_content">Dangerous content</option><option value="other">Other</option></select><label for="report-details">Additional details (optional)</label><textarea id="report-details" maxlength="1000" placeholder="Describe what happened…"></textarea><div class="modal-actions"><button id="cancel-report" type="button">Cancel</button><button class="submit-report" id="submit-report" type="button">Send report</button></div></div></div><div class="toast" id="toast" role="status" aria-live="polite"></div><footer>Adventure is just beginning · Built to connect Africa and the world.<br><a href="./policies.html" style="color:var(--green);font-weight:750;text-decoration:none">Terms &amp; Policies</a></footer></div>
 <script type="module">
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2.57.0';
@@ -39,7 +53,7 @@ const sampleProfiles=[
 {name:"Tunde A.",handle:"@tundeconnects",emoji:"🤝",bio:"Building community and creating room for new voices.",tag:"community"},
 {name:"Nia B.",handle:"@niasees",emoji:"📷",bio:"Finding beauty in places people often pass by.",tag:"travel"},
 {name:"Kwame S.",handle:"@kwamesounds",emoji:"🎵",bio:"Music, local stories and the sounds around us.",tag:"culture"}];
-let profiles=sampleProfiles;let liveMode=false;let currentUser=null;let following=new Set();let filter="all";let toastTimer;let reportTarget=null;
+let profiles=sampleProfiles;let liveMode=false;let currentUser=null;let following=new Set();let filter="all";let toastTimer;let reportTarget=null;let reportTargetType="profile";let reportContentId=null;let feedPosts=[],feedProfiles={},feedComments=[],feedLiked=new Set(),feedFilter="all";
 try{const saved=JSON.parse(localStorage.getItem("adventure-demo-follows")||"[]");if(Array.isArray(saved))following=new Set(saved.filter(x=>typeof x==="string"));}catch(e){following=new Set();}
 function escapeHtml(value){return String(value??'').replace(/[&<>"']/g,ch=>{if(ch==='&')return '&amp;';if(ch==='<')return '&lt;';if(ch==='>')return '&gt;';if(ch==='"')return '&quot;';return '&#39;';});}
 function showToast(message){const el=document.querySelector("#toast");if(!el)return;el.textContent=message;el.classList.add("show");clearTimeout(toastTimer);toastTimer=setTimeout(()=>el.classList.remove("show"),2600);}
@@ -66,12 +80,14 @@ async function loadDirectory(){
  const {data,error}=await supabase.from('profiles').select('id,username,display_name,bio,country,interests').eq('is_discoverable',true).order('created_at',{ascending:false}).limit(60);
  if(!error&&data&&data.length){
   liveMode=true;profiles=data.filter(p=>!currentUser||p.id!==currentUser.id);
-  following=new Set();
-  if(currentUser){
-   const result=await supabase.from('follows').select('followed_id').eq('follower_id',currentUser.id);
-   if(!result.error)following=new Set((result.data||[]).map(x=>x.followed_id));
-  }
+ }else if(currentUser){
+  liveMode=true;profiles=[];if(error)showToast('Member directory is temporarily unavailable.');
  }else{liveMode=false;profiles=sampleProfiles;}
+ following=new Set();
+ if(currentUser){
+  const result=await supabase.from('follows').select('followed_id').eq('follower_id',currentUser.id);
+  if(!result.error)following=new Set((result.data||[]).map(x=>x.followed_id));
+ }
  render();
 }
 document.addEventListener("click",async e=>{
@@ -97,7 +113,11 @@ document.addEventListener("click",async e=>{
 document.addEventListener("click",async e=>{
  if(e.target.matches(".report-profile")){
   if(!currentUser){location.href="./account.html";return;}
-  reportTarget=e.target.dataset.user;document.querySelector("#report-details").value="";document.querySelector("#report-modal").classList.remove("hidden");document.querySelector("#report-reason").focus();
+  reportTarget=e.target.dataset.user;reportTargetType="profile";reportContentId=null;document.querySelector("#report-title").textContent="Report this profile";document.querySelector("#report-details").value="";document.querySelector("#report-modal").classList.remove("hidden");document.querySelector("#report-reason").focus();
+ }
+ if(e.target.matches(".report-post")){
+  if(!currentUser){location.href="./account.html";return;}
+  reportTarget=e.target.dataset.author;reportTargetType="post";reportContentId=e.target.dataset.post;document.querySelector("#report-title").textContent="Report this post";document.querySelector("#report-details").value="";document.querySelector("#report-modal").classList.remove("hidden");document.querySelector("#report-reason").focus();
  }
  if(e.target.matches(".block-profile")){
   if(!currentUser){location.href="./account.html";return;}
@@ -109,16 +129,96 @@ document.addEventListener("click",async e=>{
 document.querySelector("#cancel-report").addEventListener("click",()=>{reportTarget=null;document.querySelector("#report-modal").classList.add("hidden");});
 document.querySelector("#submit-report").addEventListener("click",async()=>{
  if(!currentUser||!reportTarget)return;const b=document.querySelector("#submit-report");b.disabled=true;b.textContent="Sending…";
- const result=await supabase.from("reports").insert({reporter_id:currentUser.id,reported_user_id:reportTarget,reason:document.querySelector("#report-reason").value,details:document.querySelector("#report-details").value.trim()});
+ const payload={reporter_id:currentUser.id,reported_user_id:reportTarget,reason:document.querySelector("#report-reason").value,details:document.querySelector("#report-details").value.trim()};
+ if(reportTargetType==="post")payload.reported_post_id=reportContentId;
+ const result=await supabase.from("reports").insert(payload);
  b.disabled=false;b.textContent="Send report";
  if(result.error){showToast("Your report could not be sent. Please try again.");return;}
- reportTarget=null;document.querySelector("#report-modal").classList.add("hidden");showToast("Thank you. Your report was sent privately to the safety team.");
+ reportTarget=null;reportContentId=null;reportTargetType="profile";document.querySelector("#report-modal").classList.add("hidden");showToast("Thank you. Your report was sent privately to the safety team.");
 });
+
+function showPage(page){
+ const directory=page==='directory';document.querySelector('#directory-screen').classList.toggle('hidden',!directory);document.querySelector('#feed-screen').classList.toggle('hidden',directory);
+ document.querySelectorAll('nav [data-page]').forEach(b=>{const active=b.dataset.page===page;b.classList.toggle('active',active);if(active)b.setAttribute('aria-current','page');else b.removeAttribute('aria-current');});
+ if(!directory)loadFeed();
+}
+document.querySelectorAll('nav [data-page]').forEach(b=>b.addEventListener('click',()=>showPage(b.dataset.page)));
+async function loadAnnouncements(){
+ const {data,error}=await supabase.from('announcements').select('id,title,body,created_at').eq('status','published').order('created_at',{ascending:false}).limit(3);
+ if(error||!data?.length)return;
+ document.querySelector('#announcements-section').classList.remove('hidden');
+ document.querySelector('#announcements-list').innerHTML=data.map(a=>'<article class="announcement-card"><strong>'+escapeHtml(a.title)+'</strong><p>'+escapeHtml(a.body)+'</p><small class="post-time">'+escapeHtml(new Date(a.created_at).toLocaleDateString())+'</small></article>').join('');
+}
+function renderFeed(){
+ const host=document.querySelector('#feed-list');
+ const visible=feedPosts.filter(p=>feedFilter==='all'||(feedFilter==='following'&&following.has(p.author_id))||(feedFilter==='mine'&&currentUser&&p.author_id===currentUser.id));
+ if(!visible.length){host.innerHTML='<div class="feed-note">No posts to show here yet. Be the first to share something with Adventure.</div>';return;}
+ host.innerHTML=visible.map(p=>{
+  const author=feedProfiles[p.author_id]||{};const own=currentUser&&p.author_id===currentUser.id;const comments=feedComments.filter(c=>c.post_id===p.id);
+  const commentHtml=comments.slice(-4).map(c=>{const person=feedProfiles[c.author_id]||{};return '<div class="comment"><strong>'+escapeHtml(person.display_name||'Adventure member')+'</strong>'+escapeHtml(c.body)+'</div>';}).join('');
+  return '<article class="post-card"><div class="post-head"><div class="post-author"><strong>'+escapeHtml(author.display_name||'Adventure member')+'</strong><small>'+(author.username?'@'+escapeHtml(author.username):escapeHtml(author.country||'Community member'))+' · '+escapeHtml(new Date(p.created_at).toLocaleString())+'</small></div><small class="post-time">'+(p.visibility==='followers'?'Followers':'Public')+'</small></div><p class="post-body">'+escapeHtml(p.body)+'</p><div class="post-actions"><button class="'+(feedLiked.has(p.id)?'liked':'')+'" data-like-post="'+escapeHtml(p.id)+'">'+(feedLiked.has(p.id)?'♥ Liked':'♡ Like')+' · '+Number(p.likes_count||0)+'</button><button type="button" data-focus-comment="'+escapeHtml(p.id)+'">Comments · '+Number(p.comments_count||0)+'</button><button type="button" class="report-post" data-post="'+escapeHtml(p.id)+'" data-author="'+escapeHtml(p.author_id)+'">Report</button>'+(own?'<button type="button" data-delete-post="'+escapeHtml(p.id)+'">Delete</button>':'')+'</div><div class="comments">'+(commentHtml||'<div class="muted">No comments yet.</div>')+(currentUser?'<form class="comment-form" data-comment-post="'+escapeHtml(p.id)+'"><input name="comment" maxlength="1000" placeholder="Write a respectful comment…" required><button type="submit">Send</button></form>':'')+'</div></article>';
+ }).join('');
+}
+async function loadFeed(){
+ const guest=document.querySelector('#feed-guest'),composer=document.querySelector('#feed-post-form'),host=document.querySelector('#feed-list');
+ const {data:{session}}=await supabase.auth.getSession();currentUser=session?.user||null;
+ guest.classList.toggle('hidden',!!currentUser);composer.classList.toggle('hidden',!currentUser);
+ if(!currentUser){host.innerHTML='<div class="feed-note">The member Feed is private to signed-in Adventurers. <a href="./account.html" style="color:var(--green);font-weight:750">Sign in</a> to continue.</div>';return;}
+ host.innerHTML='<div class="feed-note">Loading the latest posts…</div>';
+ const {data,error}=await supabase.from('posts').select('id,author_id,body,visibility,status,likes_count,comments_count,created_at').eq('status','published').order('created_at',{ascending:false}).limit(40);
+ if(error){host.innerHTML='<div class="feed-note">The Feed could not load: '+escapeHtml(error.message)+'</div>';return;}
+ feedPosts=data||[];
+ if(!feedPosts.length){feedProfiles={};feedComments=[];feedLiked.clear();renderFeed();return;}
+ const ids=feedPosts.map(p=>p.id),userIds=[...new Set(feedPosts.map(p=>p.author_id))];
+ const [commentsResult,likesResult,profilesResult]=await Promise.all([
+  supabase.from('post_comments').select('id,post_id,author_id,body,created_at').in('post_id',ids).order('created_at',{ascending:true}).limit(120),
+  supabase.from('post_likes').select('post_id').eq('user_id',currentUser.id).in('post_id',ids),
+  supabase.from('profiles').select('id,display_name,username,country').in('id',userIds)
+ ]);
+ feedComments=commentsResult.data||[];feedLiked=new Set((likesResult.data||[]).map(x=>x.post_id));
+ const allProfileIds=[...new Set([...userIds,...feedComments.map(c=>c.author_id)])];
+ const extraIds=allProfileIds.filter(id=>!userIds.includes(id));
+ let extraProfiles=[];
+ if(extraIds.length){const x=await supabase.from('profiles').select('id,display_name,username,country').in('id',extraIds);extraProfiles=x.data||[];}
+ feedProfiles=Object.fromEntries([...(profilesResult.data||[]),...extraProfiles].map(p=>[p.id,p]));
+ renderFeed();
+}
+document.querySelector('#feed-post-form').addEventListener('submit',async e=>{
+ e.preventDefault();if(!currentUser){location.href='./account.html';return;}
+ const body=document.querySelector('#feed-post-body').value.trim();if(!body)return;
+ const b=document.querySelector('#feed-post-submit');b.disabled=true;b.textContent='Sharing…';
+ const {error}=await supabase.from('posts').insert({author_id:currentUser.id,body,visibility:document.querySelector('#feed-post-visibility').value});
+ b.disabled=false;b.textContent='Share post';
+ if(error){showToast('Post could not be shared: '+error.message);return;}
+ document.querySelector('#feed-post-body').value='';feedFilter='all';document.querySelectorAll('[data-feed-filter]').forEach(x=>x.classList.toggle('active',x.dataset.feedFilter==='all'));await loadFeed();showToast('Your post is now on the Adventure Feed.');
+});
+document.querySelector('#feed-list').addEventListener('click',async e=>{
+ const like=e.target.closest('[data-like-post]');
+ if(like){const id=like.dataset.likePost,liked=feedLiked.has(id);like.disabled=true;
+  const result=liked?await supabase.from('post_likes').delete().eq('post_id',id).eq('user_id',currentUser.id):await supabase.from('post_likes').insert({post_id:id,user_id:currentUser.id});
+  if(result.error)showToast('Like could not be saved.');else await loadFeed();return;
+ }
+ const del=e.target.closest('[data-delete-post]');
+ if(del){if(!confirm('Delete your post? This also removes its comments and likes.'))return;const {error}=await supabase.from('posts').delete().eq('id',del.dataset.deletePost);if(error)showToast('Post could not be deleted.');else{await loadFeed();showToast('Post deleted.');}return;}
+ const focus=e.target.closest('[data-focus-comment]');
+ if(focus){document.querySelector('[data-comment-post="'+CSS.escape(focus.dataset.focusComment)+'"] input')?.focus();}
+});
+document.querySelector('#feed-list').addEventListener('submit',async e=>{
+ if(!e.target.matches('.comment-form'))return;e.preventDefault();const postId=e.target.dataset.commentPost,input=e.target.querySelector('input[name="comment"]'),body=input.value.trim();if(!body)return;
+ const button=e.target.querySelector('button');button.disabled=true;
+ const {error}=await supabase.from('post_comments').insert({post_id:postId,author_id:currentUser.id,body});
+ button.disabled=false;if(error){showToast('Comment could not be sent: '+error.message);return;}await loadFeed();
+});
+document.querySelectorAll('[data-feed-filter]').forEach(b=>b.addEventListener('click',()=>{feedFilter=b.dataset.feedFilter;document.querySelectorAll('[data-feed-filter]').forEach(x=>x.classList.toggle('active',x===b));renderFeed();}));
+document.querySelector('#feed-refresh').addEventListener('click',loadFeed);
+
 document.querySelector("#search").addEventListener("input",render);
 document.querySelectorAll("nav button:disabled").forEach(b=>b.addEventListener("click",()=>showToast(b.textContent+" is planned for a later Adventure update.")));
 document.querySelector('[aria-label="Notifications"]').addEventListener("click",()=>showToast("Notifications will be available when member accounts are built."));
 let installPrompt=null;window.addEventListener("beforeinstallprompt",e=>{e.preventDefault();installPrompt=e;});
 document.querySelector("#install-app").addEventListener("click",async()=>{if(installPrompt){installPrompt.prompt();await installPrompt.userChoice;installPrompt=null;}else{showToast("On iPhone: open in Safari, tap Share, then Add to Home Screen. On Android: open the browser menu and choose Install app or Add to Home screen.");}});
 if("serviceWorker" in navigator){window.addEventListener("load",()=>navigator.serviceWorker.register("./service-worker.js").catch(()=>{}));}
-render();loadDirectory().catch(()=>{liveMode=false;profiles=sampleProfiles;render();});
+render();loadDirectory().catch(()=>{if(!currentUser){liveMode=false;profiles=sampleProfiles;}else{liveMode=true;profiles=[];}render();});
+loadAnnouncements();
+supabase.auth.onAuthStateChange(()=>{loadDirectory().catch(()=>{});if(!document.querySelector('#feed-screen').classList.contains('hidden'))loadFeed();});
 </script></body></html>
