@@ -173,6 +173,7 @@ Roadmap: `docs/MAIN_APP_ROADMAP.md`. Data model review: `docs/DATA_MODEL_AND_RLS
 - [x] Added Explore Africa page for community, business and event discovery/submission.
 - [x] Connected News, Marketplace and Explore Africa from the main navigation.
 - [x] Saved migration `20261124234514_adventure_marketplace_communities_events_foundation.sql` and applied it to the Adventure Supabase project.
+- [x] Added database audit triggers for owner approval/rejection of products, business profiles, communities and events; audit migration `20261124234931_adventure_growth_moderation_audit.sql` applied.
 - [ ] Add moderated image uploads for marketplace listings and business profiles; image_path is metadata only until secure storage upload and delivery are implemented.
 - [ ] Add seller listing management, favourites UI, product detail pages, and a safe member-to-seller conversation handoff.
 - [ ] Add community membership, posts, moderators and private-community access checks.
