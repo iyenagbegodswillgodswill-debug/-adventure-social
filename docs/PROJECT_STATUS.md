@@ -123,6 +123,7 @@ Never place service-role keys, database passwords, AI provider keys or other sec
 - [x] Connected published announcements to the landing page.
 - [x] Added appeal submission/history to `account.html`.
 - [x] Added `supabase/tests/adventure_social_feed_security_checks.sql`; live structural checks passed, including RLS, table grants, RPC security mode, one-owner count, counter triggers and report snapshots.
+- [x] Reconciled all 33 repository migration filenames with the live Supabase migration history; removed duplicate files that could have reintroduced the public suspension helper.
 - [x] Updated PWA service worker to cache the new member account/policy pages and use cache v2.
 - [x] JavaScript syntax checks passed for `index.html`, `account.html` and `admin.html`; static UI reference checks passed.
 - [ ] Real owner/member browser tests and a two-member privacy/block/follow test remain outstanding.
