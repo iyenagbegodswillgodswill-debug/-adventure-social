@@ -1,6 +1,6 @@
 # Adventure — Project Status
 
-Last updated: 2026-11-24 (Adventure palette refresh and private messaging foundation)
+Last updated: 2026-11-24 (private voice messaging foundation)
 
 ## Current milestone: Main app Phase 1 — text Feed + private messaging foundation
 
@@ -143,3 +143,7 @@ Roadmap: `docs/MAIN_APP_ROADMAP.md`. Data model review: `docs/DATA_MODEL_AND_RLS
 - [x] Voice-to-text is optional and asks before using the browser speech-recognition service; no AI provider key or paid AI calls were added.
 - [ ] Test real two-member voice upload/playback, blocked-member access, browser microphone permissions and speech-to-text on supported browsers before calling this production-ready.
 - [ ] Full AI-powered transcription, translation or message rewrite remains inactive until the owner approves an AI provider, data-sharing scope and any usage budget.
+
+- [x] Voice-message migration is aligned: 38 live Supabase migrations and 38 repository migration files, with no missing voice migration.
+- [x] Voice schema, private bucket, 3 Storage policies and message metadata verified in the live database; Messages JavaScript syntax and static DOM selectors pass.
+- [ ] Latest Pages workflow run `45508580168` is still in progress; do not treat the new voice UI as deployed until it succeeds.
