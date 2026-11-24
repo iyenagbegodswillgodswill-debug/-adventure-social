@@ -1,6 +1,6 @@
 # Adventure — Project Status
 
-Last updated: 2026-11-24 (Terms & Policies preview added)
+Last updated: 2026-11-24 (Owner Rules & Policies Manager added)
 
 ## Current milestone: Owner Control Centre hardening
 
@@ -9,7 +9,7 @@ Last updated: 2026-11-24 (Terms & Policies preview added)
 - [x] Mobile-first public preview, PWA shell, account page and opt-in profile discovery.
 - [x] Profiles, follows, blocks and reports with row-level security.
 - [x] Private owner registry, audit log and database-enforced single-owner authorization.
-- [x] Owner dashboard with Overview, Reports & Safety, Members and Audit Activity.
+- [x] Owner dashboard with Overview, Reports & Safety, Members, Audit Activity, AI Operations and Rules & Policies Manager.
 - [x] Public registration remains disabled.
 - [x] Premium gold/red owner dashboard theme.
 - [x] Private member account controls for Active / Restricted / Suspended, with reason, optional expiry and owner audit record.
@@ -68,14 +68,14 @@ Never place service-role keys, database passwords, AI provider keys or other sec
 - Owner bootstrap guide: `docs/ADMIN_OWNER_BOOTSTRAP.md`
 
 
-## Community Rules & Terms/Policies — preview foundation added
+## Community Rules & Terms/Policies — owner manager added
 - [x] Created public `policies.html`, linked from the homepage footer.
 - [x] Added a database-backed Community Guidelines catalogue with eight stable rule IDs, severity labels, examples, versions and rule-specific graduated penalty ladders.
 - [x] Added versioned Terms of Service, Privacy Policy and Community Guidelines document records.
-- [x] Public policy tables are read-only for members/anonymous visitors; owner-only database policies govern management.
+- [x] Public policy tables are read-only for members/anonymous visitors; owner-only database policies govern management.\n- [x] Added Rules & Policies Manager inside the existing owner dashboard: edit rules, examples, severity, penalty ladders and policy drafts; publish/retire supported records.\n- [x] Policy catalogue changes create private owner audit entries through a database trigger.\n- [x] Terms and Privacy activation is deliberately locked until their missing legal/privacy details are finalised.
 - [x] All policy records currently have `preview` status. The page clearly states that these are drafts, not effective member contracts or automatic enforcement settings.
 - [ ] Finalise and owner-approve legal Terms and Privacy details before launch, including controller/contact details, retention, deletion, lawful bases and jurisdiction.
-- [ ] Add member acceptance records and require acceptance of the current policy version before member features/registration are enabled.
+- [ ] Add member acceptance records and require acceptance of the current policy version before member features/registration are enabled.\n- [ ] Add report-to-rule linking, evidence handling, appeals and reviewed enforcement.
 - [ ] Add rule-linked evidence review, AI classification recommendations, proportionate reversible enforcement, appeals, repeat-offender handling and audit history.
 - [ ] Do not enable automatic penalties until rule wording, thresholds, appeal handling and false-positive safeguards are approved and tested.
 - [ ] Keep public registration closed.
