@@ -26,11 +26,13 @@ Last updated: 2026-11-24 (Owner Rules & Policies Manager added)
 - [x] AI prompt treats report contents as untrusted data; outputs are recommendations only and cannot change member/report status.
 - [x] Dashboard, Edge Function source and database migration are saved in GitHub.
 - [ ] AI generation is not active until the owner approves an AI provider and usage budget and the server-side `OPENAI_API_KEY` secret is configured. No provider calls are made without that secret.
-- [x] Database-level owner/non-owner gate checks passed for the AI audit-history RPC (owner allowed; synthetic non-owner denied).\n- [ ] Live browser session tests for owner/non-owner and a successful provider-backed test remain outstanding. The provider setup response is safely surfaced in the dashboard.
+- [x] Database-level owner/non-owner gate checks passed for the AI audit-history RPC (owner allowed; synthetic non-owner denied).
+- [ ] Live browser session tests for owner/non-owner and a successful provider-backed test remain outstanding. The provider setup response is safely surfaced in the dashboard.
 
 ### Security review — still open
 - [ ] Review and tighten the `private` schema USAGE grants for anon/authenticated without breaking existing RLS policy helper calls or public wrapper functions. Current inspection confirms both roles have USAGE; do not revoke until dependencies are mapped and regression-tested.
-- [x] Removed the public RPC wrapper for `member_is_suspended`; the discovery RLS policy now calls the private helper directly. Verified the public wrapper is absent and the policy expression uses the private helper.\n- [ ] Finish review of private-schema USAGE and helper execution grants; anonymous discovery regression test is still outstanding.
+- [x] Removed the public RPC wrapper for `member_is_suspended`; the discovery RLS policy now calls the private helper directly. Verified the public wrapper is absent and the policy expression uses the private helper.
+- [ ] Finish review of private-schema USAGE and helper execution grants; anonymous discovery regression test is still outstanding.
 - [ ] Enable Supabase leaked-password protection after reviewing the available Auth setting and testing sign-in/reset behaviour. Security Advisor currently reports this one warning.
 - [ ] Complete authenticated owner, ordinary-member and anonymous smoke tests using dedicated test accounts.
 - [ ] Verify restriction, expiry and reinstatement behaviour end-to-end with a non-owner test account. Do not test by restricting a real member.
@@ -74,11 +76,16 @@ Never place service-role keys, database passwords, AI provider keys or other sec
 - [x] Created public `policies.html`, linked from the homepage footer.
 - [x] Added a database-backed Community Guidelines catalogue with eight stable rule IDs, severity labels, examples, versions and rule-specific graduated penalty ladders.
 - [x] Added versioned Terms of Service, Privacy Policy and Community Guidelines document records.
-- [x] Public policy tables are read-only for members/anonymous visitors; owner-only database policies govern management.\n- [x] Added Rules & Policies Manager inside the existing owner dashboard: edit rules, examples, severity, penalty ladders and policy drafts; publish/retire supported records.\n- [x] Policy catalogue changes create private owner audit entries through a database trigger.\n- [x] Audit trigger migration is saved in `supabase/migrations/20261124235000_adventure_policy_catalogue_audit.sql`.\n- [x] Terms and Privacy activation is deliberately locked until their missing legal/privacy details are finalised.
+- [x] Public policy tables are read-only for members/anonymous visitors; owner-only database policies govern management.
+- [x] Added Rules & Policies Manager inside the existing owner dashboard: edit rules, examples, severity, penalty ladders and policy drafts; publish/retire supported records.
+- [x] Policy catalogue changes create private owner audit entries through a database trigger.
+- [x] Audit trigger migration is saved in `supabase/migrations/20261124235000_adventure_policy_catalogue_audit.sql`.
+- [x] Terms and Privacy activation is deliberately locked until their missing legal/privacy details are finalised.
 - [x] All policy records currently have `preview` status. The page clearly states that these are drafts, not effective member contracts or automatic enforcement settings.
 - [ ] Finalise and owner-approve legal Terms and Privacy details before launch, including controller/contact details, retention, deletion, lawful bases and jurisdiction.
-- [ ] Add member acceptance records and require acceptance of the current policy version before member features/registration are enabled.\n- [ ] Add report-to-rule linking, evidence handling, appeals and reviewed enforcement.
-- [ ] Add rule-linked evidence review, AI classification recommendations, proportionate reversible enforcement, appeals, repeat-offender handling and audit history.
+- [ ] Add member acceptance records and require acceptance of the current policy version before member features/registration are enabled.
+- [x] Add report-to-rule linking, private case notes, appeals and owner-reviewed case decisions; evidence uploads remain intentionally disabled.
+- [ ] Add tested AI classification recommendations and repeat-offender review; keep all consequential enforcement owner-approved.
 - [ ] Do not enable automatic penalties until rule wording, thresholds, appeal handling and false-positive safeguards are approved and tested.
 - [ ] Keep public registration closed.
 
