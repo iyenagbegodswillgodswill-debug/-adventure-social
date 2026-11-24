@@ -1,8 +1,8 @@
 # Adventure — Project Status
 
-Last updated: 2026-11-24 (Adventure text Feed foundation added)
+Last updated: 2026-11-24 (Adventure palette refresh and private messaging foundation)
 
-## Current milestone: Main app Phase 1 — text Feed
+## Current milestone: Main app Phase 1 — text Feed + private messaging foundation
 
 ### Verified foundation
 - [x] Separate public GitHub repository and Adventure-only Supabase project.
