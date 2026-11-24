@@ -17,7 +17,22 @@ Build a practical owner control centre for Adventure, supported by an AI Operati
 - The public `member_is_suspended` RPC wrapper was removed; profile discovery RLS now calls the private helper directly. Private-schema USAGE and helper execution grants still need a full dependency review and anonymous discovery regression test.
 - Supabase Security Advisor currently reports leaked-password protection disabled.
 
-## Implemented AI foundation (2026-11-24)\n- Private `ai_operations_runs` audit table with RLS, owner-only read policy, and no anon access. Owner-only history RPC is verified against owner and synthetic non-owner claims.\n- Deployed `adventure-ai-operations` Edge Function, JWT verification enabled, owner verification before data access.\n- Dashboard AI Operations section with briefing, report-triage controls and private AI run history.\n- Initial scope sends only report IDs, reason, details, status and timestamps (limited to 100 recent reports); report text is treated as untrusted input.\n- AI output is advisory only. No automated bans, report resolution, verification decisions, member messaging or other consequential actions.\n- Provider activation requires explicit owner approval of OpenAI, API key setup and a usage budget.\n\n## Implemented Rules & Policies Manager (2026-11-24)\n- Owner-only dashboard editor for the eight rule records and three policy documents.\n- Edit rule descriptions, examples, severity and per-rule penalty ladder; update document title, summary and body.\n- Explicit preview/active/retired states; Terms and Privacy cannot be activated until legal/privacy details are completed.\n- Content changes increment record versions. Database trigger writes owner-only audit entries.\n- No automatic member penalties are enabled.\n\n## Target owner workspace
+## Implemented AI foundation (2026-11-24)
+- Private `ai_operations_runs` audit table with RLS, owner-only read policy, and no anon access. Owner-only history RPC is verified against owner and synthetic non-owner claims.
+- Deployed `adventure-ai-operations` Edge Function, JWT verification enabled, owner verification before data access.
+- Dashboard AI Operations section with briefing, report-triage controls and private AI run history.
+- Initial scope sends only report IDs, reason, details, status and timestamps (limited to 100 recent reports); report text is treated as untrusted input.
+- AI output is advisory only. No automated bans, report resolution, verification decisions, member messaging or other consequential actions.
+- Provider activation requires explicit owner approval of OpenAI, API key setup and a usage budget.
+
+## Implemented Rules & Policies Manager (2026-11-24)
+- Owner-only dashboard editor for the eight rule records and three policy documents.
+- Edit rule descriptions, examples, severity and per-rule penalty ladder; update document title, summary and body.
+- Explicit preview/active/retired states; Terms and Privacy cannot be activated until legal/privacy details are completed.
+- Content changes increment record versions. Database trigger writes owner-only audit entries.
+- No automatic member penalties are enabled.
+
+## Target owner workspace
 1. **Overview & platform health:** member totals, new members, discovery, report queue, verification queue, activity and service health; visibly flag stale/unavailable data.
 2. **Member management:** profile detail, account status, reports, blocks, moderation history, expiry, notification and appeal support. Never silently delete member data as moderation.
 3. **Verification centre:** consent-based applications, clear categories and criteria, private evidence storage, strict access, short retention, deletion and appeals. AI can check completeness but cannot decide identity authenticity.
@@ -68,7 +83,15 @@ Build a practical owner control centre for Adventure, supported by an AI Operati
 - [ ] Add policy acceptance records and version gates before opening registration.
 - [ ] Complete owner, ordinary-member and anonymous end-to-end tests.
 
-### Phase 2 — reports and appeals (owner workflow implemented; member connection pending)\n- [x] Link report cases to community rule IDs and priority. Evidence uploads are deliberately not supported yet; no sensitive evidence is collected.\n- [x] Add private case notes, resolution summary, owner-recorded decisions and audit history.\n- [x] Add appeal database and owner review/decision workflow with written reasons.\n- [x] Route report status changes through owner-checked audit-logged RPCs.\n- [ ] Connect member appeal submission and appeal-status display in the main Adventure app.\n- [ ] Add member notices and proportionate reversible enforcement only after end-to-end review. No automatic permanent bans.\n\n### Phase 3 — verification centre (deferred for privacy design)
+### Phase 2 — reports and appeals (owner workflow implemented; member connection pending)
+- [x] Link report cases to community rule IDs and priority. Evidence uploads are deliberately not supported yet; no sensitive evidence is collected.
+- [x] Add private case notes, resolution summary, owner-recorded decisions and audit history.
+- [x] Add appeal database and owner review/decision workflow with written reasons.
+- [x] Route report status changes through owner-checked audit-logged RPCs.
+- [ ] Connect member appeal submission and appeal-status display in the main Adventure app.
+- [ ] Add member notices and proportionate reversible enforcement only after end-to-end review. No automatic permanent bans.
+
+### Phase 3 — verification centre (deferred for privacy design)
 - [ ] Define categories, consent, criteria, retention and appeal rules before collecting verification data.
 - [ ] Do not collect identity documents, biometric data or sensitive evidence until private storage, access controls and deletion/retention are designed and tested.
 - [ ] Build application queue, review history, owner decision and member notifications after the privacy design is approved.
