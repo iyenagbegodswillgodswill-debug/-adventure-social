@@ -103,7 +103,7 @@ Never place service-role keys, database passwords, AI provider keys or other sec
 - [x] Split catalogue SELECT and owner write policies to avoid duplicate permissive SELECT policies.
 - [x] Added supporting indexes for new foreign keys.
 - [x] Added aggregate 7-day/30-day activity metrics and owner-only database governance checks; no individual member content is exposed in analytics.
-- [x] Verified one owner, eight rules, three policy documents, five case/appeal RPCs plus analytics RPC, RLS on new public tables, and no remaining security findings except leaked-password protection.
+- [x] Verified one owner, eight rules, three policy documents, case, appeal, moderation and analytics RPCs, RLS on new public tables, and no remaining security findings except leaked-password protection.
 - [ ] Live authenticated UI smoke tests still required; a source/database check is not a substitute for signing in as owner and non-owner.
 - [ ] Latest Pages workflow is still queued; verify its final deployment result before relying on the live UI.
 - [ ] Latest performance advisor reports only unused-index notices in the current low-traffic database; no unindexed foreign keys remain.
@@ -118,10 +118,12 @@ Never place service-role keys, database passwords, AI provider keys or other sec
 - [x] Restricted members cannot publish, like, comment or report; the account page explains the recorded restriction and provides appeal access when eligible.
 - [x] Added post reporting with private report-time content snapshots, so owner review retains evidence even if the original post is deleted.
 - [x] Added owner-approved reversible hide/restore for reported posts and comments, with reason required and audit logging; authors can see the moderation reason on their own hidden content.
+- [x] Added owner moderation RPC as a SECURITY INVOKER wrapper; non-owner access was tested and denied.
 - [x] Connected the member Feed, text composer, likes, comments, reporting and delete-own-post action in `index.html`.
 - [x] Connected published announcements to the landing page.
 - [x] Added appeal submission/history to `account.html`.
-- [x] Added `supabase/tests/adventure_social_feed_security_checks.sql`; live structural checks passed, including RLS, table grants, RPC security mode, one-owner count and counter triggers.
+- [x] Added `supabase/tests/adventure_social_feed_security_checks.sql`; live structural checks passed, including RLS, table grants, RPC security mode, one-owner count, counter triggers and report snapshots.
+- [x] Updated PWA service worker to cache the new member account/policy pages and use cache v2.
 - [x] JavaScript syntax checks passed for `index.html`, `account.html` and `admin.html`; static UI reference checks passed.
 - [ ] Real owner/member browser tests and a two-member privacy/block/follow test remain outstanding.
 - [ ] Latest Pages workflow is queued; confirm successful deployment and perform mobile/desktop smoke tests.
