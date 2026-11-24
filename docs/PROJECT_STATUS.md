@@ -26,7 +26,7 @@ Last updated: 2026-11-24
 - [x] AI prompt treats report contents as untrusted data; outputs are recommendations only and cannot change member/report status.
 - [x] Dashboard, Edge Function source and database migration are saved in GitHub.
 - [ ] AI generation is not active until the owner approves an AI provider and usage budget and the server-side `OPENAI_API_KEY` secret is configured. No provider calls are made without that secret.
-- [ ] Live authenticated owner/non-owner tests and a successful provider-backed test remain outstanding. The provider setup response is safely surfaced in the dashboard.
+- [x] Database-level owner/non-owner gate checks passed for the AI audit-history RPC (owner allowed; synthetic non-owner denied).\n- [ ] Live browser session tests for owner/non-owner and a successful provider-backed test remain outstanding. The provider setup response is safely surfaced in the dashboard.
 
 ### Security review — still open
 - [ ] Review and tighten the `private` schema USAGE grants for anon/authenticated without breaking existing RLS policy helper calls or public wrapper functions. Current inspection confirms both roles have USAGE; do not revoke until dependencies are mapped and regression-tested.
