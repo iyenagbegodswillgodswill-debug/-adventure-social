@@ -63,7 +63,7 @@ Last updated: 2026-11-24 (Adventure text Feed foundation added)
 ## Deployment and release
 - [x] GitHub Pages configured from `main` / root.
 - [x] Latest known deployment run `45491662650` succeeded for commit `312339308f868897003d61c743f4538ae2fbc66e`.
-- [ ] Verify the latest owner dashboard deployment after latest owner dashboard commit `ffd59d487f0d023e2fe922ce6ba8de932b72219b`; visually inspect desktop/mobile and complete authenticated owner/non-owner smoke tests.
+- [ ] Verify the latest owner dashboard deployment after latest owner dashboard commit `52578dce374ecd18d98954f0e4c89ed3e10df5f4`; visually inspect desktop/mobile and complete authenticated owner/non-owner smoke tests.
 - [ ] Keep public registration closed and the site in preview until security, privacy, moderation and release checks pass.
 
 ## Safety and cost guardrails
@@ -117,6 +117,7 @@ Never place service-role keys, database passwords, AI provider keys or other sec
 - [x] Added database-maintained like/comment counters and timestamp updates.
 - [x] Restricted members cannot publish, like, comment or report; the account page explains the recorded restriction and provides appeal access when eligible.
 - [x] Added post reporting with private report-time content snapshots, so owner review retains evidence even if the original post is deleted.
+- [x] Added owner-approved reversible hide/restore for reported posts and comments, with reason required and audit logging; authors can see the moderation reason on their own hidden content.
 - [x] Connected the member Feed, text composer, likes, comments, reporting and delete-own-post action in `index.html`.
 - [x] Connected published announcements to the landing page.
 - [x] Added appeal submission/history to `account.html`.
