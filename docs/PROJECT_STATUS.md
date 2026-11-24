@@ -19,7 +19,7 @@ Last updated: 2026-11-24 (Adventure text Feed foundation added)
 - [x] Exactly one owner row was confirmed.
 - [x] Main app Feed now supports text posts, public/followers visibility, likes, comments and post reporting.
 - [x] Database triggers maintain like/comment counts; clients cannot directly edit counters.
-- [x] Member account page supports eligible appeals and displays the member's own restriction reason/expiry.
+- [x] Member account page supports eligible appeals, displays the member's own restriction reason/expiry, and lists/unblocks accounts the member has blocked.
 - [x] Published owner announcements are displayed on the public landing page.
 - [x] Latest Pages workflow for commit `312339308f868897003d61c743f4538ae2fbc66e` completed successfully: run `45491662650`, including build and deploy jobs.
 
@@ -122,8 +122,8 @@ Never place service-role keys, database passwords, AI provider keys or other sec
 - [x] Connected the member Feed, text composer, likes, comments, reporting and delete-own-post action in `index.html`.
 - [x] Connected published announcements to the landing page.
 - [x] Added appeal submission/history to `account.html`.
-- [x] Added `supabase/tests/adventure_social_feed_security_checks.sql`; live structural checks passed, including RLS, table grants, RPC security mode, one-owner count, counter triggers and report snapshots.
-- [x] Reconciled all 34 repository migration filenames with the live Supabase migration history; removed duplicate files that could have reintroduced the public suspension helper.
+- [x] Added `supabase/tests/adventure_social_feed_security_checks.sql`; live structural checks passed, including RLS, table grants, RPC security mode, one-owner count, counter triggers, report snapshots and self-service block listing.
+- [x] Reconciled all 35 repository migration filenames with the live Supabase migration history; removed duplicate files that could have reintroduced the public suspension helper.
 - [x] Updated PWA service worker to cache the new member account/policy pages and use cache v2.
 - [x] Added indexes for the two content-moderation actor foreign keys; the performance advisor now reports zero unindexed foreign keys.
 - [x] JavaScript syntax checks passed for `index.html`, `account.html` and `admin.html`; static UI reference checks passed.
