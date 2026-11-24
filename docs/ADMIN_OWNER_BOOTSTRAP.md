@@ -1,13 +1,20 @@
 # Adventure owner administrator setup
 
-The Admin Control Centre is implemented at `admin.html`, but it intentionally grants no one access by default. The first owner account must be provisioned by the project owner through the Supabase Dashboard.
+The Admin Control Centre is implemented at `admin.html`. It is connected to the same Adventure Supabase project as the public platform, but private records and privileged actions are protected by database authorization.
+
+## Designated owner
+
+- **Owner email:** `allenjamesl1014@gmail.com`
+- **Access model:** one owner only; no moderator accounts and no public admin registration.
+- The email is prefilled on the private sign-in page. The database independently verifies the signed-in user's UUID against `private.admin_users` and the `owner` role. The email check in the page is an extra convenience check, not the security boundary.
 
 ## One-time owner setup
 
-1. In the Supabase Dashboard, open the separate **Adventure** project.
-2. Go to **Authentication → Users** and create the owner's account with an email address the owner controls. Use a strong unique password and verify the email as appropriate.
-3. Copy that user's UUID from the Users table.
-4. Open **SQL Editor** in the Adventure project and run the statement below after replacing the placeholder with the exact UUID:
+1. Open the **Adventure** Supabase project.
+2. Go to **Authentication → Users**.
+3. Create an Auth user using `allenjamesl1014@gmail.com`, set a strong unique password, and complete email verification if required.
+4. Copy that user's UUID from the Auth Users list.
+5. Open **SQL Editor** in the Adventure project and run this statement, replacing the placeholder with the exact UUID:
 
 ```sql
 insert into private.admin_users (user_id, role)
@@ -15,15 +22,20 @@ values ('REPLACE-WITH-OWNER-USER-UUID', 'owner')
 on conflict (user_id) do update set role = 'owner';
 ```
 
-5. Open the public site and choose **Admin access** in the footer, or visit `/admin.html`. Sign in using the email and password created in step 2.
+6. Visit `https://iyenagbegodswillgodswill-debug.github.io/-adventure-social/admin.html` and sign in with the owner email and the password you created.
 
-## Important safeguards
+## Current setup status
 
-- Do not put the owner's password, service-role key or database password in GitHub or browser code.
-- Do not create a public sign-up path for administrators.
-- Only the trusted Supabase project owner should run the bootstrap SQL. There is no client-facing endpoint to grant administrator roles.
-- A user who signs in but is not in `private.admin_users` sees an access-denied screen; the dashboard does not load member or report data.
-- Additional moderators should be added only by the trusted project owner using a reviewed SQL operation. Support accounts cannot read or resolve private reports.
-- If the account is compromised, remove its row from `private.admin_users` and revoke its active sessions in Supabase Auth.
+The owner Auth account has **not** been created yet. A database lookup confirmed that `allenjamesl1014@gmail.com` is not currently present in this project's Auth users. I cannot create the Auth identity through the connected project tools, and I will not invent a password or write credentials into the repository.
 
-This bootstrap step is not performed yet because no Adventure owner login account has been designated in this project.
+If the Supabase Dashboard says you do not have access to the Adventure project, first make sure you are signed into the Supabase account that owns the Adventure organization/project. Do not create a different project or invite another admin as a workaround.
+
+## Security safeguards
+
+- Only the single `owner` role is accepted by the private admin registry; the database also enforces at most one owner row.
+- Owner checks run in PostgreSQL through `private.is_admin()` and `private.can_review_reports()`. Frontend visibility or a hidden URL is never treated as authorization.
+- Anonymous users and ordinary signed-in members cannot read reports, the admin registry or the audit log, or change report status.
+- The owner dashboard uses the same Adventure backend as the public website.
+- Do not put the owner's password, service-role key, database password or other secrets in GitHub or browser code.
+- Keep public registration closed until member safety, privacy and end-to-end tests are complete.
+- No paid services or upgrades without explicit approval.
