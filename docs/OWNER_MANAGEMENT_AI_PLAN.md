@@ -13,11 +13,11 @@ Build a practical owner control centre for Adventure, supported by an AI Operati
 - Restriction enforcement currently covers profile updates, follows, blocks and report submission. Suspended profiles are excluded from public discovery.
 - Public registration remains disabled.
 - The latest Pages workflow for commit `312339308f868897003d61c743f4538ae2fbc66e` succeeded (run `45491662650`).
-- **AI is not implemented or live.** No Edge Functions are deployed and no provider credential is configured.
+- **AI Operations foundation is installed but provider-backed generation is not active.** The owner dashboard now includes briefing and report-triage actions; a JWT-protected Supabase Edge Function verifies the signed-in owner and a private audit table records outputs. The function is deployed, but no `OPENAI_API_KEY` secret is configured, so it safely returns an inactive/setup-needed state without making provider calls.
 - The public `member_is_suspended` RPC wrapper was removed; profile discovery RLS now calls the private helper directly. Private-schema USAGE and helper execution grants still need a full dependency review and anonymous discovery regression test.
 - Supabase Security Advisor currently reports leaked-password protection disabled.
 
-## Target owner workspace
+## Implemented AI foundation (2026-11-24)\n- Private `ai_operations_runs` audit table with RLS and no direct anon/authenticated access.\n- Deployed `adventure-ai-operations` Edge Function, JWT verification enabled, owner verification before data access.\n- Dashboard AI Operations section with briefing and report-triage controls.\n- Initial scope sends only report IDs, reason, details, status and timestamps (limited to 100 recent reports); report text is treated as untrusted input.\n- AI output is advisory only. No automated bans, report resolution, verification decisions, member messaging or other consequential actions.\n- Provider activation requires explicit owner approval of OpenAI, API key setup and a usage budget.\n\n## Target owner workspace
 1. **Overview & platform health:** member totals, new members, discovery, report queue, verification queue, activity and service health; visibly flag stale/unavailable data.
 2. **Member management:** profile detail, account status, reports, blocks, moderation history, expiry, notification and appeal support. Never silently delete member data as moderation.
 3. **Verification centre:** consent-based applications, clear categories and criteria, private evidence storage, strict access, short retention, deletion and appeals. AI can check completeness but cannot decide identity authenticity.
