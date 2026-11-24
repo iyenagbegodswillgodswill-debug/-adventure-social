@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#145c45">
+<meta name="description" content="Read Adventure's community guidelines, terms of service and privacy policy.">
+<title>Terms & Policies | Adventure</title>
+<style>
+:root{--green:#145c45;--dark:#103d32;--gold:#e8b94f;--cream:#fbf8ef;--ink:#1d2924;--muted:#68766d;--line:#e8e9e1}
+*{box-sizing:border-box}body{margin:0;background:#f3f5ef;color:var(--ink);font:15px/1.6 system-ui,-apple-system,sans-serif}.shell{max-width:980px;margin:auto;background:#fff;min-height:100vh}header{background:var(--green);color:white;padding:22px clamp(18px,5vw,48px)}.brand{font-size:25px;font-weight:850;letter-spacing:-1px}.brand span{color:var(--gold)}header p{margin:3px 0 0;color:#dcebe1;font-size:13px}main{padding:26px clamp(16px,5vw,48px) 48px}.back{color:var(--green);font-weight:750;text-decoration:none;font-size:13px}.intro{margin:20px 0}.eyebrow{font-size:11px;letter-spacing:1.3px;text-transform:uppercase;color:var(--green);font-weight:850}.intro h1{font-size:clamp(29px,5vw,42px);line-height:1.1;letter-spacing:-1.2px;margin:5px 0}.intro p{color:var(--muted);margin:0}.notice{border:1px solid #ecd9a7;background:#fff9e9;border-radius:13px;padding:13px 15px;color:#66552d;font-size:13px;margin:18px 0 22px}.tabs{display:flex;gap:8px;overflow:auto;padding-bottom:12px}.tabs button{border:1px solid var(--line);background:white;border-radius:30px;padding:9px 14px;color:var(--muted);font-weight:750;white-space:nowrap}.tabs button.active{background:#e9f1eb;border-color:#c9ddce;color:var(--green)}.panel{border:1px solid var(--line);border-radius:16px;padding:20px;margin:12px 0}.panel h2{margin:0 0 5px;font-size:21px}.muted{color:var(--muted)}.rule{border-top:1px solid var(--line);padding:17px 0}.rule:first-of-type{margin-top:10px}.rule h3{margin:0 0 5px;font-size:17px}.rule p{margin:5px 0;color:#4e5b53}.meta{display:flex;gap:7px;flex-wrap:wrap;margin:8px 0}.pill{font-size:10px;font-weight:850;letter-spacing:.4px;text-transform:uppercase;padding:4px 8px;border-radius:20px;background:#eef2ed;color:var(--green)}.pill.high,.pill.critical{background:#fae9e8;color:#9a3434}.pill.medium{background:#fff3d9;color:#815d17}.penalties{background:#f8faf6;border-radius:11px;padding:11px 13px;margin-top:9px}.penalties strong{font-size:12px}.penalties ol{margin:5px 0 0;padding-left:20px}.penalties li{margin:4px 0;font-size:13px}.doc-body{white-space:pre-line;color:#4e5b53}.doc-body p{margin:8px 0}.loading{color:var(--muted);padding:18px}.footer{padding:20px;text-align:center;color:var(--muted);font-size:12px;border-top:1px solid var(--line)}.footer a{color:var(--green)}@media(max-width:600px){.panel{padding:15px}.intro{margin-top:16px}}
+</style>
+</head>
+<body><div class="shell">
+<header><div class="brand">adventure<span>.</span></div><p>Your world. Your adventure.</p></header>
+<main>
+<a class="back" href="./index.html">← Back to Adventure</a>
+<section class="intro"><div class="eyebrow">Community information</div><h1>Terms & Policies</h1><p>Know the standards that help keep Adventure respectful, safe and trustworthy.</p></section>
+<div class="notice"><strong>Preview notice:</strong> Adventure is not yet open for public registration. These documents and penalties are published for review and transparency. They are drafts, not yet effective member agreements or automatic enforcement settings. Final terms and privacy details must be approved before launch.</div>
+<div class="tabs" role="tablist" aria-label="Policy sections">
+<button class="active" data-tab="rules" role="tab" aria-selected="true">Community Guidelines</button>
+<button data-tab="terms" role="tab" aria-selected="false">Terms of Service</button>
+<button data-tab="privacy" role="tab" aria-selected="false">Privacy Policy</button>
+</div>
+<section class="panel" id="content"><div class="loading">Loading Adventure policies…</div></section>
+</main>
+<footer class="footer">Adventure · <a href="./index.html">Home</a> · Policies are versioned and will be updated before launch.</footer>
+</div>
+<script type="module">
+import {createClient} from 'https://esm.sh/@supabase/supabase-js@2.57.0';
+const db=createClient('https://fhjhbkbyglchiiunwohy.supabase.co','sb_publishable_hAnq_0mwuXZowP77K-xluA_yHRhlyhq');
+const content=document.querySelector('#content');let rules=[],docs=[];
+const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+function show(tab){
+ document.querySelectorAll('[data-tab]').forEach(b=>{const on=b.dataset.tab===tab;b.classList.toggle('active',on);b.setAttribute('aria-selected',String(on));});
+ if(tab==='rules'){
+  content.innerHTML='<h2>Community Guidelines</h2><p class="muted">Every Adventurer is expected to follow these standards. Each rule has its own graduated penalty ladder.</p>'+rules.map(r=>'<article class="rule"><h3>'+esc(r.title)+'</h3><div class="meta"><span class="pill '+esc(r.severity)+'">'+esc(r.severity)+' severity</span><span class="pill">Rule '+esc(r.id)+'</span><span class="pill">Version '+esc(r.version)+'</span></div><p>'+esc(r.description)+'</p><p><strong>Examples:</strong> '+(r.examples||[]).map(esc).join(' · ')+'</p><div class="penalties"><strong>Penalty levels (proposed)</strong><ol>'+(r.penalty_levels||[]).map(p=>'<li><strong>'+esc(p.action)+'</strong> — '+esc(p.duration)+'</li>').join('')+'</ol></div></article>').join('')+'<p class="muted">A report is not proof. Decisions should consider evidence, context, severity and repeat history. Members should be able to appeal. Serious or permanent removal requires owner review.</p>';
+ }else{
+  const d=docs.find(x=>x.id===(tab==='terms'?'terms-of-service':'privacy-policy'));
+  content.innerHTML=d?'<h2>'+esc(d.title)+'</h2><p class="muted">'+esc(d.summary)+'</p><div class="meta"><span class="pill">'+esc(d.status)+'</span><span class="pill">Version '+esc(d.version)+'</span></div><div class="doc-body">'+esc(d.body).replace(/\\n/g,'\n')+'</div>':'<h2>Not available</h2><p>This document is not available yet.</p>';
+ }
+}
+document.querySelectorAll('[data-tab]').forEach(b=>b.addEventListener('click',()=>show(b.dataset.tab)));
+try{
+ const [rr,dd]=await Promise.all([db.from('community_rules').select('*').in('status',['preview','active']).order('sort_order'),db.from('policy_documents').select('*').in('status',['preview','active'])]);
+ if(rr.error)throw rr.error;if(dd.error)throw dd.error;
+ rules=rr.data||[];docs=dd.data||[];
+ if(!rules.length)throw new Error('No rules published');
+ show('rules');
+}catch(e){content.innerHTML='<h2>Policies temporarily unavailable</h2><p class="muted">Please try again later. Adventure keeps registration closed while its policies are being prepared.</p>';console.error(e);}
+</script>
+</body></html>
