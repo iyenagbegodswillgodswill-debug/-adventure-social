@@ -53,7 +53,7 @@ const sampleProfiles=[
 {name:"Tunde A.",handle:"@tundeconnects",emoji:"🤝",bio:"Building community and creating room for new voices.",tag:"community"},
 {name:"Nia B.",handle:"@niasees",emoji:"📷",bio:"Finding beauty in places people often pass by.",tag:"travel"},
 {name:"Kwame S.",handle:"@kwamesounds",emoji:"🎵",bio:"Music, local stories and the sounds around us.",tag:"culture"}];
-let profiles=sampleProfiles;let liveMode=false;let currentUser=null;let following=new Set();let filter="all";let toastTimer;let reportTarget=null;let reportTargetType="profile";let reportContentId=null;let feedPosts=[],feedProfiles={},feedComments=[],feedLiked=new Set(),feedFilter="all";
+let profiles=sampleProfiles;let liveMode=false;let currentUser=null;let following=new Set();let filter="all";let toastTimer;let reportTarget=null;let reportTargetType="profile";let reportContentId=null;let feedPosts=[],feedProfiles={},feedComments=[],feedLiked=new Set(),feedFilter="all",feedCanInteract=false;
 try{const saved=JSON.parse(localStorage.getItem("adventure-demo-follows")||"[]");if(Array.isArray(saved))following=new Set(saved.filter(x=>typeof x==="string"));}catch(e){following=new Set();}
 function escapeHtml(value){return String(value??'').replace(/[&<>"']/g,ch=>{if(ch==='&')return '&amp;';if(ch==='<')return '&lt;';if(ch==='>')return '&gt;';if(ch==='"')return '&quot;';return '&#39;';});}
 function showToast(message){const el=document.querySelector("#toast");if(!el)return;el.textContent=message;el.classList.add("show");clearTimeout(toastTimer);toastTimer=setTimeout(()=>el.classList.remove("show"),2600);}
@@ -161,9 +161,11 @@ function renderFeed(){
 }
 async function loadFeed(){
  const guest=document.querySelector('#feed-guest'),composer=document.querySelector('#feed-post-form'),host=document.querySelector('#feed-list');
- const {data:{session}}=await supabase.auth.getSession();currentUser=session?.user||null;
+ const {data:{session}}=await supabase.auth.getSession();currentUser=session?.user||null;feedCanInteract=false;
  guest.classList.toggle('hidden',!!currentUser);composer.classList.toggle('hidden',!currentUser);
  if(!currentUser){host.innerHTML='<div class="feed-note">The member Feed is private to signed-in Adventurers. <a href="./account.html" style="color:var(--green);font-weight:750">Sign in</a> to continue.</div>';return;}
+ const eligibility=await supabase.rpc('member_can_interact');feedCanInteract=!!eligibility.data&&!eligibility.error;
+ const feedMessage=document.querySelector('#feed-message');feedMessage.classList.toggle('hidden',feedCanInteract);if(!feedCanInteract)feedMessage.textContent='Your account currently has interaction restrictions. You can still read the Feed; use the account page to appeal if you believe this is a mistake.';composer.classList.toggle('hidden',!feedCanInteract);
  host.innerHTML='<div class="feed-note">Loading the latest posts…</div>';
  const {data,error}=await supabase.from('posts').select('id,author_id,body,visibility,status,likes_count,comments_count,created_at').eq('status','published').order('created_at',{ascending:false}).limit(40);
  if(error){host.innerHTML='<div class="feed-note">The Feed could not load: '+escapeHtml(error.message)+'</div>';return;}
