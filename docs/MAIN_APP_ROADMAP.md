@@ -46,6 +46,9 @@ Adventure is an Africa-first social platform connecting people, cultures, commun
 - [x] Private one-to-one conversations with member discovery, block enforcement, spam controls and abuse reporting foundation.
 - [x] Private voice-note recording, preview, upload and playback groundwork; text messages remain supported.
 - [x] Optional browser speech-to-text assist with an explicit browser-processing notice; no paid AI provider is connected.
+- [x] One-to-one audio/video call interface with incoming accept/decline, WebRTC signalling, mute, camera toggle and hang-up controls.
+- [ ] Test actual two-member calls and verify private Realtime channel enforcement; STUN-only setup may need TURN for some networks.
+- [ ] Add background/push call notifications only after consent and delivery costs are reviewed.
 - [ ] Complete real two-member tests for text, voice, storage access, blocked users and mobile browser microphone support.
 - [ ] Add AI-powered transcription, translation and message rewrite only after owner approval of provider, privacy boundaries and usage budget.
 - [ ] Add in-app notifications for follows, comments, replies, appeals, announcements and messages.
@@ -68,4 +71,4 @@ Adventure is an Africa-first social platform connecting people, cultures, commun
 
 ## Current scope limits
 
-The Feed is text-only. Voice-message groundwork is in place but still requires authenticated browser testing. Photo uploads, avatar uploads, Shorts/video, Communities and real-time notifications remain future work. No AI provider is configured. The owner dashboard's AI features remain advisory-only and inactive without explicit provider approval.
+The Feed is text-only. Private voice messaging and one-to-one audio/video calling foundations are in place but require authenticated two-member browser testing. Calls currently rely on STUN and require both members to have Messages open; TURN and push notifications are not configured. Photo uploads, avatar uploads, Shorts/video and Communities remain future work. No AI provider is configured. The owner dashboard's AI features remain advisory-only and inactive without explicit provider approval.
