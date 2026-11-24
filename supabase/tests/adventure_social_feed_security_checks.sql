@@ -27,8 +27,22 @@ begin
   raise exception 'Post counters or reaction/comment rows have unsafe direct update grants';
  end if;
 
+ if has_table_privilege('authenticated','public.posts','insert')
+  or has_column_privilege('authenticated','public.posts','likes_count','insert')
+  or has_column_privilege('authenticated','public.posts','comments_count','insert')
+  or has_column_privilege('authenticated','public.posts','status','insert')
+  or has_column_privilege('authenticated','public.post_likes','created_at','insert')
+  or has_column_privilege('authenticated','public.post_comments','created_at','insert')
+  or has_column_privilege('authenticated','public.reports','status','insert')
+  or has_column_privilege('authenticated','public.reports','reported_content_snapshot','insert')
+  or has_column_privilege('authenticated','public.member_appeals','status','insert')
+  or has_table_privilege('authenticated','public.member_appeals','update') then
+  raise exception 'Members have insert/update access to server-managed fields';
+ end if;
+
  if has_function_privilege('authenticated','private.adjust_post_counter()','execute')
-  or has_function_privilege('anon','private.adjust_post_counter()','execute') then
+  or has_function_privilege('anon','private.adjust_post_counter()','execute')
+  or has_function_privilege('authenticated','private.capture_reported_content_snapshot()','execute') then
   raise exception 'Post counter trigger function is directly executable';
  end if;
 
@@ -48,7 +62,8 @@ begin
  end if;
 
  if not exists(select 1 from pg_trigger where tgname='post_likes_counter' and not tgisinternal)
-  or not exists(select 1 from pg_trigger where tgname='post_comments_counter' and not tgisinternal) then
+  or not exists(select 1 from pg_trigger where tgname='post_comments_counter' and not tgisinternal)
+  or not exists(select 1 from pg_trigger where tgname='reports_capture_content_snapshot' and not tgisinternal) then
   raise exception 'Post counter triggers are missing';
  end if;
 end $$;
