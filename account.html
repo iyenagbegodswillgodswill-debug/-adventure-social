@@ -34,6 +34,7 @@ main{width:min(100% - 28px,760px);margin:30px auto 55px}.card{background:#fff;bo
   <label class="privacy"><input id="discoverable" type="checkbox"><span><strong>Show my profile in discovery</strong>Your profile is private by default. Turn this on only when you're ready to be discovered.</span></label>
   <div class="row"><button class="primary" id="save-profile" type="submit">Save profile</button><button class="secondary" id="logout" type="button">Sign out</button></div>
  </form>
+ <section id="appeal-panel" style="border-top:1px solid var(--line);margin-top:22px;padding-top:20px"><div class="eyebrow">Account review</div><h2 style="font-size:19px;margin:5px 0">Appeal a restriction</h2><p class="muted">If your account has an active restriction or suspension and you believe it was a mistake, you can ask the owner to review it. An appeal does not automatically restore account access.</p><div id="appeal-message" class="notice">Checking appeal eligibility…</div><form id="appeal-form" class="hidden"><div class="field"><label for="appeal-reason">Why should this decision be reviewed?</label><textarea id="appeal-reason" maxlength="2000" minlength="10" required placeholder="Explain your situation respectfully…"></textarea></div><button class="primary" id="appeal-submit" type="submit">Submit appeal</button></form><div id="appeal-history"></div></section>
 </section>
 <div class="footer">Adventure is just beginning. <a href="./admin.html">Administrator access</a></div>
 </main>
@@ -42,6 +43,19 @@ import { createClient } from 'https://esm.sh/@supabase/supabase-js@2.57.0';
 const supabase=createClient('https://fhjhbkbyglchiiunwohy.supabase.co','sb_publishable_hAnq_0mwuXZowP77K-xluA_yHRhlyhq',{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:true}});
 const $=s=>document.querySelector(s);
 function notice(el,text,error){el.textContent=text;el.classList.remove('hidden');el.classList.toggle('error',!!error);}
+function escapeHtml(v){return String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+async function loadMemberAppeals(user){
+ const [eligibility,history]=await Promise.all([
+  supabase.rpc('member_can_appeal'),
+  supabase.from('member_appeals').select('id,reason,status,owner_decision,created_at').eq('member_id',user.id).order('created_at',{ascending:false}).limit(10)
+ ]);
+ if(history.error){notice($('#appeal-message'),'Appeal history could not be loaded: '+history.error.message,true);return;}
+ const rows=history.data||[],pending=rows.some(x=>x.status==='pending'||x.status==='under_review');
+ const canAppeal=!!eligibility.data&&!eligibility.error&&!pending;
+ $('#appeal-form').classList.toggle('hidden',!canAppeal);
+ notice($('#appeal-message'),eligibility.error?'Appeal eligibility could not be checked.':pending?'Your appeal is awaiting owner review.':canAppeal?'You may submit one appeal for your current restriction.':'There is no active restriction eligible for appeal on this account.',!!eligibility.error);
+ $('#appeal-history').innerHTML=rows.length?'<h3 style="font-size:14px;margin:18px 0 8px">Your appeal history</h3>'+rows.map(x=>'<div class="notice"><strong>'+escapeHtml(x.status.replace('_',' '))+'</strong> · '+escapeHtml(new Date(x.created_at).toLocaleString())+'<p>'+escapeHtml(x.reason)+'</p>'+(x.owner_decision?'<p><strong>Owner decision:</strong> '+escapeHtml(x.owner_decision)+'</p>':'')+'</div>').join(''):'';
+}
 function showProfile(show){$('#login-card').classList.toggle('hidden',show);$('#profile-card').classList.toggle('hidden',!show);}
 let currentUser=null;
 async function loadProfile(user){
@@ -49,7 +63,7 @@ async function loadProfile(user){
  const {data,error}=await supabase.from('profiles').select('display_name,username,country,bio,interests,is_discoverable').eq('id',user.id).single();
  if(error){notice($('#profile-message'),'Your profile could not be loaded: '+error.message,true);return;}
  $('#display-name').value=data.display_name||'';$('#username').value=data.username||'';$('#country').value=data.country||'';$('#bio').value=data.bio||'';$('#interests').value=(data.interests||[]).join(', ');$('#discoverable').checked=!!data.is_discoverable;
- showProfile(true);
+ showProfile(true);await loadMemberAppeals(user);
 }
 $('#login-form').addEventListener('submit',async e=>{e.preventDefault();const b=$('#login-button');b.disabled=true;b.textContent='Signing in…';$('#login-message').classList.add('hidden');
  const {data,error}=await supabase.auth.signInWithPassword({email:$('#email').value.trim(),password:$('#password').value});
@@ -60,6 +74,7 @@ $('#forgot').addEventListener('click',async()=>{const email=$('#email').value.tr
  const {error}=await supabase.auth.resetPasswordForEmail(email,{redirectTo:location.origin+location.pathname});
  notice($('#login-message'),error?error.message:'If the address belongs to an account, password reset instructions will be sent.',!!error);
 });
+$('#appeal-form').addEventListener('submit',async e=>{e.preventDefault();if(!currentUser)return;const reason=$('#appeal-reason').value.trim();if(reason.length<10){notice($('#appeal-message'),'Please explain your appeal in at least 10 characters.',true);return;}const b=$('#appeal-submit');b.disabled=true;b.textContent='Submitting…';const {error}=await supabase.from('member_appeals').insert({member_id:currentUser.id,reason});b.disabled=false;b.textContent='Submit appeal';if(error){notice($('#appeal-message'),error.message,true);return;}$('#appeal-reason').value='';await loadMemberAppeals(currentUser);});
 $('#profile-form').addEventListener('submit',async e=>{e.preventDefault();if(!currentUser)return;const b=$('#save-profile');b.disabled=true;b.textContent='Saving…';$('#profile-message').classList.add('hidden');
  const interests=$('#interests').value.split(',').map(x=>x.trim()).filter(Boolean);
  if(interests.length>10){notice($('#profile-message'),'Please choose no more than 10 interests.',true);b.disabled=false;b.textContent='Save profile';return;}
