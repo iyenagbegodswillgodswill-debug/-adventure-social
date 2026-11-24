@@ -45,15 +45,17 @@ const $=s=>document.querySelector(s);
 function notice(el,text,error){el.textContent=text;el.classList.remove('hidden');el.classList.toggle('error',!!error);}
 function escapeHtml(v){return String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
 async function loadMemberAppeals(user){
- const [eligibility,history]=await Promise.all([
+ const [eligibility,history,accountStatus]=await Promise.all([
   supabase.rpc('member_can_appeal'),
-  supabase.from('member_appeals').select('id,reason,status,owner_decision,created_at').eq('member_id',user.id).order('created_at',{ascending:false}).limit(10)
+  supabase.from('member_appeals').select('id,reason,status,owner_decision,created_at').eq('member_id',user.id).order('created_at',{ascending:false}).limit(10),
+  supabase.rpc('member_account_status')
  ]);
  if(history.error){notice($('#appeal-message'),'Appeal history could not be loaded: '+history.error.message,true);return;}
  const rows=history.data||[],pending=rows.some(x=>x.status==='pending'||x.status==='under_review');
  const canAppeal=!!eligibility.data&&!eligibility.error&&!pending;
  $('#appeal-form').classList.toggle('hidden',!canAppeal);
- notice($('#appeal-message'),eligibility.error?'Appeal eligibility could not be checked.':pending?'Your appeal is awaiting owner review.':canAppeal?'You may submit one appeal for your current restriction.':'There is no active restriction eligible for appeal on this account.',!!eligibility.error);
+ const control=accountStatus.data||{};const controlText=control.status?'Account status: '+control.status+'. Reason: '+(control.reason||'Please contact Adventure support.')+(control.expires_at?' · Review date: '+new Date(control.expires_at).toLocaleString():' · No expiry is currently set.'):'No active account restriction is recorded.';
+ notice($('#appeal-message'),(accountStatus.error?'Account status could not be checked. ':controlText+' ')+(eligibility.error?'Appeal eligibility could not be checked.':pending?'Your appeal is awaiting owner review.':canAppeal?'You may submit one appeal for your current restriction.':'There is no active restriction eligible for appeal on this account.'),!!eligibility.error||!!accountStatus.error);
  $('#appeal-history').innerHTML=rows.length?'<h3 style="font-size:14px;margin:18px 0 8px">Your appeal history</h3>'+rows.map(x=>'<div class="notice"><strong>'+escapeHtml(x.status.replace('_',' '))+'</strong> · '+escapeHtml(new Date(x.created_at).toLocaleString())+'<p>'+escapeHtml(x.reason)+'</p>'+(x.owner_decision?'<p><strong>Owner decision:</strong> '+escapeHtml(x.owner_decision)+'</p>':'')+'</div>').join(''):'';
 }
 function showProfile(show){$('#login-card').classList.toggle('hidden',show);$('#profile-card').classList.toggle('hidden',!show);}
