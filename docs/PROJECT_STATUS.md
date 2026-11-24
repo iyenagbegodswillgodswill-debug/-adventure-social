@@ -71,3 +71,12 @@ Last updated: 2026-11-24
 Adventure is separate from Mktradehome, Data2Coin and BIGMK Furniture. The database project is isolated from those projects. It was created on the Free plan with a quoted $0 monthly project cost; this does not guarantee that future usage, storage, bandwidth or optional services can never incur charges. Do not upgrade, enable paid add-ons or accept a nonzero cost without explicit user approval.
 
 Never put service-role keys, database passwords or other secrets in browser code or the public repository. Keep the public preview clearly labelled as a demo until authentication, privacy, moderation and release tests are complete. Do not invite real members or collect real personal information yet.
+
+
+## Owner management and AI operations roadmap
+
+- [x] Inspected the live owner dashboard and Adventure database before expanding the control centre.
+- [x] Added `docs/OWNER_MANAGEMENT_AI_PLAN.md` with phased requirements, AI safety boundaries, privacy/security rules and release guardrails.
+- [ ] Implement owner member operations, verification centre, AI assist-first workflows, announcements and analytics in separately reviewed and tested phases.
+- [ ] Keep AI recommendations distinct from owner decisions; no autonomous identity verification, permanent bans, sensitive evidence disclosure or irreversible enforcement.
+- [ ] Keep AI provider credentials server-side and do not enable paid AI services without explicit owner approval.
