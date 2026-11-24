@@ -80,3 +80,12 @@ Never put service-role keys, database passwords or other secrets in browser code
 - [ ] Implement owner member operations, verification centre, AI assist-first workflows, announcements and analytics in separately reviewed and tested phases.
 - [ ] Keep AI recommendations distinct from owner decisions; no autonomous identity verification, permanent bans, sensitive evidence disclosure or irreversible enforcement.
 - [ ] Keep AI provider credentials server-side and do not enable paid AI services without explicit owner approval.
+
+
+## Admin dashboard visual identity update — 2026-11-24
+
+- [x] Applied the requested premium gold-and-red theme to the private owner Admin Dashboard.
+- [x] Updated browser theme color, navigation/sidebar palette, primary accents and login background.
+- [x] Preserved existing authentication and owner-only access logic; this commit is a visual-only change.
+- [ ] Verify the deployed GitHub Pages workflow and inspect the dashboard on desktop and mobile before calling the theme rollout complete.
+- [ ] Continue phased implementation from `docs/OWNER_MANAGEMENT_AI_PLAN.md`; no new management or AI capabilities are claimed complete by this visual update.
