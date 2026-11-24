@@ -1,8 +1,8 @@
 # Adventure — Project Status
 
-Last updated: 2026-11-24 (Owner Rules & Policies Manager added)
+Last updated: 2026-11-24 (Adventure text Feed foundation added)
 
-## Current milestone: Owner Control Centre hardening
+## Current milestone: Main app Phase 1 — text Feed
 
 ### Verified foundation
 - [x] Separate public GitHub repository and Adventure-only Supabase project.
@@ -17,6 +17,10 @@ Last updated: 2026-11-24 (Owner Rules & Policies Manager added)
 - [x] Owner member directory uses the owner-checked `admin_list_members` RPC and status changes use `admin_set_member_status`.
 - [x] Private control table has RLS enabled and no direct anon/authenticated table access.
 - [x] Exactly one owner row was confirmed.
+- [x] Main app Feed now supports text posts, public/followers visibility, likes, comments and post reporting.
+- [x] Database triggers maintain like/comment counts; clients cannot directly edit counters.
+- [x] Member account page supports eligible appeals and displays the member's own restriction reason/expiry.
+- [x] Published owner announcements are displayed on the public landing page.
 - [x] Latest Pages workflow for commit `312339308f868897003d61c743f4538ae2fbc66e` completed successfully: run `45491662650`, including build and deploy jobs.
 
 ### AI Operations Manager — foundation installed, provider activation pending
@@ -49,8 +53,8 @@ Last updated: 2026-11-24 (Owner Rules & Policies Manager added)
 - [x] Report status changes now use owner-checked RPCs and write audit records.
 - [x] Appeals database and owner review centre; final decisions require written reasons and do not automatically change member account status.
 - [x] Owner announcements manager with draft/publish/archive controls and database audit trigger.
-- [ ] Member-facing appeal submission must be connected in the main Adventure app.
-- [ ] Public announcements display must be connected in the main Adventure app.
+- [x] Member-facing appeal submission and appeal-status display are connected in the member account page.
+- [x] Public announcements display is connected to the landing page.
 - [ ] Verification remains intentionally deferred until consent, non-sensitive collection, private storage, retention/deletion and appeal design are approved. Do not collect identity documents or biometrics yet.
 - [x] Add aggregate analytics and database governance checks; [ ] add policy acceptance/version gates before enabling registration.
 - [ ] Complete authenticated owner, ordinary-member and anonymous end-to-end browser tests.
@@ -101,7 +105,26 @@ Never place service-role keys, database passwords, AI provider keys or other sec
 - [x] Added aggregate 7-day/30-day activity metrics and owner-only database governance checks; no individual member content is exposed in analytics.
 - [x] Verified one owner, eight rules, three policy documents, five case/appeal RPCs plus analytics RPC, RLS on new public tables, and no remaining security findings except leaked-password protection.
 - [ ] Live authenticated UI smoke tests still required; a source/database check is not a substitute for signing in as owner and non-owner.
-- [ ] The public GitHub Pages URL could not be inspected with the available page reader in this session; confirm latest Pages deployment before relying on live UI.
+- [ ] Latest Pages workflow is still queued; verify its final deployment result before relying on the live UI.
 - [ ] Latest performance advisor reports only unused-index notices in the current low-traffic database; no unindexed foreign keys remain.
 
 - [x] Analytics migration `20261124223619_adventure_owner_analytics_health.sql` saved in GitHub and applied to Supabase.
+
+
+## Main app — Phase 1 Feed foundation — 2026-11-24
+- [x] Added `posts`, `post_likes` and `post_comments` with RLS and least-privilege grants.
+- [x] Added public/followers visibility checks, block-aware visibility and suspension hiding.
+- [x] Added database-maintained like/comment counters and timestamp updates.
+- [x] Restricted members cannot publish, like, comment or report; the account page explains the recorded restriction and provides appeal access when eligible.
+- [x] Added post reporting with owner access to the reported content in the private report queue.
+- [x] Connected the member Feed, text composer, likes, comments, reporting and delete-own-post action in `index.html`.
+- [x] Connected published announcements to the landing page.
+- [x] Added appeal submission/history to `account.html`.
+- [x] Added `supabase/tests/adventure_social_feed_security_checks.sql`; live structural checks passed, including RLS, table grants, RPC security mode, one-owner count and counter triggers.
+- [x] JavaScript syntax checks passed for `index.html`, `account.html` and `admin.html`; static UI reference checks passed.
+- [ ] Real owner/member browser tests and a two-member privacy/block/follow test remain outstanding.
+- [ ] Latest Pages workflow is queued; confirm successful deployment and perform mobile/desktop smoke tests.
+- [ ] Photo/avatar uploads, Shorts/video, Communities, messaging and real-time notifications are not implemented yet.
+- [ ] Public registration remains closed; no AI provider or paid service has been enabled.
+
+Roadmap: `docs/MAIN_APP_ROADMAP.md`. Data model review: `docs/DATA_MODEL_AND_RLS_REVIEW.md`.
