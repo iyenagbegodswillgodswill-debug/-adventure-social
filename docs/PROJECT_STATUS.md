@@ -160,3 +160,23 @@ Roadmap: `docs/MAIN_APP_ROADMAP.md`. Data model review: `docs/DATA_MODEL_AND_RLS
 - [ ] Test actual two-member incoming/outgoing calls, microphone/camera permissions, decline, busy, disconnect and blocked-member denial on mobile and desktop.
 - [ ] Current WebRTC configuration uses STUN only. A TURN relay may be needed for restrictive mobile/Wi-Fi networks; do not add a paid relay without owner approval.
 - [ ] Calls require both members to have Adventure Messages open; background/push incoming-call notifications are not implemented.
+
+
+## Africa-first expansion — marketplace, business, communities and events (2026-11-25)
+- [x] Added Marketplace listings and favourites tables with RLS; new listings are private/pending until owner approval.
+- [x] Added business profile submissions; public profiles require owner approval and use a verified status.
+- [x] Added community-space submissions; public community spaces require owner approval.
+- [x] Added event submissions; events are not public until owner approval.
+- [x] Added an owner-only review queue for pending products, businesses, communities and events.
+- [x] Added a Marketplace preview page with listing submission, category/country filters and safety notices. In-app payments, escrow and delivery are not enabled.
+- [x] Added News discovery page linking to external publisher coverage and topic searches; it does not fabricate headlines or republish article text.
+- [x] Added Explore Africa page for community, business and event discovery/submission.
+- [x] Connected News, Marketplace and Explore Africa from the main navigation.
+- [x] Saved migration `20261125000000_adventure_marketplace_communities_events_foundation.sql` and applied it to the Adventure Supabase project.
+- [ ] Add moderated image uploads for marketplace listings and business profiles; image_path is metadata only until secure storage upload and delivery are implemented.
+- [ ] Add seller listing management, favourites UI, product detail pages, and a safe member-to-seller conversation handoff.
+- [ ] Add community membership, posts, moderators and private-community access checks.
+- [ ] Add event RSVP and event reporting.
+- [ ] Build a sourced, refreshable news feed using publisher-approved RSS/API sources and attribution; current page opens external coverage instead of embedding live headlines.
+- [ ] Browser QA for owner approval, member submission and anonymous public browsing remains required.
+- [ ] Registration remains closed. No payments, paid APIs, paid AI, paid storage or paid services were enabled.
