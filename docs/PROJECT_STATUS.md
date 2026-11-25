@@ -401,3 +401,12 @@ Roadmap: `docs/MAIN_APP_ROADMAP.md`. Data model review: `docs/DATA_MODEL_AND_RLS
 - [ ] Run automated script checks and test generated sound preview, track addition, playback, save/load and WAV export across supported browsers.
 - [ ] This is an original synthesized starter library, not an unlimited catalogue of recorded instruments or commercial samples. Add more sound families, genre presets, licensed sample packs and cloud project storage only after rights, storage and moderation workflows are designed.
 - [ ] Keep projects private by default; no paid sound provider, external audio API or copyrighted sample library was added.
+
+
+## Adventure online genre-based Beat & Sound Store — 2026-11-25
+- [x] Added a discoverable Beat & Sound Store inside Music Studio, with genre filters for Afrobeats, Hip-hop, Amapiano, Gospel, Highlife, Dancehall, R&B and Pop.
+- [x] Added preview/add controls for eight original synthesized sound loops and genre starter-pack actions that add selected layers into the current session.
+- [x] Linked the Music Hub directly to the Studio sound catalogue and refreshed the PWA cache to v23.
+- [x] Existing recording, import, beat sequencer, track mixing, local project save/load and WAV export paths remain in place.
+- [ ] Test genre filtering, previews, starter-pack generation, track playback, project save/load and WAV export in supported browsers, including iOS Safari.
+- [ ] Current catalogue sounds are synthesized in the browser; they are not recorded commercial sample files or an external online audio library. Expand with uploaded/recorded sample packs only after creator upload, rights verification, moderation, storage limits and licensing workflows are implemented.
