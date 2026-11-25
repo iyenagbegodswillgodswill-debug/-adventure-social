@@ -237,3 +237,14 @@ Roadmap: `docs/MAIN_APP_ROADMAP.md`. Data model review: `docs/DATA_MODEL_AND_RLS
 - [ ] Creator Hub, community membership and moderation, event RSVP, seller management and product detail/contact flows.
 - [ ] Verify news feed reliability and improve country coverage with attributed sources.
 - [ ] Full owner/member/mobile browser QA and release checklist before public launch.
+
+### Adventure photo and Shorts media foundation — 2026-11-25
+- [x] Added optional photo/video metadata to posts without changing existing text-only posts.
+- [x] Created private `adventure-post-media` Storage bucket, 25 MB maximum object size and JPEG/PNG/WebP/MP4/WebM allowlist.
+- [x] Storage RLS checks post ownership for uploads and post visibility/moderation/block/follower access for downloads; authors and owner can delete objects.
+- [x] Feed composer supports photo/video file selection, photo filters baked into JPEG output, file-size/type checks and 60-second video duration validation.
+- [x] Added an in-app Shorts camera recorder using MediaRecorder and canvas filter rendering; camera video filters are baked into recorded clips. Video posts play inline with user-controlled controls and no autoplay.
+- [x] Added Photos and Short videos Feed filters. Existing text-only posts remain supported.
+- [ ] Verify real phone camera/microphone capture, iOS Safari MP4 recording, Android WebM recording, media uploads, signed playback URLs, follower visibility and moderation-hidden media.
+- [ ] Add trim/crop, captions, drafts, accessibility review, media reporting and orphaned-object cleanup before public release.
+- [ ] Confirm actual Storage usage and Free-plan quotas; do not upgrade or enable paid services without explicit approval.
