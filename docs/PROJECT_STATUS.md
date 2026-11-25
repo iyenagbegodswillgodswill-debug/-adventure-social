@@ -294,3 +294,5 @@ Roadmap: `docs/MAIN_APP_ROADMAP.md`. Data model review: `docs/DATA_MODEL_AND_RLS
 - [x] Bumped the PWA app-shell cache to v13 so returning visitors can receive the updated navigation.
 - [ ] Verify navigation, dropdown usability, keyboard access and small-screen layouts on real mobile browsers.
 - [ ] Verify all core features using real owner/member accounts; deployment and source checks alone do not establish end-to-end correctness.
+
+- [x] Replaced the generic empty Feed message with clear, section-specific guidance and useful next steps for Music Videos, News, Marketplace, Events and new member posts.
