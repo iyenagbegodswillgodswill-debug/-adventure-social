@@ -93,9 +93,42 @@ html{scroll-snap-type:y proximity;scroll-padding-top:12px}
 #feed-list .short-card .short-hint{position:absolute;z-index:2;right:14px;top:14px;padding:6px 9px;border-radius:20px;background:#0007;color:#fff;font-size:11px;pointer-events:none}
 @media(max-width:650px){#feed-list .short-card{width:calc(100% + 28px);max-width:none;margin:12px -14px 20px;border-radius:0;min-height:calc(100svh - 112px);min-height:calc(100dvh - 112px)}#feed-list .short-card .post-head,#feed-list .short-card .post-body,#feed-list .short-card .post-actions,#feed-list .short-card .comments{margin-left:16px;margin-right:16px}}
 @media(prefers-reduced-motion:reduce){#feed-list{scroll-snap-type:none}}
-</style></head>
+/* Adventure personal appearance: black home with selectable accent colours */
+:root{--green:#151515;--dark:#090909;--gold:#ef3340;--cream:#211719;--ink:#f3f3f4;--muted:#a6a6ad;--line:#343438;--theme-accent:#ef3340;--theme-accent-soft:#35191d;--theme-bg:#101012;--theme-surface:#19191d}
+:root[data-theme="blue"]{--theme-accent:#4b9dff;--theme-accent-soft:#14263b}
+:root[data-theme="green"]{--theme-accent:#28b887;--theme-accent-soft:#123128}
+:root[data-theme="purple"]{--theme-accent:#a78bfa;--theme-accent-soft:#2b2142}
+:root[data-theme="orange"]{--theme-accent:#ff914d;--theme-accent-soft:#3a2518}
+:root[data-theme="pink"]{--theme-accent:#f472b6;--theme-accent-soft:#3a1e30}
+:root{--gold:var(--theme-accent);--green:var(--theme-accent);--dark:#090909}
+body{background:var(--theme-bg)!important;color:var(--ink)!important}.app{background:#111114!important}
+header{background:#080809!important;border-bottom:1px solid #2c2c30}.tag{color:#b7b7bd}.brand span{color:var(--theme-accent)!important}
+main{color:var(--ink)}.intro p,.heading small,.feed-topline span,.post-author small,.post-time,.handle{color:var(--muted)!important}
+.hero{background:linear-gradient(120deg,#1b1b20,var(--theme-accent-soft))!important;border:1px solid #38383e}.badge{background:var(--theme-accent)!important;color:#090909!important}
+.person,.post-card,.composer,.announcement-card,.modal-card{background:var(--theme-surface)!important;color:var(--ink)!important;border-color:var(--line)!important}
+.person p{color:#c2c2c8!important}.avatar{background:#29292f!important}
+.follow,.modal-actions .submit-report{background:var(--theme-accent)!important;color:#090909!important}
+.follow.following{background:var(--theme-accent-soft)!important;color:var(--theme-accent)!important;border-color:var(--theme-accent)!important}
+.chip,.feed-filters button,.post-actions button,.comment-form button,.profile-actions button,.modal-actions button{background:#202025!important;color:#e6e6e9!important;border-color:#414149!important}
+.chip.active,.feed-filters button.active,.post-actions button.liked{background:var(--theme-accent-soft)!important;color:var(--theme-accent)!important;border-color:var(--theme-accent)!important}
+.search,.composer textarea,.composer select,.comment-form input,.modal-card select,.modal-card textarea{background:#202025!important;color:#f5f5f6!important;border-color:#414149!important}
+.preview-note,.feed-note{background:#1b1b20!important;color:#c4c4ca!important;border-color:#3b3b42!important}.preview-note strong,.eyebrow{color:var(--theme-accent)!important}
+.post-actions,.comments,.feed-topline,footer{border-color:var(--line)!important}.post-actions button,.comment-form button,.profile-actions button{color:var(--theme-accent)!important}
+.adventure-nav{background:rgba(15,15,17,.97)!important;border-color:#34343a!important;box-shadow:0 -5px 24px #0008!important}.adventure-nav .nav-item{color:#aaaab2!important}
+.adventure-nav .nav-item.active,.adventure-nav .nav-item[aria-current=page]{color:var(--theme-accent)!important}
+.adventure-nav .nav-create{background:var(--theme-accent)!important;color:#080808!important}.icon{border-color:#ffffff40!important}
+.toast{background:var(--theme-accent)!important;color:#090909!important}.hero-cta{background:var(--theme-accent)!important;color:#090909!important}
+#feed-list .short-card{background:#080809!important}#appearance-open{border-color:#ffffff55;background:#ffffff14;color:#fff}
+.appearance-panel{position:fixed;inset:0;z-index:10020;background:#000b;display:grid;place-items:center;padding:18px}
+.appearance-card{width:min(100%,420px);background:#19191d;border:1px solid #3a3a42;border-radius:20px;padding:22px;color:#f5f5f6;box-shadow:0 24px 80px #000b}
+.appearance-card h2{margin:0 0 5px;font-size:21px}.appearance-card p{margin:0 0 17px;color:#aaaab2;font-size:13px}
+.theme-options{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.theme-choice{border:1px solid #44444b;background:#222228;color:#eee;border-radius:12px;padding:12px 8px;font-weight:700;font-size:12px;display:grid;justify-items:center;gap:8px}
+.theme-choice[aria-pressed="true"]{border:2px solid var(--theme-accent);padding:11px 7px;background:var(--theme-accent-soft)}
+.theme-swatch{width:28px;height:28px;border-radius:50%;border:3px solid #ffffff30;display:block}
+.theme-close{margin-top:16px;width:100%;padding:11px;border:0;border-radius:11px;background:var(--theme-accent);color:#090909;font-weight:800}</style></head>
 <body><a class="skip-link" href="#main">Skip to content</a><div class="app">
-<header><div class="top"><div><div class="brand">adventure<span>.</span></div><div class="tag">Your world. Your adventure.</div></div><div class="actions"><button class="icon" aria-label="Search" onclick="document.querySelector('#search').focus()">⌕</button><a class="icon" href="./account.html" aria-label="Member sign in" title="Member sign in" style="display:grid;place-items:center;text-decoration:none">♙</a><button class="icon" id="install-app" aria-label="Install Adventure" title="Install Adventure">↓</button><a class="icon" href="./notifications.html" aria-label="Notifications" title="Notifications" style="display:grid;place-items:center;text-decoration:none">♧</a></div></div>
+<header><div class="top"><div><div class="brand">adventure<span>.</span></div><div class="tag">Your world. Your adventure.</div></div><div class="actions"><button class="icon" id="appearance-open" type="button" aria-label="Personalise colours" title="Personalise colours">◐</button><button class="icon" aria-label="Search" onclick="document.querySelector('#search').focus()">⌕</button><a class="icon" href="./account.html" aria-label="Member sign in" title="Member sign in" style="display:grid;place-items:center;text-decoration:none">♙</a><button class="icon" id="install-app" aria-label="Install Adventure" title="Install Adventure">↓</button><a class="icon" href="./notifications.html" aria-label="Notifications" title="Notifications" style="display:grid;place-items:center;text-decoration:none">♧</a></div></div>
 <nav class="adventure-nav" aria-label="Adventure navigation">
 <button class="nav-item active" type="button" data-page="feed" aria-label="Home feed" aria-current="page"><span class="nav-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m3 10 9-7 9 7v10a1 1 0 0 1-1 1h-5v-7H9v7H4a1 1 0 0 1-1-1z"/></svg></span><span class="nav-label">Home</span></button>
 <a class="nav-item" href="./discover.html" aria-label="Explore"><span class="nav-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m15.8 8.2-2.4 5.2-5.2 2.4 2.4-5.2z"/></svg></span><span class="nav-label">Explore</span></a>
@@ -123,7 +156,7 @@ html{scroll-snap-type:y proximity;scroll-padding-top:12px}
  <div id="feed-message" class="feed-note hidden"></div>
  <div id="feed-list"><div class="feed-note">Loading the community feed…</div></div>
 </section>
-</main><div id="report-modal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="report-title"><div class="modal-card"><h2 id="report-title">Report this profile</h2><p>Tell the Adventure safety team what concerns you. Reports are private.</p><label for="report-reason">Reason</label><select id="report-reason"><option value="harassment">Harassment or bullying</option><option value="impersonation">Impersonation</option><option value="spam_or_scam">Spam or scam</option><option value="privacy_violation">Privacy violation</option><option value="hateful_content">Hateful content</option><option value="dangerous_content">Dangerous content</option><option value="other">Other</option></select><label for="report-details">Additional details (optional)</label><textarea id="report-details" maxlength="1000" placeholder="Describe what happened…"></textarea><div class="modal-actions"><button id="cancel-report" type="button">Cancel</button><button class="submit-report" id="submit-report" type="button">Send report</button></div></div></div><div class="toast" id="toast" role="status" aria-live="polite"></div><footer>Adventure is just beginning · Built to connect Africa and the world.<br><a href="./policies.html" style="color:var(--green);font-weight:750;text-decoration:none">Terms &amp; Policies</a></footer></div>
+</main><div id="report-modal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="report-title"><div class="modal-card"><h2 id="report-title">Report this profile</h2><p>Tell the Adventure safety team what concerns you. Reports are private.</p><label for="report-reason">Reason</label><select id="report-reason"><option value="harassment">Harassment or bullying</option><option value="impersonation">Impersonation</option><option value="spam_or_scam">Spam or scam</option><option value="privacy_violation">Privacy violation</option><option value="hateful_content">Hateful content</option><option value="dangerous_content">Dangerous content</option><option value="other">Other</option></select><label for="report-details">Additional details (optional)</label><textarea id="report-details" maxlength="1000" placeholder="Describe what happened…"></textarea><div class="modal-actions"><button id="cancel-report" type="button">Cancel</button><button class="submit-report" id="submit-report" type="button">Send report</button></div></div></div><div class="appearance-panel hidden" id="appearance-panel" role="dialog" aria-modal="true" aria-labelledby="appearance-title"><section class="appearance-card"><h2 id="appearance-title">Make Adventure yours</h2><p>Choose the accent colour for your home. Your choice is saved on this device.</p><div class="theme-options"><button class="theme-choice" data-theme-choice="red" aria-pressed="true"><span class="theme-swatch" style="background:#ef3340"></span>Red</button><button class="theme-choice" data-theme-choice="blue" aria-pressed="false"><span class="theme-swatch" style="background:#4b9dff"></span>Blue</button><button class="theme-choice" data-theme-choice="green" aria-pressed="false"><span class="theme-swatch" style="background:#28b887"></span>Green</button><button class="theme-choice" data-theme-choice="purple" aria-pressed="false"><span class="theme-swatch" style="background:#a78bfa"></span>Purple</button><button class="theme-choice" data-theme-choice="orange" aria-pressed="false"><span class="theme-swatch" style="background:#ff914d"></span>Orange</button><button class="theme-choice" data-theme-choice="pink" aria-pressed="false"><span class="theme-swatch" style="background:#f472b6"></span>Pink</button></div><button class="theme-close" id="appearance-close" type="button">Done</button></section></div><div class="toast" id="toast" role="status" aria-live="polite"></div><footer>Adventure is just beginning · Built to connect Africa and the world.<br><a href="./policies.html" style="color:var(--green);font-weight:750;text-decoration:none">Terms &amp; Policies</a></footer></div>
 <script type="module">
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2.57.0';
 const supabase=createClient('https://fhjhbkbyglchiiunwohy.supabase.co','sb_publishable_hAnq_0mwuXZowP77K-xluA_yHRhlyhq',{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:true}});
@@ -395,4 +428,18 @@ if("serviceWorker" in navigator){window.addEventListener("load",()=>navigator.se
 render();loadDirectory().catch(()=>{if(!currentUser){liveMode=false;profiles=sampleProfiles;}else{liveMode=true;profiles=[];}render();});
 loadAnnouncements();
 supabase.auth.onAuthStateChange(()=>{loadDirectory().catch(()=>{});if(!document.querySelector('#feed-screen').classList.contains('hidden'))loadFeed();});
+
+(function(){
+ const root=document.documentElement,allowed=['red','blue','green','purple','orange','pink'];
+ let theme='red';try{const saved=localStorage.getItem('adventure-home-theme');if(allowed.includes(saved))theme=saved;}catch(e){}
+ root.dataset.theme=theme;
+ const panel=document.getElementById('appearance-panel'),open=document.getElementById('appearance-open'),close=document.getElementById('appearance-close');
+ function paint(value){if(!allowed.includes(value))return;root.dataset.theme=value;try{localStorage.setItem('adventure-home-theme',value);}catch(e){}document.querySelectorAll('[data-theme-choice]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.themeChoice===value)));}
+ open?.addEventListener('click',()=>{panel.classList.remove('hidden');document.querySelector('[data-theme-choice="'+root.dataset.theme+'"]')?.focus();});
+ close?.addEventListener('click',()=>{panel.classList.add('hidden');open?.focus();});
+ panel?.addEventListener('click',e=>{if(e.target===panel){panel.classList.add('hidden');open?.focus();}});
+ panel?.querySelectorAll('[data-theme-choice]').forEach(b=>b.addEventListener('click',()=>paint(b.dataset.themeChoice)));
+ document.addEventListener('keydown',e=>{if(e.key==='Escape'&&panel&&!panel.classList.contains('hidden')){panel.classList.add('hidden');open?.focus();}});
+ paint(theme);
+})();
 </script></body></html>
