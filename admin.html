@@ -128,7 +128,7 @@ async function loadGrowthQueue(){
   $(c.target).innerHTML='<div class="table-wrap"><table><thead><tr><th>Submission</th><th>Details</th><th>Submitted</th><th>Decision</th></tr></thead><tbody>'+data.map(row=>{
    const title=row.release_title||row.title||row.business_name||row.name||'Untitled';
    const meta=[row.artist_name,row.genre,row.release_type,row.category,row.city,row.country,row.price?row.currency+' '+row.price:null,row.starts_at?dateText(row.starts_at):null].filter(Boolean).join(' · ');
-   return '<tr><td><strong>'+escapeHtml(title)+'</strong><div class="muted">'+escapeHtml(meta)+'</div></td><td>'+escapeHtml((row.description||'').slice(0,420))+'</td><td>'+escapeHtml(dateText(row.created_at))+'</td><td><button class="save" data-growth-table="'+c.table+'" data-growth-id="'+escapeHtml(row.id)+'" data-growth-status="'+c.approved+'">Approve</button> <button class="save" data-growth-table="'+c.table+'" data-growth-id="'+escapeHtml(row.id)+'" data-growth-status="rejected">Reject</button></td></tr>';
+   return '<tr><td><strong>'+escapeHtml(title)+'</strong><div class="muted">'+escapeHtml(meta)+'</div></td><td>'+escapeHtml(((row.description||'')+(row.rights_statement?'\nRights: '+row.rights_statement:'')).slice(0,650))+'</td><td>'+escapeHtml(dateText(row.created_at))+'</td><td><button class="save" data-growth-table="'+c.table+'" data-growth-id="'+escapeHtml(row.id)+'" data-growth-status="'+c.approved+'">Approve</button> <button class="save" data-growth-table="'+c.table+'" data-growth-id="'+escapeHtml(row.id)+'" data-growth-status="rejected">Reject</button></td></tr>';
   }).join('')+'</tbody></table></div>';
  }
 }
