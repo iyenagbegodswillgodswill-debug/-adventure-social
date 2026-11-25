@@ -250,3 +250,14 @@ Roadmap: `docs/MAIN_APP_ROADMAP.md`. Data model review: `docs/DATA_MODEL_AND_RLS
 - [ ] Confirm actual Storage usage and Free-plan quotas; do not upgrade or enable paid services without explicit approval.
 
 - [x] Added covering indexes for Adventure events, communities, marketplace favourites, notification actors and support-message sender foreign keys; migration `20261125012000_adventure_growth_support_foreign_key_indexes.sql` applied.
+
+
+## Adventure Voice & Music Studio — first creator workspace
+- [x] Added `music.html`, a mobile-friendly browser studio with microphone vocal recording, audio-file import, a 16-step kick/snare/hi-hat beat maker, multi-track playback, per-track volume/mute/remove controls, master volume and low-pass warmth control.
+- [x] Added local project save/load using IndexedDB on the current device and stereo WAV mix export using browser audio rendering.
+- [x] Added Music Studio to the main Adventure navigation and PWA app-shell cache v11.
+- [ ] Verify microphone recording, audio decoding, IndexedDB save/restore and WAV export on current iOS Safari, Android Chrome and desktop browsers.
+- [ ] Current projects are stored only in the current browser/device; cloud project sync and private cross-device backups are not implemented yet.
+- [ ] This is a starter production workspace, not yet a full commercial DAW: advanced pitch correction/Auto-Tune, MIDI instruments, piano roll, detailed timeline editing, vocal comping, professional mastering, collaboration and cloud storage remain future stages.
+- [ ] Add artist profiles, rights/permission records, owner-reviewed release submissions and an in-app Music discovery catalogue before public releases.
+- [ ] Keep all studio work private by default; public registration stays closed; no paid services, audio APIs or AI provider have been enabled.
