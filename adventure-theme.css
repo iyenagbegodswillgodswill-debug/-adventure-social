@@ -103,3 +103,32 @@ body:has(#directory-screen) .adventure-nav .nav-item[aria-current=page],body:has
 body:has(#directory-screen) .adventure-nav .nav-create{background:linear-gradient(135deg,#f0cc7b,#d9ad52)!important;color:#17130b!important}
 @media(max-width:650px){body:has(#directory-screen) header{padding:15px 16px 0!important}body:has(#directory-screen) main{padding:22px 16px 38px!important}body:has(#directory-screen) .brand{font-size:25px!important}body:has(#directory-screen) .hero{padding:24px 20px!important;border-radius:19px!important}}
 @media(prefers-reduced-motion:reduce){body:has(#directory-screen) .person{transition:none!important}}
+
+
+/* Explore and member-account surfaces — shared Adventure premium identity.
+   Scoped selectors only; no page markup, form names, handlers or backend calls changed. */
+body:has(.tabs) header{background:linear-gradient(115deg,#0c0c0f,#19150e)!important;border-bottom:1px solid #3b3020!important}
+body:has(.tabs) .brand,body:has(.profile-top) .brand{color:#f7f5ef!important}
+body:has(.tabs) .hero{background:radial-gradient(ellipse at 88% 10%,#49351a 0,transparent 42%),linear-gradient(120deg,#191715,#211c14)!important;border:1px solid #574321!important;box-shadow:0 16px 38px #0004}
+body:has(.tabs) .hero h1,body:has(.tabs) .hero h2{color:#fffaf0!important}
+body:has(.tabs) .hero p{color:#c2bbb0!important}
+body:has(.tabs) .tabs button{background:#19191d!important;color:#c7c0b5!important;border:1px solid #39363b!important}
+body:has(.tabs) .tabs button.active{background:#302719!important;color:#f0cc7b!important;border-color:#94733b!important}
+body:has(.tabs) .grid .card,body:has(.tabs) .formbox{background:#151519!important;border-color:#343138!important;color:#f7f5ef!important;box-shadow:0 8px 24px #0003}
+body:has(.tabs) .card h3,body:has(.tabs) .formbox h2{color:#f7f5ef!important}
+body:has(.tabs) .muted{color:#aaa8a1!important}
+body:has(.tabs) .btn{background:linear-gradient(135deg,#f0cc7b,#d9ad52)!important;color:#17130b!important;border:0!important}
+body:has(.tabs) .notice{background:#211c14!important;border-color:#574321!important;color:#d8c9a8!important}
+body:has(.tabs) .form input,body:has(.tabs) .form textarea,body:has(.tabs) .form select{background:#101014!important;border-color:#39363b!important;color:#f7f5ef!important}
+body:has(.profile-top) header{background:linear-gradient(115deg,#0c0c0f,#19150e)!important;border-bottom:1px solid #3b3020!important}
+body:has(.profile-top) main .card{background:#151519!important;border:1px solid #343138!important;color:#f7f5ef!important;box-shadow:0 12px 30px #0003}
+body:has(.profile-top) .eyebrow{color:#f0cc7b!important}
+body:has(.profile-top) .card h1,body:has(.profile-top) .card h2,body:has(.profile-top) .card strong{color:#f7f5ef!important}
+body:has(.profile-top) .muted,body:has(.profile-top) .footer{color:#aaa8a1!important}
+body:has(.profile-top) .field input,body:has(.profile-top) .field textarea{background:#101014!important;border-color:#39363b!important;color:#f7f5ef!important}
+body:has(.profile-top) .primary{background:linear-gradient(135deg,#f0cc7b,#d9ad52)!important;color:#17130b!important;border:0!important}
+body:has(.profile-top) .secondary{background:#242329!important;border-color:#403b42!important;color:#e9d9b5!important}
+body:has(.profile-top) .notice{background:#211c14!important;color:#d8c9a8!important;border:1px solid #574321!important}
+body:has(.profile-top) .privacy{background:#19191d!important;border-color:#39363b!important}
+body:has(.profile-top) .privacy span{color:#aaa8a1!important}
+@media(prefers-reduced-motion:reduce){body:has(.tabs) *,body:has(.profile-top) *{transition:none!important}}
