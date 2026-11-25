@@ -381,3 +381,13 @@ Roadmap: `docs/MAIN_APP_ROADMAP.md`. Data model review: `docs/DATA_MODEL_AND_RLS
 - [x] Preserved existing page markup, controls, form names, event handlers and backend calls in this styling pass.
 - [x] Incremented the service-worker cache to `adventure-preview-v20` to refresh the shared stylesheet.
 - [ ] Inspect Home, Explore and Account visually on desktop and mobile; automated script checks do not replace browser/device interaction tests.
+
+
+## Premium member-page visual rollout — 2026-11-24
+- [x] Extended the shared black/charcoal, warm-gold and restrained-crimson design to Messages, Music Hub, Marketplace, News, Notifications, Support and other shared card/form surfaces using presentation-only CSS.
+- [x] Kept the central crimson Add Heart action visually distinct and preserved its existing create/Shorts handler and destination.
+- [x] Kept existing markup, IDs, routes, form controls, event handlers, authentication, Supabase calls, RLS and storage behavior unchanged in this styling pass.
+- [x] Refreshed the PWA app-shell cache to `adventure-preview-v21`.
+- [ ] Verify every page visually at desktop and narrow mobile sizes; CSS selector coverage is not a substitute for real-browser inspection.
+- [ ] Exercise messaging, calls, Music Hub submissions, Marketplace actions, News reader, notifications, support tickets, settings and owner flows with appropriate test accounts before launch.
+- [ ] The exact reference image is not available in this work session; this batch follows the approved Adventure black/gold/red design plan and must be compared against the reference when it is available.
