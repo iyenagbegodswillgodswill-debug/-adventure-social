@@ -248,3 +248,5 @@ Roadmap: `docs/MAIN_APP_ROADMAP.md`. Data model review: `docs/DATA_MODEL_AND_RLS
 - [ ] Verify real phone camera/microphone capture, iOS Safari MP4 recording, Android WebM recording, media uploads, signed playback URLs, follower visibility and moderation-hidden media.
 - [ ] Add trim/crop, captions, drafts, accessibility review, media reporting and orphaned-object cleanup before public release.
 - [ ] Confirm actual Storage usage and Free-plan quotas; do not upgrade or enable paid services without explicit approval.
+
+- [x] Added covering indexes for Adventure events, communities, marketplace favourites, notification actors and support-message sender foreign keys; migration `20261125012000_adventure_growth_support_foreign_key_indexes.sql` applied.
