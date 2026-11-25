@@ -4,7 +4,7 @@ import { spawnSync } from 'node:child_process';
 const files = [
   'index.html', 'admin.html', 'support.html', 'account.html',
   'messages.html', 'news.html', 'marketplace.html', 'discover.html',
-  'notifications.html', 'policies.html'
+  'notifications.html', 'policies.html', 'music.html'
 ];
 let failed = false;
 for (const file of files) {
