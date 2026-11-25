@@ -74,6 +74,25 @@ body{padding-bottom:calc(96px + env(safe-area-inset-bottom))!important}
 @media(min-width:900px){.adventure-nav{width:min(650px,92vw)!important;left:50%!important;right:auto!important;transform:translateX(-50%);border:1px solid #e9edf0!important;border-bottom:0!important;border-radius:18px 18px 0 0!important}.adventure-nav .nav-create{width:50px;flex-basis:50px}}
 @media(max-width:480px){main{padding-left:14px!important;padding-right:14px!important}.feed-topline span{font-size:10px}.adventure-nav .nav-item .nav-label{font-size:9px!important}}
 @media(prefers-reduced-motion:reduce){.adventure-nav .nav-create{transition:none}}
+
+/* Immersive Shorts feed: mixed posts remain mixed; video posts become vertical viewing stops */
+#feed-list{scroll-snap-type:y proximity;scroll-padding-top:12px}
+#feed-list .post-card{scroll-snap-align:start}
+#feed-list .short-card{position:relative;width:100%;max-width:560px;margin:14px auto 22px;padding:0;border:0;border-radius:18px;overflow:hidden;background:#07131d;color:#fff;isolation:isolate;min-height:min(78svh,820px);display:flex;flex-direction:column;justify-content:flex-end}
+#feed-list .short-card .short-player{position:absolute;inset:0;width:100%;height:100%;max-height:none!important;object-fit:cover!important;border-radius:0!important;margin:0!important;background:#07131d}
+#feed-list .short-card:after{content:"";position:absolute;inset:35% 0 0;background:linear-gradient(transparent,rgba(0,0,0,.76));pointer-events:none;z-index:1}
+#feed-list .short-card .post-head,#feed-list .short-card .post-body,#feed-list .short-card .post-actions,#feed-list .short-card .comments{position:relative;z-index:2;color:#fff;margin-left:16px;margin-right:16px}
+#feed-list .short-card .post-head{order:2;padding:0 0 8px}
+#feed-list .short-card .post-author:before{background:#ffffff35;box-shadow:0 0 0 1px #ffffff80}
+#feed-list .short-card .post-body{order:3;margin-top:0;margin-bottom:12px;max-width:85%;text-shadow:0 1px 3px #000}
+#feed-list .short-card .post-actions{order:4;border:0;padding:0 0 17px;gap:8px}
+#feed-list .short-card .post-actions button{background:#ffffff20;color:#fff;border-color:#ffffff65;backdrop-filter:blur(8px)}
+#feed-list .short-card .post-actions .post-time{color:#fff}
+#feed-list .short-card .comments{order:5;background:#101f2c;padding:8px;border-radius:12px;margin-bottom:12px}
+#feed-list .short-card .post-head>small{color:#fff}
+#feed-list .short-card .short-hint{position:absolute;z-index:2;right:14px;top:14px;padding:6px 9px;border-radius:20px;background:#0007;color:#fff;font-size:11px;pointer-events:none}
+@media(max-width:650px){#feed-list .short-card{width:calc(100% + 28px);max-width:none;margin:12px -14px 20px;border-radius:0;min-height:calc(100svh - 112px);min-height:calc(100dvh - 112px)}#feed-list .short-card .post-head,#feed-list .short-card .post-body,#feed-list .short-card .post-actions,#feed-list .short-card .comments{margin-left:16px;margin-right:16px}}
+@media(prefers-reduced-motion:reduce){#feed-list{scroll-snap-type:none}}
 </style></head>
 <body><a class="skip-link" href="#main">Skip to content</a><div class="app">
 <header><div class="top"><div><div class="brand">adventure<span>.</span></div><div class="tag">Your world. Your adventure.</div></div><div class="actions"><button class="icon" aria-label="Search" onclick="document.querySelector('#search').focus()">⌕</button><a class="icon" href="./account.html" aria-label="Member sign in" title="Member sign in" style="display:grid;place-items:center;text-decoration:none">♙</a><button class="icon" id="install-app" aria-label="Install Adventure" title="Install Adventure">↓</button><a class="icon" href="./notifications.html" aria-label="Notifications" title="Notifications" style="display:grid;place-items:center;text-decoration:none">♧</a></div></div>
@@ -227,6 +246,12 @@ function showPage(page){
 document.querySelectorAll('nav [data-page]').forEach(b=>b.addEventListener('click',()=>showPage(b.dataset.page)));
 showPage('feed');
 
+document.querySelector('#feed-list')?.addEventListener('click',e=>{
+ const sound=e.target.closest('[data-short-sound]');
+ if(sound){const video=sound.parentElement.querySelector('video');if(video){video.muted=!video.muted;sound.textContent=video.muted?'♪':'♫';sound.setAttribute('aria-label',video.muted?'Turn sound on':'Mute video');if(!video.muted)video.play().catch(()=>{});}return;}
+ const video=e.target.closest('.short-card video');
+ if(video){if(video.paused)video.play().catch(()=>{});else video.pause();}
+});
 document.querySelector('#nav-create-short')?.addEventListener('click',async()=>{
  const {data:{session}}=await supabase.auth.getSession();
  if(!session?.user){showToast('Sign in to create and share a Short.');location.href='./account.html';return;}
@@ -243,6 +268,22 @@ async function loadAnnouncements(){
  document.querySelector('#announcements-section').classList.remove('hidden');
  document.querySelector('#announcements-list').innerHTML=data.map(a=>'<article class="announcement-card"><strong>'+escapeHtml(a.title)+'</strong><p>'+escapeHtml(a.body)+'</p><small class="post-time">'+escapeHtml(new Date(a.created_at).toLocaleDateString())+'</small></article>').join('');
 }
+function setupShortPlayback(){
+ const cards=[...document.querySelectorAll('#feed-list [data-short-card],#feed-list .short-card video')];
+ const videos=cards.map(x=>x.tagName==='VIDEO'?x:x.querySelector('video')).filter(Boolean);
+ if(!videos.length)return;
+ const reduced=window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
+ const saveData=!!navigator.connection?.saveData;
+ const observer=window.__adventureShortObserver;
+ if(observer)observer.disconnect();
+ const next=new IntersectionObserver(entries=>entries.forEach(entry=>{
+  const v=entry.target;
+  if(entry.isIntersecting&&entry.intersectionRatio>=.65&&!reduced&&!saveData){v.muted=true;v.play().catch(()=>{});}
+  else v.pause();
+ }),{threshold:[0,.25,.65,1]});
+ window.__adventureShortObserver=next;
+ videos.forEach(v=>{v.pause();v.preload='none';next.observe(v);});
+}
 function renderFeed(){
  const host=document.querySelector('#feed-list');
  const visible=feedPosts.filter(p=>feedFilter==='all'||(feedFilter==='following'&&following.has(p.author_id))||(feedFilter==='mine'&&currentUser&&p.author_id===currentUser.id));
@@ -253,11 +294,11 @@ function renderFeed(){
   const commentHtml=comments.slice(0,4).map(c=>{const person=feedProfiles[c.author_id]||{};return '<div class="comment"><strong>'+escapeHtml(person.display_name||'Adventure member')+'</strong>'+escapeHtml(c.body)+(c.moderation_status==='hidden'&&currentUser&&c.author_id===currentUser.id?'<div class="feed-note">This comment is hidden from other members. Review reason: '+escapeHtml(c.moderation_reason||'Owner moderation')+'</div>':'')+'</div>';}).join('');
   const actions=(feedCanInteract?'<button class="'+(feedLiked.has(p.id)?'liked':'')+'" data-like-post="'+escapeHtml(p.id)+'">'+(feedLiked.has(p.id)?'♥ Liked':'♡ Like')+' · '+Number(p.likes_count||0)+'</button><button type="button" data-focus-comment="'+escapeHtml(p.id)+'">Comments · '+Number(p.comments_count||0)+'</button><button type="button" class="report-post" data-post="'+escapeHtml(p.id)+'" data-author="'+escapeHtml(p.author_id)+'">Report</button>':'<span class="post-time">'+Number(p.likes_count||0)+' likes · '+Number(p.comments_count||0)+' comments</span>')+(own?'<button type="button" data-delete-post="'+escapeHtml(p.id)+'">Delete</button>':'');
   const commentForm=feedCanInteract?'<form class="comment-form" data-comment-post="'+escapeHtml(p.id)+'"><input name="comment" maxlength="1000" placeholder="Write a respectful comment…" required><button type="submit">Send</button></form>':'';
-  return {time:new Date(p.created_at).getTime()||0,html:'<article class="post-card"><div class="post-head"><div class="post-author"><strong>'+escapeHtml(author.display_name||'Adventure member')+'</strong><small>'+(author.username?'@'+escapeHtml(author.username):escapeHtml(author.country||'Community member'))+' · '+escapeHtml(new Date(p.created_at).toLocaleString())+'</small></div><small class="post-time">'+(p.visibility==='followers'?'Followers':'All members')+'</small></div>'+(own&&p.moderation_status==='hidden'?'<div class="feed-note">This post is hidden from other members. Reason: '+escapeHtml(p.moderation_reason||'Owner moderation')+'</div>':'')+'<p class="post-body">'+escapeHtml(p.body)+'</p>'+(p.media_url?(p.media_type==='video'?'<video controls playsinline preload="metadata" style="width:100%;max-height:520px;background:#111;border-radius:12px;margin:8px 0" src="'+escapeHtml(p.media_url)+'"></video>':'<img loading="lazy" alt="Photo shared on Adventure" style="width:100%;max-height:520px;object-fit:contain;border-radius:12px;margin:8px 0" src="'+escapeHtml(p.media_url)+'">'):'')+'<div class="post-actions">'+actions+'</div><div class="comments">'+(commentHtml||'<div class="muted">No comments yet.</div>')+commentForm+'</div></article>'};
+  return {time:new Date(p.created_at).getTime()||0,html:'<article class="post-card '+(p.media_type==='video'&&p.media_url?'short-card':'')+'"><div class="post-head"><div class="post-author"><strong>'+escapeHtml(author.display_name||'Adventure member')+'</strong><small>'+(author.username?'@'+escapeHtml(author.username):escapeHtml(author.country||'Community member'))+' · '+escapeHtml(new Date(p.created_at).toLocaleString())+'</small></div><small class="post-time">'+(p.visibility==='followers'?'Followers':'All members')+'</small></div>'+(own&&p.moderation_status==='hidden'?'<div class="feed-note">This post is hidden from other members. Reason: '+escapeHtml(p.moderation_reason||'Owner moderation')+'</div>':'')+'<p class="post-body">'+escapeHtml(p.body)+'</p>'+(p.media_url?(p.media_type==='video'?'<video class="short-player" playsinline muted loop preload="none" aria-label="Short video shared on Adventure" src="'+escapeHtml(p.media_url)+'"></video><span class="short-hint">Short · Tap for sound</span><button type="button" class="short-sound" data-short-sound aria-label="Turn sound on" style="position:absolute;z-index:3;right:14px;top:54px;border:1px solid #ffffff80;border-radius:50%;width:42px;height:42px;background:#0008;color:#fff">♪</button>':'<img loading="lazy" alt="Photo shared on Adventure" style="width:100%;max-height:520px;object-fit:contain;border-radius:12px;margin:8px 0" src="'+escapeHtml(p.media_url)+'">'):'')+'<div class="post-actions">'+actions+'</div><div class="comments">'+(commentHtml||'<div class="muted">No comments yet.</div>')+commentForm+'</div></article>'};
  }):[];
  const extraCards=extras.map(x=>({time:new Date(x.created_at||x.published||0).getTime()||0,html:x.html}));
  const cards=[...postCards,...extraCards].sort((a,b)=>b.time-a.time);
- if(cards.length){host.innerHTML=cards.map(x=>x.html).join('');return;}
+ if(cards.length){host.innerHTML=cards.map(x=>x.html).join('');setupShortPlayback();return;}
  let emptyTitle='Adventure is just getting started.';
  let emptyText='There is nothing to show in this Feed section yet. You can explore Music, News and Explore Africa while the community grows.';
  let emptyLink='<a href="./discover.html" style="color:var(--green);font-weight:750">Explore Africa</a>';
