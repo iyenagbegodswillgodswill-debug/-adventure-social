@@ -410,3 +410,13 @@ Roadmap: `docs/MAIN_APP_ROADMAP.md`. Data model review: `docs/DATA_MODEL_AND_RLS
 - [x] Existing recording, import, beat sequencer, track mixing, local project save/load and WAV export paths remain in place.
 - [ ] Test genre filtering, previews, starter-pack generation, track playback, project save/load and WAV export in supported browsers, including iOS Safari.
 - [ ] Current catalogue sounds are synthesized in the browser; they are not recorded commercial sample files or an external online audio library. Expand with uploaded/recorded sample packs only after creator upload, rights verification, moderation, storage limits and licensing workflows are implemented.
+
+
+## Adventure Creative Studio foundation — 2026-11-25
+- [x] Added a standalone in-app Photo Studio with local image import, natural/beauty-style looks, brightness, contrast, saturation, rotation, flip, reset and edited-image export.
+- [x] Added a direct Photo Studio entry from the Add composer and Music Studio.
+- [x] Expanded the existing Shorts camera looks with Beauty Glow, Golden Beauty and Rose Beauty presets; these are lightweight colour/lighting effects, not face-tracked makeup.
+- [x] Kept image editing in the browser; photos are not uploaded by the editor and no external image provider or paid AI service was added.
+- [x] Refreshed the app-shell cache to v24 and included Photo Studio.
+- [ ] Verify image import/edit/export and camera recording on real mobile browsers, especially iOS Safari.
+- [ ] Face-aware virtual makeup, AI-powered photo edits, true AI instrumental generation and an AI feature-development workflow remain future integrations. They require model/provider selection, secure server-side integration, privacy review, licensing and explicit approval of any costs. No AI provider is currently connected.
