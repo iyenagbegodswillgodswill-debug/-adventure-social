@@ -391,3 +391,13 @@ Roadmap: `docs/MAIN_APP_ROADMAP.md`. Data model review: `docs/DATA_MODEL_AND_RLS
 - [ ] Verify every page visually at desktop and narrow mobile sizes; CSS selector coverage is not a substitute for real-browser inspection.
 - [ ] Exercise messaging, calls, Music Hub submissions, Marketplace actions, News reader, notifications, support tickets, settings and owner flows with appropriate test accounts before launch.
 - [ ] The exact reference image is not available in this work session; this batch follows the approved Adventure black/gold/red design plan and must be compared against the reference when it is available.
+
+
+## Adventure Music Studio — original sound library foundation — 2026-11-24
+- [x] Added an in-browser Adventure Sound Library with eight original synthesized loop types: deep bass, log drum, warm keys, bright pluck, marimba, dream pad, guitar-style pluck and soft bell.
+- [x] Members can preview a loop or add it as a separate editable session track; generated loops follow the Studio BPM and selected bar count.
+- [x] Preserved existing vocal recording, audio import, drum sequencer, track controls, local project save/load and WAV export code paths.
+- [x] Refreshed the PWA app-shell cache to `adventure-preview-v22`.
+- [ ] Run automated script checks and test generated sound preview, track addition, playback, save/load and WAV export across supported browsers.
+- [ ] This is an original synthesized starter library, not an unlimited catalogue of recorded instruments or commercial samples. Add more sound families, genre presets, licensed sample packs and cloud project storage only after rights, storage and moderation workflows are designed.
+- [ ] Keep projects private by default; no paid sound provider, external audio API or copyrighted sample library was added.
