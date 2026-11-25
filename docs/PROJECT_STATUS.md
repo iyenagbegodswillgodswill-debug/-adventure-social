@@ -1,6 +1,6 @@
 # Adventure — Project Status
 
-Last updated: 2026-11-25 (Music Hub foundation)
+Last updated: 2026-11-25 (member comfort and navigation pass)
 
 ## Current milestone: Main app Phase 1 — text Feed + private messaging foundation
 
@@ -285,3 +285,12 @@ Roadmap: `docs/MAIN_APP_ROADMAP.md`. Data model review: `docs/DATA_MODEL_AND_RLS
 - [ ] Verify the deployed News Edge Function returns current headlines and fix upstream feed/parser/deployment issues if it returns no items. A web fetch attempt could not access the function endpoint, so live headline availability is not yet confirmed.
 - [ ] Add audio post support so artists can export a vocal/song from Music Studio and publish it to the Feed. Current post media schema and composer support photos/videos only; do not describe audio publishing as complete.
 - [ ] Simplify global navigation and first-time-user guidance in a separate UI pass without removing existing features.
+
+
+## Member comfort and navigation pass — 2026-11-25
+- [x] Simplified the main navigation to Home, Feed, Explore, Music, Messages and a More menu for News, Marketplace, Music Studio, Notifications, Help and Account.
+- [x] Removed an outdated notification click message that incorrectly said notifications were not available.
+- [x] Added consistent navigation to the Music Hub, Music Studio, Messages, Support and Account pages.
+- [x] Bumped the PWA app-shell cache to v13 so returning visitors can receive the updated navigation.
+- [ ] Verify navigation, dropdown usability, keyboard access and small-screen layouts on real mobile browsers.
+- [ ] Verify all core features using real owner/member accounts; deployment and source checks alone do not establish end-to-end correctness.
