@@ -365,3 +365,12 @@ Roadmap: `docs/MAIN_APP_ROADMAP.md`. Data model review: `docs/DATA_MODEL_AND_RLS
 - [x] Updated the PWA manifest brand colours and Home browser theme colour; bumped the service-worker cache to `adventure-preview-v18`.
 - [ ] Page-by-page visual QA and regression checks are still required. This first batch establishes shared design tokens and brand assets; it is not the complete screen redesign.
 - [ ] Keep backend, authentication, RLS, database, routes, event handlers, media flows, and owner permissions unchanged during the visual pass.
+
+
+## Premium visual redesign — Phase 1 started
+- [x] Approved brand direction: deep black/charcoal, warm gold, subtle crimson details; retain six personal accent choices.
+- [x] Replaced the Adventure app icon with a scalable SVG compass/road-inspired letter A; existing favicon and app-shell paths remain unchanged.
+- [x] Began the Home/discovery page visual refresh using scoped CSS for header, hero, cards, filters, and bottom navigation. Existing markup, IDs, handlers, navigation destinations, and data logic were not intentionally changed.
+- [x] Incremented the service-worker cache to `adventure-preview-v19` so the updated icon and stylesheet can refresh.
+- [ ] Run the repository's automated script checks and inspect the deployed Home screen on desktop/mobile. No real-device visual or interaction test has been completed in this change.
+- [ ] Continue the redesign page by page only after reviewing the Home result; preserve all existing functionality and personal accent settings.
