@@ -224,3 +224,41 @@ body:has(.layout) .brand span,body:has(.cards) .brand span,body:has(.panel) .bra
   main{max-width:1240px;margin-left:auto!important;margin-right:auto!important}
   .card,.panel,.post-card,.composer,.formbox{padding:22px}
 }
+
+
+/* iPhone readability refinement — enlarge navigation and compact controls.
+   Scoped to narrow screens; presentation only, preserving all routes and actions. */
+@media(max-width:760px){
+  header .icon, header button{
+    min-width:46px!important;min-height:46px!important;
+    font-size:18px!important;padding:9px!important;
+  }
+  body:has(#directory-screen) .brand{font-size:27px!important}
+  body:has(#directory-screen) .tag{font-size:14px!important}
+  body:has(#directory-screen) .filters .chip,
+  body:has(#directory-screen) .filters button,
+  body:has(.cards) .filters .filter,
+  body:has(.cards) .filters button{
+    min-height:48px!important;padding:10px 15px!important;
+    font-size:16px!important;line-height:1.25!important;
+  }
+  .adventure-nav{
+    min-height:84px!important;
+    padding:9px 8px calc(10px + env(safe-area-inset-bottom))!important;
+  }
+  .adventure-nav .nav-item{
+    min-width:60px!important;min-height:60px!important;
+    padding:7px 7px!important;gap:4px!important;
+    font-size:13px!important;line-height:1.15!important;
+  }
+  .adventure-nav .nav-item svg{
+    width:27px!important;height:27px!important;flex:0 0 27px!important;
+  }
+  .adventure-nav .nav-create{
+    min-width:56px!important;min-height:56px!important;
+  }
+  .adventure-nav .nav-create svg{width:29px!important;height:29px!important}
+  button,.btn,.chip,.follow,.tabs button,.mini{
+    font-size:16px!important;
+  }
+}
