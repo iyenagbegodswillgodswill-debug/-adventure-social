@@ -337,3 +337,10 @@ Roadmap: `docs/MAIN_APP_ROADMAP.md`. Data model review: `docs/DATA_MODEL_AND_RLS
 - [ ] Verify actual vertical playback, sound, controls, iOS Safari camera recording, Android playback, signed media URLs and scroll behavior on real devices.
 - [ ] Confirm GitHub Pages deployment of the latest commits before asking members to test the live experience; code saved to GitHub is not proof of a successful deployment.
 - [ ] The current implementation is an immersive mixed-feed video experience; advanced creator editing, trim/captions, and dedicated swipe-only Reels mode remain future work.
+
+
+## Personal home colours — 2026-11-25
+- [x] Set Adventure Home's default appearance to a dark black/charcoal base with red accents.
+- [x] Added a Home header appearance control with six accent choices: red, blue, green, purple, orange and pink.
+- [x] Each browser saves its own selected accent locally; no account data or cross-user settings are changed.
+- [ ] Verify colour contrast and appearance on mobile/desktop after Pages deployment.
