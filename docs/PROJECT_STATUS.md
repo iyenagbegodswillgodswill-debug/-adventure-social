@@ -439,3 +439,10 @@ Roadmap: `docs/MAIN_APP_ROADMAP.md`. Data model review: `docs/DATA_MODEL_AND_RLS
 - [x] Added wider desktop content bounds and spacing without changing routes, IDs, authentication, handlers, Supabase calls or permissions.
 - [x] Refreshed the PWA app-shell cache to v26.
 - [ ] Verify on real iPhone and Android screen sizes, including bottom navigation, More menu, forms, camera and media pages. CSS/source checks do not replace real-device QA.
+
+
+## iPhone navigation readability refinement — 2026-11-25
+- [x] Increased narrow-screen header icon touch targets, filter-chip size, bottom-navigation height, icon dimensions and label typography.
+- [x] Kept this change presentation-only; routes, controls, handlers, authentication and backend behavior are unchanged.
+- [x] Bumped the service-worker app-shell cache to v27 so installed clients can request the refreshed stylesheet.
+- [ ] Confirm the result on the user's iPhone after the latest GitHub Pages deployment; screenshot-based CSS review is not a substitute for device verification.
