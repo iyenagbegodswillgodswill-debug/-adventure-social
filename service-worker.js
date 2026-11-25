@@ -1,7 +1,10 @@
-const CACHE_NAME = "adventure-preview-v24";
+const CACHE_NAME = "adventure-preview-v25";
 const APP_SHELL = [
   "./",
   "./index.html",
+  "./admin.html",
+  "./admin-manifest.webmanifest",
+  "./assets/adventure-admin-icon.svg",
   "./account.html",
   "./messages.html",
   "./news.html",

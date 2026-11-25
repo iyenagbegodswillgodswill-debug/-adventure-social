@@ -15,5 +15,30 @@
       "type": "image/svg+xml",
       "purpose": "any maskable"
     }
+  ],
+  "id": "./",
+  "shortcuts": [
+    {
+      "name": "Create music",
+      "short_name": "Music Studio",
+      "url": "./studio.html",
+      "icons": [
+        {
+          "src": "./assets/adventure-icon.svg",
+          "sizes": "any"
+        }
+      ]
+    },
+    {
+      "name": "Edit photos",
+      "short_name": "Photo Studio",
+      "url": "./photo-studio.html",
+      "icons": [
+        {
+          "src": "./assets/adventure-icon.svg",
+          "sizes": "any"
+        }
+      ]
+    }
   ]
 }

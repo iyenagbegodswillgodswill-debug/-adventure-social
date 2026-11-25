@@ -422,3 +422,12 @@ Roadmap: `docs/MAIN_APP_ROADMAP.md`. Data model review: `docs/DATA_MODEL_AND_RLS
 - [ ] Face-aware virtual makeup, AI-powered photo edits, true AI instrumental generation and an AI feature-development workflow remain future integrations. They require model/provider selection, secure server-side integration, privacy review, licensing and explicit approval of any costs. No AI provider is currently connected.
 
 - [x] Corrected photo rotation rendering to preserve the source image's original proportions while rotating the canvas.
+
+
+### Separate installable Adventure Admin app — 2026-11-25
+- [x] Added a dedicated Admin PWA manifest with its own app identity, title, start URL and owner-console icon.
+- [x] Added iOS standalone metadata and clear iPhone/Android home-screen installation guidance to the owner login screen.
+- [x] Added main Adventure PWA identity and Music Studio / Photo Studio shortcuts.
+- [x] Updated the shared service-worker app shell to cache the owner entry page, admin manifest and admin icon; cache version v25.
+- [x] Preserved the existing owner-only Supabase authentication and backend authorization; the admin manifest and hidden URL do not grant access.
+- [ ] Verify installation on iOS Safari and Android Chrome, plus authenticated owner login on an installed standalone launch.
