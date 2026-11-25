@@ -344,3 +344,12 @@ Roadmap: `docs/MAIN_APP_ROADMAP.md`. Data model review: `docs/DATA_MODEL_AND_RLS
 - [x] Added a Home header appearance control with six accent choices: red, blue, green, purple, orange and pink.
 - [x] Each browser saves its own selected accent locally; no account data or cross-user settings are changed.
 - [ ] Verify colour contrast and appearance on mobile/desktop after Pages deployment.
+
+
+## Shared member experience refresh — 2026-11-25
+- [x] Added a shared charcoal member theme with a brighter red accent and six preserved accent choices.
+- [x] Added a dedicated member Settings page with appearance selection plus clear routes to existing Account and Notifications controls.
+- [x] Linked the shared theme loader and stylesheet across Home, Account, Explore, Marketplace, Messages, Music, News, Notifications, Policies, Studio and Support.
+- [x] Replaced the central Home create plus with a heart symbol while retaining the existing Create a Short button ID and action handler.
+- [ ] Verify all page layouts, contrast, settings persistence, heart-button Shorts flow and deployment on real iOS/Android browsers.
+- [ ] Settings appearance is browser-local; privacy/account security and device push controls are not represented as functional toggles until backend support exists.
