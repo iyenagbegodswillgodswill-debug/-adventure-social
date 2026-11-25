@@ -194,3 +194,16 @@ Roadmap: `docs/MAIN_APP_ROADMAP.md`. Data model review: `docs/DATA_MODEL_AND_RLS
 - [x] Applied migration `20261124235214_adventure_member_in_app_notifications.sql` and saved it in GitHub.
 - [ ] Test notifications using two authenticated member accounts, including self-actions, blocks, unread counts and read state.
 - [ ] Add reply notifications, notification preferences and optional push notifications after consent and cost review.
+
+
+## In-app African News reader — 2026-11-25
+- [x] Replaced Google News topic links and external search redirects with an in-app headline feed, filters, search, and story reader.
+- [x] Deployed public read-only Edge Function `adventure-news-feed` (JWT verification disabled intentionally because headlines are public; GET/OPTIONS only; no database writes or secrets).
+- [x] Feed aggregates publisher RSS headlines and short descriptions from BBC News Africa, Africanews, Premium Times, The Guardian Africa and France 24 Africa; deduplicates and sorts by publication date.
+- [x] Feed response uses a short in-memory cache and HTTP cache headers to reduce upstream requests.
+- [x] Story cards open an in-app reading panel with publisher attribution and the RSS summary; opening the original publisher is an explicit optional action.
+- [x] News page uses the Adventure Edge Function through the project's publishable key; no paid news API or AI provider is used.
+- [x] Saved Edge Function source at `supabase/functions/adventure-news-feed/index.ts`.
+- [x] Updated service worker cache to v6.
+- [ ] Verify live feed response and real mobile/desktop browsing after Pages deployment; external RSS providers may occasionally be unavailable or change feed formats.
+- [ ] Expand country-specific reporting and editorial review as the news section grows. Do not republish full copyrighted articles or imply publisher endorsement.
