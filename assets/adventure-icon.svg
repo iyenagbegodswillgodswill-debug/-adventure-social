@@ -1,7 +1,10 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-  <rect width="512" height="512" rx="112" fill="#145c45"/>
-  <circle cx="256" cy="256" r="164" fill="none" stroke="#fbf8ef" stroke-width="18" opacity=".92"/>
-  <path d="M256 112 291 221 400 256 291 291 256 400 221 291 112 256 221 221Z" fill="#e8b94f"/>
-  <circle cx="256" cy="256" r="36" fill="#fbf8ef"/>
-  <path d="M256 190 276 236 322 256 276 276 256 322 236 276 190 256 236 236Z" fill="#145c45"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="title desc">
+<title id="title">Adventure compass mark</title><desc id="desc">A gold compass-inspired letter A with a small red north marker on a black background.</desc>
+<rect width="512" height="512" rx="112" fill="#09090b"/>
+<circle cx="256" cy="256" r="190" fill="none" stroke="#d9ad52" stroke-width="15" opacity=".72"/>
+<circle cx="256" cy="256" r="157" fill="none" stroke="#f0cc7b" stroke-width="3" opacity=".35"/>
+<path d="M256 82 386 414 256 345 126 414Z" fill="#d9ad52"/>
+<path d="M256 166 309 326 256 297 203 326Z" fill="#09090b"/>
+<path d="M256 82 278 139 256 126 234 139Z" fill="#b83a43"/>
+<circle cx="256" cy="256" r="15" fill="#f0cc7b"/>
 </svg>
