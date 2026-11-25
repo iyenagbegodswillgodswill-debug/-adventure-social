@@ -98,3 +98,13 @@ The Feed is text-only. Private voice messaging and one-to-one audio/video callin
 - [ ] Build Explore as a unified discovery surface across creators, music, Shorts, culture, communities, events, businesses and marketplace listings.
 - [ ] Build real Live broadcasting only after selecting a reliable, cost-controlled WebRTC/SFU architecture, moderation controls and privacy design. Do not enable a paid streaming provider without explicit owner approval.
 - [ ] Keep artist submissions private until owner approval; require proof/confirmation of rights and never scrape or redistribute copyrighted music.
+
+
+### Feed and Music clarity pass — next milestone
+- [x] Feed includes an approved Music Videos discovery filter and continues attempting public discovery content if member-post loading fails.
+- [x] Music Hub has a dedicated approved Music Videos section, separate from the Voice & Music Studio.
+- [ ] Verify News Edge Function/RSS availability in the live deployment; keep a visible retry/empty state when publishers are unavailable.
+- [ ] Add audio media to Feed posts with storage/database size, MIME, duration and access controls; connect Music Studio exports to this safe upload path.
+- [ ] Simplify primary navigation and group secondary destinations without removing features.
+- [ ] Add a simple first-time walkthrough for watching videos, discovering music, creating a song and sharing to Feed.
+- [ ] Do not label videos as trending until real view/engagement data exists; use latest/featured labels until then.
