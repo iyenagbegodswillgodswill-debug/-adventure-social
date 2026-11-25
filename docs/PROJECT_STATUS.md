@@ -321,3 +321,7 @@ Roadmap: `docs/MAIN_APP_ROADMAP.md`. Data model review: `docs/DATA_MODEL_AND_RLS
 - [x] Kept Explore, Messages and Profile as direct bottom-navigation destinations and preserved existing post visibility, moderation and media upload rules.
 - [x] Bumped the service-worker cache to v16.
 - [ ] Verify camera permission, Short recording/upload, and feed behavior on real mobile devices after deployment.
+
+
+### Cache refresh correction — 2026-11-25
+- Follow-up verification found the service-worker cache name was still `adventure-preview-v15` despite the earlier navigation update note. Corrected it to `adventure-preview-v16` in commit `812eabe55a094f41315e56519c4cad14b548a027` so installed clients can activate the refreshed app shell. This correction is committed; Pages deployment status must still be verified separately.
