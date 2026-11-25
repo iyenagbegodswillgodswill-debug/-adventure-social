@@ -296,3 +296,11 @@ Roadmap: `docs/MAIN_APP_ROADMAP.md`. Data model review: `docs/DATA_MODEL_AND_RLS
 - [ ] Verify all core features using real owner/member accounts; deployment and source checks alone do not establish end-to-end correctness.
 
 - [x] Replaced the generic empty Feed message with clear, section-specific guidance and useful next steps for Music Videos, News, Marketplace, Events and new member posts.
+
+
+## Icon-first navigation — 2026-11-25
+- [x] Replaced text-heavy page navigation with a consistent icon-first bottom navigation on Home, Feed, Explore, Music and Messages.
+- [x] Added an icon grid under More for News, Marketplace, Music Studio, Notifications, Help and Account.
+- [x] Added accessible labels for navigation controls and a safe-area-aware mobile bottom bar.
+- [x] Refreshed the PWA cache to v14.
+- [ ] Verify all icon destinations, active states, dropdown behavior, keyboard access and mobile layouts on real devices before public launch.
