@@ -1,6 +1,6 @@
 # Adventure — Project Status
 
-Last updated: 2026-11-25 (member comfort and navigation pass)
+Last updated: 2026-11-25 (release-readiness source audit)
 
 ## Current milestone: Main app Phase 1 — text Feed + private messaging foundation
 
@@ -510,3 +510,13 @@ Only mark a test complete after it has been run and its result recorded. Source 
 - [x] Refreshed service-worker cache to v28 so installed clients can request the updated shared stylesheet.
 - [ ] Confirm Pages deployment for the latest commit and visually verify on the owner's actual iPhone; source checks cannot guarantee device rendering.
 - [ ] Run the existing release verification plan before treating Adventure as production-ready. Registration remains closed.
+
+
+## 2026-11-25 — release-readiness source audit
+
+- [x] Re-fetched the current default-branch source for the main landing page, shared theme CSS/JS, PWA manifests, service worker and all member-facing app-shell pages.
+- [x] Confirmed every path listed in the current service worker app shell exists in the repository: landing page, owner dashboard, member pages, shared theme assets, manifests and both app icons.
+- [x] Confirmed the current service worker cache identifier is `adventure-preview-v28` (the earlier v27 note is superseded by the current source).
+- [x] Confirmed the service worker skips non-GET and cross-origin requests; navigation requests prefer the network and fall back to the cached app shell.
+- [ ] This source audit does not prove that GitHub Pages has deployed the current default-branch revision or that the app has been tested on a physical iPhone/Android device.
+- [ ] Keep public registration closed until the outstanding release gates above are completed and the owner explicitly approves launch.
