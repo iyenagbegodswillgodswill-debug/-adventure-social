@@ -186,7 +186,17 @@ function renderFeed(){
  }):[];
  const extraCards=extras.map(x=>({time:new Date(x.created_at||x.published||0).getTime()||0,html:x.html}));
  const cards=[...postCards,...extraCards].sort((a,b)=>b.time-a.time);
- host.innerHTML=cards.length?cards.map(x=>x.html).join(''):'<div class="feed-note">Nothing in this part of the Feed yet. Check back soon.</div>';
+ if(cards.length){host.innerHTML=cards.map(x=>x.html).join('');return;}
+ let emptyTitle='Adventure is just getting started.';
+ let emptyText='There is nothing to show in this Feed section yet. You can explore Music, News and Explore Africa while the community grows.';
+ let emptyLink='<a href="./discover.html" style="color:var(--green);font-weight:750">Explore Africa</a>';
+ if(feedType==='music_video'){emptyTitle='No approved music videos yet.';emptyText='Artists and rights-holders can submit official video links in Music Hub. Approved videos will appear here.';emptyLink='<a href="./music.html#submit-release" style="color:var(--green);font-weight:750">Submit an official music video</a>';}
+ else if(feedType==='news'){emptyTitle='News is taking a break.';emptyText='The headline service may be temporarily unavailable. Try refreshing, or open the News page for the latest status.';emptyLink='<a href="./news.html" style="color:var(--green);font-weight:750">Open Adventure News</a>';}
+ else if(feedType==='marketplace'){emptyTitle='No approved listings yet.';emptyText='New listings appear after owner review. Visit Marketplace to learn how to submit one.';emptyLink='<a href="./marketplace.html" style="color:var(--green);font-weight:750">Visit Marketplace</a>';}
+ else if(feedType==='events'){emptyTitle='No published events yet.';emptyText='Approved community events will appear here as organisers submit them.';emptyLink='<a href="./discover.html" style="color:var(--green);font-weight:750">Explore Africa</a>';}
+ else if(feedCanInteract){emptyTitle='Be one of the first to share.';emptyText='Post a thought, photo or short video and help make Adventure feel alive.';emptyLink='<a href="#feed-post-body" style="color:var(--green);font-weight:750">Create your first post</a>';}
+ else if(!currentUser){emptyTitle='Join the conversation.';emptyText='Sign in to share a post, follow members and take part in the community.';emptyLink='<a href="./account.html" style="color:var(--green);font-weight:750">Sign in to Adventure</a>';}
+ host.innerHTML='<div class="feed-note"><strong>'+emptyTitle+'</strong><p>'+emptyText+'</p>'+emptyLink+'</div>';
 }
 async function loadFeedExtras(){
  const tasks=await Promise.allSettled([
