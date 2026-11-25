@@ -351,5 +351,6 @@ Roadmap: `docs/MAIN_APP_ROADMAP.md`. Data model review: `docs/DATA_MODEL_AND_RLS
 - [x] Added a dedicated member Settings page with appearance selection plus clear routes to existing Account and Notifications controls.
 - [x] Linked the shared theme loader and stylesheet across Home, Account, Explore, Marketplace, Messages, Music, News, Notifications, Policies, Studio and Support.
 - [x] Replaced the central Home create plus with a heart symbol while retaining the existing Create a Short button ID and action handler.
+- [x] Bumped the service-worker cache to `adventure-preview-v17` and added Settings plus shared theme assets to the app shell.
 - [ ] Verify all page layouts, contrast, settings persistence, heart-button Shorts flow and deployment on real iOS/Android browsers.
 - [ ] Settings appearance is browser-local; privacy/account security and device push controls are not represented as functional toggles until backend support exists.
