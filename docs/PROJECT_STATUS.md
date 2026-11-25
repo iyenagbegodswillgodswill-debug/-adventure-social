@@ -312,3 +312,12 @@ Roadmap: `docs/MAIN_APP_ROADMAP.md`. Data model review: `docs/DATA_MODEL_AND_RLS
 - [x] Preserved existing navigation destinations and page routing; no feature or security behavior was intentionally changed.
 - [x] Bumped the service-worker cache to v15 so returning app users can receive the refreshed shell.
 - [ ] Verify the new navigation on real mobile devices and confirm all routes after deployment.
+
+
+## Instagram-inspired feed and create navigation — 2026-11-25
+- [x] Made the Home destination open the unified, chronological feed by default.
+- [x] Added a centered plus action to the bottom navigation; signed-in members are taken to the existing Shorts camera workflow, with the composer available for caption and sharing.
+- [x] Refined the feed into a single-column, media-forward scrolling timeline for mixed posts, photos, videos and supported feed extras.
+- [x] Kept Explore, Messages and Profile as direct bottom-navigation destinations and preserved existing post visibility, moderation and media upload rules.
+- [x] Bumped the service-worker cache to v16.
+- [ ] Verify camera permission, Short recording/upload, and feed behavior on real mobile devices after deployment.
