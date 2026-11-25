@@ -520,3 +520,10 @@ Only mark a test complete after it has been run and its result recorded. Source 
 - [x] Confirmed the service worker skips non-GET and cross-origin requests; navigation requests prefer the network and fall back to the cached app shell.
 - [ ] This source audit does not prove that GitHub Pages has deployed the current default-branch revision or that the app has been tested on a physical iPhone/Android device.
 - [ ] Keep public registration closed until the outstanding release gates above are completed and the owner explicitly approves launch.
+
+
+## Adventure Studios — original game planning — 2026-11-25
+- [x] Saved the original game vision, candidate portfolio, staged development process, originality research requirements, safety/child-protection guardrails, cost controls and first-session checklist in `docs/ADVENTURE_STUDIOS_GAME_PLAN.md`.
+- [x] Planning only: no game code, game backend, paid service, social-app integration or public game launch was started.
+- [ ] Owner decision required on first flagship, football direction, target devices/audience and any spending limit.
+- [ ] Complete competitor research and validate a distinctive gameplay hook before selecting a game to prototype.
