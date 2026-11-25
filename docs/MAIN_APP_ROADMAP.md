@@ -1,6 +1,6 @@
 # Adventure — Main App Roadmap
 
-Last updated: 2026-11-24
+Last updated: 2026-11-25
 
 Adventure is an Africa-first social platform connecting people, cultures, communities and opportunities. The current main app is a mobile-first web app. Public registration remains closed while the member experience, moderation, privacy and release tests are completed.
 
@@ -105,6 +105,12 @@ The Feed is text-only. Private voice messaging and one-to-one audio/video callin
 - [x] Music Hub has a dedicated approved Music Videos section, separate from the Voice & Music Studio.
 - [ ] Verify News Edge Function/RSS availability in the live deployment; keep a visible retry/empty state when publishers are unavailable.
 - [ ] Add audio media to Feed posts with storage/database size, MIME, duration and access controls; connect Music Studio exports to this safe upload path.
-- [ ] Simplify primary navigation and group secondary destinations without removing features.
+- [x] Simplify primary navigation and group secondary destinations without removing features.
 - [ ] Add a simple first-time walkthrough for watching videos, discovering music, creating a song and sharing to Feed.
 - [ ] Do not label videos as trending until real view/engagement data exists; use latest/featured labels until then.
+
+
+### Member comfort pass
+- [x] Main navigation now prioritises Home, Feed, Explore, Music and Messages, with secondary destinations grouped under More.
+- [x] Consistent navigation added to Music Hub, Music Studio, Messages, Support and Account.
+- [ ] Continue accessibility, keyboard, mobile layout and real-account usability testing before public launch.
