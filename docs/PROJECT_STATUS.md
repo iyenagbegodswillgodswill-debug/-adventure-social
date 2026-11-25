@@ -325,3 +325,15 @@ Roadmap: `docs/MAIN_APP_ROADMAP.md`. Data model review: `docs/DATA_MODEL_AND_RLS
 
 ### Cache refresh correction — 2026-11-25
 - Follow-up verification found the service-worker cache name was still `adventure-preview-v15` despite the earlier navigation update note. Corrected it to `adventure-preview-v16` in commit `812eabe55a094f41315e56519c4cad14b548a027` so installed clients can activate the refreshed app shell. This correction is committed; Pages deployment status must still be verified separately.
+
+
+## Immersive Shorts playback — 2026-11-25
+- [x] Converted member video posts in the unified Feed into tall, immersive vertical video cards while leaving text and photo posts in the same chronological feed.
+- [x] Added viewport-aware playback: eligible Shorts start muted only when substantially visible and pause when scrolled away.
+- [x] Added native video controls, an explicit sound toggle, and vertical scroll snapping at Short cards.
+- [x] Respects reduced-motion preferences and browser data-saver mode by avoiding automatic playback.
+- [x] Preserved existing signed media URLs, post visibility, reporting, moderation, likes, comments and owner/member permissions.
+- [x] Kept the centered plus button connected to the existing signed-in Shorts camera workflow.
+- [ ] Verify actual vertical playback, sound, controls, iOS Safari camera recording, Android playback, signed media URLs and scroll behavior on real devices.
+- [ ] Confirm GitHub Pages deployment of the latest commits before asking members to test the live experience; code saved to GitHub is not proof of a successful deployment.
+- [ ] The current implementation is an immersive mixed-feed video experience; advanced creator editing, trim/captions, and dedicated swipe-only Reels mode remain future work.
