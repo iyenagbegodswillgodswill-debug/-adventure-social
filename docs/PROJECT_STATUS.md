@@ -304,3 +304,11 @@ Roadmap: `docs/MAIN_APP_ROADMAP.md`. Data model review: `docs/DATA_MODEL_AND_RLS
 - [x] Added accessible labels for navigation controls and a safe-area-aware mobile bottom bar.
 - [x] Refreshed the PWA cache to v14.
 - [ ] Verify all icon destinations, active states, dropdown behavior, keyboard access and mobile layouts on real devices before public launch.
+
+
+## Premium navigation visual refinement — 2026-11-24
+- [x] Replaced emoji navigation artwork with consistent inline SVG line icons across the ten member-facing pages.
+- [x] Restyled the fixed navigation as a clean, white, Instagram-inspired mobile tab bar with restrained active states, readable labels, safe-area spacing and a refined More panel.
+- [x] Preserved existing navigation destinations and page routing; no feature or security behavior was intentionally changed.
+- [x] Bumped the service-worker cache to v15 so returning app users can receive the refreshed shell.
+- [ ] Verify the new navigation on real mobile devices and confirm all routes after deployment.
