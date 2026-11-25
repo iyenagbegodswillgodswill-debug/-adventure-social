@@ -274,3 +274,14 @@ Roadmap: `docs/MAIN_APP_ROADMAP.md`. Data model review: `docs/DATA_MODEL_AND_RLS
 - [ ] Verify anonymous public browsing, member submission, owner approval/rejection and official link safety with real sessions.
 - [ ] Add licensed/artist-authorised audio previews, artist profiles, charts, Music Shorts integration and release notifications after rights and storage workflows are designed.
 - [ ] Keep public registration closed; no paid audio service, streaming provider or AI provider was enabled.
+
+
+## Feed and Music usability correction — 2026-11-25
+- [x] Added an Adventure Feed filter for approved Music Hub video submissions.
+- [x] Feed now loads approved music-video links alongside news, marketplace listings and events.
+- [x] If the member-post query fails, the Feed still attempts to show public discovery items instead of returning early with an empty screen.
+- [x] Music Hub now has a dedicated Music Videos section with embedded YouTube/Vimeo player support for approved official links; other official destinations remain external links.
+- [ ] No approved music releases or music-video submissions were present when this change was made, so the new video sections will show an honest empty-state message until rights-confirmed content is submitted and owner-approved.
+- [ ] Verify the deployed News Edge Function returns current headlines and fix upstream feed/parser/deployment issues if it returns no items. A web fetch attempt could not access the function endpoint, so live headline availability is not yet confirmed.
+- [ ] Add audio post support so artists can export a vocal/song from Music Studio and publish it to the Feed. Current post media schema and composer support photos/videos only; do not describe audio publishing as complete.
+- [ ] Simplify global navigation and first-time-user guidance in a separate UI pass without removing existing features.
