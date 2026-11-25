@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#101012"><meta name="description" content="Adventure Art House — create, save and share original artwork, and meet artists across Africa.">
+<title>Art House | Adventure</title>
+<link rel="stylesheet" href="./adventure-theme.css">
+<style>
+:root{color-scheme:dark;--bg:#101012;--panel:#19191d;--line:#34343a;--text:#f5f5f6;--muted:#aaaab2;--accent:#ef3340}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:15px/1.5 system-ui,-apple-system,sans-serif;padding-bottom:35px}
+a{color:inherit}.wrap{width:min(1100px,100%);margin:auto;padding:18px 16px 45px}
+header{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 0 20px;border-bottom:1px solid var(--line)}
+.brand{font-size:22px;font-weight:850;letter-spacing:-.7px}.brand span{color:var(--accent)}.back{color:var(--muted);text-decoration:none;font-size:13px}
+.hero{padding:25px 0 22px}.eyebrow{color:var(--accent);font-size:11px;font-weight:850;letter-spacing:1.4px;text-transform:uppercase}.hero h1{font-size:clamp(30px,6vw,48px);line-height:1.05;letter-spacing:-1.8px;margin:8px 0}.hero p{color:var(--muted);max-width:650px;margin:0}
+.layout{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(260px,.7fr);gap:16px;align-items:start}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:16px;margin-bottom:15px;min-width:0}
+.panel h2{font-size:18px;margin:0 0 5px}.sub{color:var(--muted);font-size:12px;margin:0 0 14px}
+.tools{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}
+button,.button,input,select{font:inherit}
+button,.button{border:1px solid #45454d;background:#24242a;color:var(--text);border-radius:10px;padding:9px 12px;font-size:12px;font-weight:750;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;gap:6px}
+button.primary,.button.primary{background:var(--accent);color:#090909;border-color:var(--accent)}
+button:disabled{opacity:.45;cursor:not-allowed}
+input,select{background:#222228;color:var(--text);border:1px solid #45454d;border-radius:10px;padding:10px;min-width:0}
+label{display:grid;gap:6px;color:var(--muted);font-size:12px}
+.canvas-wrap{background:#0b0b0d;border:1px solid #3b3b42;border-radius:14px;padding:8px;overflow:hidden}
+canvas{display:block;width:100%;height:auto;aspect-ratio:4/3;background:#fff;border-radius:8px;touch-action:none}
+.controls{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px}
+.controls .wide{grid-column:span 2}
+.gallery{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.art-card{border:1px solid var(--line);border-radius:12px;overflow:hidden;background:#222228}
+.art-card img{display:block;width:100%;aspect-ratio:4/3;object-fit:cover;background:#fff}
+.art-card div{padding:8px}.art-card strong{font-size:12px;display:block;overflow-wrap:anywhere}.art-card button{margin:6px 5px 2px 0;padding:7px 8px;font-size:11px}
+.empty{border:1px dashed #45454d;border-radius:12px;padding:18px;text-align:center;color:var(--muted);font-size:13px;grid-column:1/-1}
+.connect{display:grid;gap:9px}.connect a{display:flex;align-items:center;gap:11px;text-decoration:none;padding:12px;border:1px solid var(--line);border-radius:12px;background:#222228}.connect .emoji{font-size:23px}.connect strong{display:block;font-size:13px}.connect small{display:block;color:var(--muted);font-size:11px}
+.notice{padding:11px 12px;border-radius:11px;background:#28251b;border:1px solid #59472a;color:#e8d5a9;font-size:11px;margin-top:12px}
+.toast{position:fixed;left:50%;bottom:18px;transform:translate(-50%,20px);opacity:0;pointer-events:none;background:#f5f5f6;color:#111;padding:10px 14px;border-radius:12px;font-size:12px;font-weight:700;transition:.2s;z-index:5}.toast.show{opacity:1;transform:translate(-50%,0)}
+@media(max-width:760px){.layout{grid-template-columns:1fr}.controls{grid-template-columns:repeat(2,minmax(0,1fr))}.wrap{padding-left:13px;padding-right:13px}}
+</style>
+</head>
+<body><div class="wrap">
+<header><div class="brand">adventure<span>.</span> Art House</div><a class="back" href="./index.html">← Back to Adventure</a></header>
+<section class="hero"><div class="eyebrow">Create • Discover • Connect</div><h1>Your imagination<br>belongs here.</h1><p>A welcoming creative corner for artists, designers and curious beginners across Africa. Make something original, keep your gallery close, and find people who love creating too.</p></section>
+<div class="layout">
+<section>
+<div class="panel">
+<h2>🎨 Art Studio</h2><p class="sub">Make a quick design on your phone or computer. Your work stays on this device until you export it.</p>
+<div class="canvas-wrap"><canvas id="artboard" width="1200" height="900" aria-label="Artwork design canvas"></canvas></div>
+<div class="tools">
+<button type="button" id="tool-pen" class="primary">✎ Draw</button><button type="button" id="tool-eraser">⌫ Eraser</button><button type="button" id="tool-text">＋ Add text</button><button type="button" id="tool-clear">Clear canvas</button>
+</div>
+<div class="controls">
+<label>Brush / text colour<input id="colour" type="color" value="#17324d"></label>
+<label>Brush size<input id="size" type="range" min="2" max="48" value="8"></label>
+<label class="wide">Artwork title<input id="title" maxlength="60" placeholder="Give your artwork a name"></label>
+<label>Canvas background<select id="background"><option value="#ffffff">White</option><option value="#fff4df">Warm cream</option><option value="#101820">Midnight</option><option value="#f3d5dc">Soft rose</option><option value="#d9eee7">Mint</option></select></label>
+<label>Text style<select id="textstyle"><option value="bold">Bold</option><option value="normal">Regular</option><option value="italic">Italic</option></select></label>
+</div>
+<div class="tools"><button type="button" class="primary" id="save-art">Save to My Gallery</button><button type="button" id="download-art">Export PNG</button><button type="button" id="reset-art">New artwork</button></div>
+</div>
+<div class="panel"><h2>🖼️ My Gallery</h2><p class="sub">Saved designs are private to this browser. Export a PNG to keep a separate copy.</p><div class="gallery" id="gallery"><div class="empty">Your gallery is ready. Create your first artwork above.</div></div></div>
+</section>
+<aside>
+<div class="panel"><h2>🤝 Meet other artists</h2><p class="sub">Adventure's existing community tools help you discover people and start conversations.</p>
+<div class="connect">
+<a href="./discover.html"><span class="emoji">🌍</span><span><strong>Discover Adventurers</strong><small>Find people with creative interests.</small></span></a>
+<a href="./messages.html"><span class="emoji">💬</span><span><strong>Message someone</strong><small>Connect and discuss a creative idea.</small></span></a>
+<a href="./index.html"><span class="emoji">✨</span><span><strong>Visit the Adventure Feed</strong><small>Share your creative journey with the community.</small></span></a>
+<a href="./studio.html"><span class="emoji">🎵</span><span><strong>Adventure Music Studio</strong><small>Explore another creative space.</small></span></a>
+</div>
+<div class="notice">This first Art House version saves designs on your device. Secure artwork uploads, a dedicated artist feed, collaboration rooms and selling artwork are not switched on yet. We will add those only after moderation, copyright, privacy and payment protections are ready.</div>
+</div>
+<div class="panel"><h2>🌱 Creative community</h2><p class="sub">A few ideas for what belongs here:</p><ul style="padding-left:19px;margin:0;color:var(--muted);font-size:13px"><li>Digital art, illustration and posters</li><li>Fashion, textiles and African-inspired patterns</li><li>Photography concepts and visual storytelling</li><li>Design feedback and respectful collaboration</li><li>Creative challenges for all skill levels</li></ul></div>
+</aside>
+</div>
+</div><div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script>
+(()=>{
+const canvas=document.getElementById('artboard'),ctx=canvas.getContext('2d'),$=id=>document.getElementById(id);
+let drawing=false,mode='pen',last=null;
+const KEY='adventure_art_house_gallery_v1';
+function paintBackground(){ctx.save();ctx.fillStyle=$('background').value;ctx.fillRect(0,0,canvas.width,canvas.height);ctx.restore();}
+function toast(message){$('toast').textContent=message;$('toast').classList.add('show');clearTimeout(toast.timer);toast.timer=setTimeout(()=>$('toast').classList.remove('show'),2300);}
+function point(e){const r=canvas.getBoundingClientRect();return{x:(e.clientX-r.left)*canvas.width/r.width,y:(e.clientY-r.top)*canvas.height/r.height};}
+function start(e){drawing=true;last=point(e);canvas.setPointerCapture?.(e.pointerId);draw(e);}
+function draw(e){if(!drawing)return;const p=point(e);ctx.lineCap='round';ctx.lineJoin='round';ctx.lineWidth=Number($('size').value);ctx.strokeStyle=mode==='eraser'?'#ffffff':$('colour').value;ctx.beginPath();ctx.moveTo(last.x,last.y);ctx.lineTo(p.x,p.y);ctx.stroke();last=p;}
+function stop(){drawing=false;last=null;}
+canvas.addEventListener('pointerdown',start);canvas.addEventListener('pointermove',draw);canvas.addEventListener('pointerup',stop);canvas.addEventListener('pointercancel',stop);canvas.addEventListener('pointerleave',stop);
+$('tool-pen').onclick=()=>{mode='pen';$('tool-pen').classList.add('primary');$('tool-eraser').classList.remove('primary');};
+$('tool-eraser').onclick=()=>{mode='eraser';$('tool-eraser').classList.add('primary');$('tool-pen').classList.remove('primary');};
+$('tool-text').onclick=()=>{const value=prompt('Type the words for your artwork:');if(!value)return;ctx.save();ctx.fillStyle=$('colour').value;ctx.font=$('textstyle').value+' 76px system-ui, sans-serif';ctx.textBaseline='middle';const lines=value.split('\n').slice(0,4);lines.forEach((line,i)=>ctx.fillText(line,70,130+i*92,1060));ctx.restore();};
+$('tool-clear').onclick=()=>{if(confirm('Clear this canvas?'))paintBackground();};
+$('background').onchange=()=>{if(confirm('Changing the background will clear the current canvas. Continue?'))paintBackground();};
+function png(){return new Promise(resolve=>canvas.toBlob(resolve,'image/png'));}
+function getGallery(){try{return JSON.parse(localStorage.getItem(KEY)||'[]');}catch{return[];}}
+function setGallery(items){try{localStorage.setItem(KEY,JSON.stringify(items));return true;}catch{return false;}}
+async function save(){const blob=await png();if(!blob){toast('Could not save this artwork.');return;}const reader=new FileReader();reader.onload=()=>{const items=getGallery(),entry={id:Date.now().toString(36)+Math.random().toString(36).slice(2,7),title:$('title').value.trim()||'Untitled artwork',image:reader.result,created:new Date().toISOString()};items.unshift(entry);if(!setGallery(items.slice(0,24))){toast('Device storage is full. Export this PNG instead.');return;}renderGallery();toast('Saved to your gallery on this device.');};reader.readAsDataURL(blob);}
+function download(data,title){const a=document.createElement('a');a.href=data;a.download=(title||'adventure-artwork').replace(/[^a-z0-9-_]+/gi,'-').slice(0,55)+'.png';document.body.appendChild(a);a.click();a.remove();}
+$('save-art').onclick=save;
+$('download-art').onclick=async()=>{const blob=await png();if(!blob)return;const url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=( $('title').value.trim()||'adventure-artwork').replace(/[^a-z0-9-_]+/gi,'-')+'.png';a.click();setTimeout(()=>URL.revokeObjectURL(url),1200);toast('PNG export started.');};
+$('reset-art').onclick=()=>{if(confirm('Start a new artwork? Unsaved changes will be cleared.')){paintBackground();$('title').value='';}};
+function renderGallery(){const host=$('gallery'),items=getGallery();if(!items.length){host.innerHTML='<div class="empty">Your gallery is ready. Create your first artwork above.</div>';return;}host.innerHTML=items.map(item=>'<article class="art-card"><img loading="lazy" alt="Saved artwork: '+escapeHtml(item.title)+'" src="'+item.image+'"><div><strong>'+escapeHtml(item.title)+'</strong><small style="color:var(--muted)">'+new Date(item.created).toLocaleDateString()+'</small><br><button type="button" data-download="'+item.id+'">Export</button><button type="button" data-delete="'+item.id+'">Delete</button></div></article>').join('');}
+function escapeHtml(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+$('gallery').addEventListener('click',e=>{const d=e.target.closest('[data-download]'),x=e.target.closest('[data-delete]');if(d){const item=getGallery().find(i=>i.id===d.dataset.download);if(item)download(item.image,item.title);}if(x){if(!confirm('Delete this saved artwork from this device?'))return;setGallery(getGallery().filter(i=>i.id!==x.dataset.delete));renderGallery();}});
+paintBackground();renderGallery();
+})();
+</script>
+</body></html>
