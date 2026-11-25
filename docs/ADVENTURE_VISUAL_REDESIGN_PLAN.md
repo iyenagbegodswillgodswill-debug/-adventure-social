@@ -1,6 +1,6 @@
 # Adventure Visual Redesign Plan
 
-Status: Planned — no production UI changes made by this document.
+Status: In progress — Phase 1 brand assets and scoped Home styling have been committed. Full-page visual and device testing remain outstanding.
 Approved direction: unique Adventure identity inspired by the supplied reference; deep black and charcoal foundation, warm gold primary identity, subtle red details.
 
 ## 1. Goals
