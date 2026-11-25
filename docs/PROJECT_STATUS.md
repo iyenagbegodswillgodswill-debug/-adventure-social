@@ -354,3 +354,11 @@ Roadmap: `docs/MAIN_APP_ROADMAP.md`. Data model review: `docs/DATA_MODEL_AND_RLS
 - [x] Bumped the service-worker cache to `adventure-preview-v17` and added Settings plus shared theme assets to the app shell.
 - [ ] Verify all page layouts, contrast, settings persistence, heart-button Shorts flow and deployment on real iOS/Android browsers.
 - [ ] Settings appearance is browser-local; privacy/account security and device push controls are not represented as functional toggles until backend support exists.
+
+
+## Visual redesign — approved direction and plan
+- [x] Approved visual direction: unique Adventure design inspired by the supplied reference, with a deep black/charcoal foundation, warm gold platform identity, and subtle red details.
+- [x] Preserved requirement: retain the existing six personal accent choices as optional customisation; gold is the platform identity, not a forced replacement for personal accents.
+- [x] Added `docs/ADVENTURE_VISUAL_REDESIGN_PLAN.md` with page-by-page scope, phased rollout, functionality safeguards, and testing gates.
+- [ ] No production visual redesign has been applied yet. Next step is a page-by-page baseline audit and then small, testable UI-only batches.
+- [ ] Keep backend, authentication, RLS, database, routes, event handlers, media flows, and owner permissions unchanged during the visual pass.
