@@ -452,7 +452,51 @@ Roadmap: `docs/MAIN_APP_ROADMAP.md`. Data model review: `docs/DATA_MODEL_AND_RLS
 - [x] Rechecked the latest iPhone readability CSS and confirmed the mobile overrides are scoped to the narrow-screen breakpoint and presentation only.
 - [x] Rechecked the PWA service worker: cache key is `adventure-preview-v27`; the app shell includes the shared theme stylesheet and the current member/owner entry pages.
 - [x] Confirmed the repository documentation still keeps public registration closed and identifies legal/privacy, multi-account browser testing, real-device testing and deployment verification as release gates.
-- [x] Added `docs/RELEASE_READINESS_CHECKLIST.md` to turn the outstanding release gates into a repeatable, evidence-based test plan.
+- [x] Expanded this status record with a repeatable, evidence-based release test plan.
 - [ ] Deployment of the latest readability commit `fe16c9608ef44a86dd17ad8e8ec3d6c6172e756c` is not yet independently confirmed by the available GitHub status interface. Do not mark it live until a Pages/Actions run for that exact commit succeeds and the live site is checked.
 - [ ] Real iPhone visual/interaction QA remains outstanding; CSS source inspection is not proof of on-device readability.
 - [ ] No backend schema, RLS policy, authentication, owner permissions, payment, paid service or public registration setting was changed during this audit.
+
+
+### Release verification plan
+
+Only mark a test complete after it has been run and its result recorded. Source inspection is not a browser test.
+
+**Deployment and build integrity**
+- [ ] Confirm the GitHub Pages deployment source and production branch.
+- [ ] Confirm a successful Pages/Actions deployment for the current default-branch commit.
+- [ ] Confirm the deployed artifact contains the app entry page and required CSS, JavaScript, manifests and assets at expected paths.
+- [ ] Open the deployed site in a fresh private browser session and check missing assets, console errors and failed network requests.
+- [ ] Verify the deployed commit is at least `fe16c9608ef44a86dd17ad8e8ec3d6c6172e756c` before treating the iPhone readability refinement as live.
+- [ ] Verify the current service worker activates and stale CSS is not retained.
+
+**Responsive and accessibility QA**
+- [ ] Test Home, Feed, Account, Settings, Messages, Calls, Music Studio, Photo Studio, Marketplace, News, Notifications, Support and Owner Console at narrow phone, larger phone, tablet and desktop widths.
+- [ ] Confirm no unintended horizontal overflow, clipped dialogs or hidden controls.
+- [ ] Confirm bottom navigation and More menu clear the iPhone safe area and remain tappable.
+- [ ] Check form labels, keyboard visibility, focus indicators, text enlargement, reduced motion and contrast.
+- [ ] Record device, browser, commit, tested page and pass/fail evidence for each test.
+
+**Authorization and moderation matrix**
+- [ ] Test anonymous, ordinary-member and single-owner sessions separately.
+- [ ] Verify public registration remains closed until explicit owner approval.
+- [ ] Verify private profiles, followers-only posts, follows, blocks and post visibility across separate accounts.
+- [ ] Verify members cannot read another member's private messages, reports, appeals or owner case notes.
+- [ ] Verify restrictions/suspensions prevent prohibited actions and hide content as designed.
+- [ ] Verify report snapshots, owner hide/restore reasons, audit records and appeal decisions are protected by database authorization.
+- [ ] Verify only the authorized owner account can perform owner operations.
+
+**Privacy, legal and data lifecycle**
+- [ ] Complete Terms and Privacy details, operator/contact information and applicable jurisdiction review.
+- [ ] Define retention for profiles, posts, messages, reports, appeals, logs and backups.
+- [ ] Implement and test account deletion and applicable data export/erasure workflows.
+- [ ] Add policy versioning and acceptance gates before public registration.
+- [ ] Verify privileged keys remain server-side and review Auth abuse/leaked-password protections.
+
+**Media and paid integrations**
+- [ ] Before enabling uploads, enforce file type, size, ownership, access, moderation, retention and deletion rules.
+- [ ] Before video, estimate storage, processing, bandwidth and moderation costs.
+- [ ] Before AI, push, TURN or other paid providers, document provider, privacy impact and expected cost and obtain owner approval.
+- [ ] Do not add recurring costs or enable public registration without explicit owner approval.
+
+**Release decision:** Keep registration closed and Adventure labelled as a preview until critical deployment, security, privacy, legal and core interaction gates are complete and the owner explicitly approves release.
