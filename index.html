@@ -40,10 +40,50 @@ footer{border-top:1px solid var(--line);padding:17px;text-align:center;color:var
 body{padding-bottom:calc(88px + env(safe-area-inset-bottom))!important}
 @media(min-width:900px){.adventure-nav{border:1px solid #e7e7e7!important;border-bottom:0!important;border-radius:18px 18px 0 0!important;width:min(720px,92vw)!important}.adventure-nav .nav-item .nav-label{font-size:11px!important}}
 @media(prefers-reduced-motion:reduce){.adventure-nav .nav-item{transition:none!important}}
+
+/* Instagram-inspired feed and centered creation action */
+.adventure-nav{min-height:70px!important;justify-content:space-around!important;gap:6px!important;padding:7px max(14px,env(safe-area-inset-right)) calc(7px + env(safe-area-inset-bottom)) max(14px,env(safe-area-inset-left))!important;background:rgba(255,255,255,.97)!important;border-top:1px solid #e9edf0!important;backdrop-filter:blur(18px);box-shadow:0 -4px 20px rgba(16,40,63,.07)!important}
+.adventure-nav .nav-item{flex:1;max-width:78px;color:#626d78!important;background:transparent!important;border:0!important;border-radius:12px!important;gap:3px!important}
+.adventure-nav .nav-item .nav-icon{height:25px!important;display:grid;place-items:center;font-size:0!important}
+.adventure-nav .nav-icon svg{width:23px;height:23px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.adventure-nav .nav-item .nav-label{font-size:10px!important;font-weight:650!important}
+.adventure-nav .nav-item.active,.adventure-nav .nav-item[aria-current=page]{color:#142c45!important;background:transparent!important}
+.adventure-nav .nav-item.active .nav-icon svg{stroke-width:2.35}
+.adventure-nav .nav-create{width:48px;height:42px;flex:0 0 48px;border:0;border-radius:13px;background:linear-gradient(145deg,#17324d,#176c70);color:#fff;display:grid;place-items:center;box-shadow:0 4px 12px rgba(20,44,69,.2);cursor:pointer;transition:transform .16s ease,box-shadow .16s ease}
+.adventure-nav .nav-create:active{transform:scale(.94)}
+.adventure-nav .nav-create svg{width:27px;height:27px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round}
+.feed-topline{display:flex;align-items:baseline;justify-content:space-between;gap:12px;padding:2px 0 12px;border-bottom:1px solid var(--line);margin-bottom:12px}
+.feed-topline strong{font-size:18px;color:var(--dark)}
+.feed-topline span{font-size:11px;color:var(--muted)}
+#feed-list{width:min(100%,650px);margin:0 auto}
+#feed-screen .feed-filters{width:min(100%,650px);margin:12px auto;scrollbar-width:none}
+#feed-screen .feed-filters::-webkit-scrollbar{display:none}
+#feed-screen .post-card{border-radius:0;border-left:0;border-right:0;margin:0;padding:16px 0 18px}
+#feed-screen .post-card:first-child{border-top:0}
+#feed-screen .post-head{align-items:center}
+#feed-screen .post-author{display:flex;align-items:center;gap:9px;min-width:0}
+#feed-screen .post-author:before{content:"";width:38px;height:38px;flex:0 0 38px;border-radius:50%;background:linear-gradient(135deg,#e7f1f2,#d8e8e8);border:2px solid #fff;box-shadow:0 0 0 1px #d7e3e8}
+#feed-screen .post-author strong{font-size:13px}
+#feed-screen .post-author small{font-size:10px}
+#feed-screen .post-body{font-size:14px;line-height:1.55;margin:11px 0}
+#feed-screen .post-card video,#feed-screen .post-card img{display:block;width:100%;max-height:680px!important;object-fit:cover!important;border-radius:4px!important;margin:8px 0!important;background:#101820}
+#feed-screen .post-actions{border:0;padding-top:8px}
+#feed-screen .comments{border:0;padding-top:4px}
+#feed-screen .composer{width:min(100%,650px);margin:12px auto}
+body{padding-bottom:calc(96px + env(safe-area-inset-bottom))!important}
+@media(min-width:900px){.adventure-nav{width:min(650px,92vw)!important;left:50%!important;right:auto!important;transform:translateX(-50%);border:1px solid #e9edf0!important;border-bottom:0!important;border-radius:18px 18px 0 0!important}.adventure-nav .nav-create{width:50px;flex-basis:50px}}
+@media(max-width:480px){main{padding-left:14px!important;padding-right:14px!important}.feed-topline span{font-size:10px}.adventure-nav .nav-item .nav-label{font-size:9px!important}}
+@media(prefers-reduced-motion:reduce){.adventure-nav .nav-create{transition:none}}
 </style></head>
 <body><a class="skip-link" href="#main">Skip to content</a><div class="app">
 <header><div class="top"><div><div class="brand">adventure<span>.</span></div><div class="tag">Your world. Your adventure.</div></div><div class="actions"><button class="icon" aria-label="Search" onclick="document.querySelector('#search').focus()">⌕</button><a class="icon" href="./account.html" aria-label="Member sign in" title="Member sign in" style="display:grid;place-items:center;text-decoration:none">♙</a><button class="icon" id="install-app" aria-label="Install Adventure" title="Install Adventure">↓</button><a class="icon" href="./notifications.html" aria-label="Notifications" title="Notifications" style="display:grid;place-items:center;text-decoration:none">♧</a></div></div>
-<nav class="adventure-nav" aria-label="Adventure navigation"><button class="nav-item active" type="button" data-page="directory" aria-label="Home" aria-current="page"><span class="nav-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m3 10 9-7 9 7v10a1 1 0 0 1-1 1h-5v-7H9v7H4a1 1 0 0 1-1-1z"/></svg></span><span class="nav-label">Home</span></button><button class="nav-item" type="button" data-page="feed" aria-label="Feed"><span class="nav-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M7 8h5v5H7zM15 8h3M15 11h3M7 16h11"/></svg></span><span class="nav-label">Feed</span></button><a class="nav-item" href="./discover.html" aria-label="Explore" ><span class="nav-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m15.8 8.2-2.4 5.2-5.2 2.4 2.4-5.2z"/></svg></span><span class="nav-label">Explore</span></a><a class="nav-item" href="./music.html" aria-label="Music" ><span class="nav-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg></span><span class="nav-label">Music</span></a><a class="nav-item" href="./messages.html" aria-label="Messages" ><span class="nav-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 11.5a7.5 7.5 0 0 1-8 7.5 8 8 0 0 1-3.5-.8L4 20l1.2-3.7A7.3 7.3 0 0 1 4 12c0-4.2 3.6-7.5 8-7.5s8 2.8 8 7z"/></svg></span><span class="nav-label">Messages</span></a><details><summary class="nav-item" aria-label="More pages"><span class="nav-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg></span><span class="nav-label">More</span></summary><div class="more-grid"><a href="./news.html" aria-label="News"><span class="nav-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></svg></span><span>News</span></a><a href="./marketplace.html" aria-label="Market"><span class="nav-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8h16l-1 13H5zM9 8a3 3 0 0 1 6 0"/></svg></span><span>Market</span></a><a href="./studio.html" aria-label="Studio"><span class="nav-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="3" width="6" height="12" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3M9 21h6"/></svg></span><span>Studio</span></a><a href="./notifications.html" aria-label="Alerts"><span class="nav-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 9a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9M10 21h4"/></svg></span><span>Alerts</span></a><a href="./support.html" aria-label="Help"><span class="nav-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3"/><path d="m5.6 5.6 4.3 4.3m4.2 4.2 4.3 4.3m0-12.8-4.3 4.3m-4.2 4.2-4.3 4.3"/></svg></span><span>Help</span></a><a href="./account.html" aria-label="Account"><span class="nav-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg></span><span>Account</span></a></div></details></nav></header>
+<nav class="adventure-nav" aria-label="Adventure navigation">
+<button class="nav-item active" type="button" data-page="feed" aria-label="Home feed" aria-current="page"><span class="nav-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m3 10 9-7 9 7v10a1 1 0 0 1-1 1h-5v-7H9v7H4a1 1 0 0 1-1-1z"/></svg></span><span class="nav-label">Home</span></button>
+<a class="nav-item" href="./discover.html" aria-label="Explore"><span class="nav-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m15.8 8.2-2.4 5.2-5.2 2.4 2.4-5.2z"/></svg></span><span class="nav-label">Explore</span></a>
+<button class="nav-create" type="button" id="nav-create-short" aria-label="Create a Short"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
+<a class="nav-item" href="./messages.html" aria-label="Messages"><span class="nav-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 11.5a7.5 7.5 0 0 1-8 7.5 8 8 0 0 1-3.5-.8L4 20l1.2-3.7A7.3 7.3 0 0 1 4 12c0-4.2 3.6-7.5 8-7.5s8 2.8 8 7z"/></svg></span><span class="nav-label">Messages</span></a>
+<a class="nav-item" href="./account.html" aria-label="Profile"><span class="nav-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg></span><span class="nav-label">Profile</span></a>
+</nav></header>
 <main id="main"><div id="directory-screen"><section class="intro"><div><div class="eyebrow">Find your people</div><h1>Meet the Adventurers</h1><p>Discover people, stories and fresh perspectives across Africa.</p></div><input id="search" class="search" type="search" placeholder="Search names or interests…" aria-label="Search adventurers"></section>
 <section class="hero"><span class="badge">WELCOME TO ADVENTURE</span><h2>Every connection starts somewhere.</h2><p>Meet people who share your interests, explore new communities and discover the many stories that make our world.</p><a class="hero-cta" href="#discover">Explore Adventurers</a></section>
 <section class="preview-note" role="note"><strong>Early preview</strong> — These are sample profiles, not real members. Follow choices are saved only in this browser; no account or personal information is collected.</section>
@@ -51,7 +91,7 @@ body{padding-bottom:calc(88px + env(safe-area-inset-bottom))!important}
 <section id="discover"><div class="heading"><h2>Discover people</h2><small id="count">Suggested profiles</small></div><div class="filters"><button class="chip active" data-filter="all" aria-pressed="true">For you</button><button class="chip" data-filter="culture" aria-pressed="false">Culture</button><button class="chip" data-filter="travel" aria-pressed="false">Travel</button><button class="chip" data-filter="creativity" aria-pressed="false">Creativity</button><button class="chip" data-filter="community" aria-pressed="false">Community</button></div><div class="list" id="people"></div><div class="empty" id="empty">No profiles match that search yet.</div></section>
 </div>
 <section id="feed-screen" class="hidden">
- <div class="intro"><div><div class="eyebrow">Community conversations</div><h1>Your Adventure Feed</h1><p>Stories, thoughts and moments shared by Adventurers.</p></div></div>
+ <div class="feed-topline"><strong>For you</strong><span>Fresh posts from across Adventure</span></div>
  <div id="feed-guest" class="feed-note hidden">Sign in to see member posts, like and comment. <a href="./account.html" style="color:var(--green);font-weight:750">Sign in</a></div>
  <form id="feed-post-form" class="composer hidden">
   <strong>Share something with the community</strong>
@@ -185,7 +225,18 @@ function showPage(page){
  if(!directory)loadFeed();
 }
 document.querySelectorAll('nav [data-page]').forEach(b=>b.addEventListener('click',()=>showPage(b.dataset.page)));
-if(new URLSearchParams(location.search).get('view')==='feed')showPage('feed');
+showPage('feed');
+
+document.querySelector('#nav-create-short')?.addEventListener('click',async()=>{
+ const {data:{session}}=await supabase.auth.getSession();
+ if(!session?.user){showToast('Sign in to create and share a Short.');location.href='./account.html';return;}
+ showPage('feed');
+ const composer=document.querySelector('#feed-post-form');
+ composer.classList.remove('hidden');
+ composer.scrollIntoView({behavior:'smooth',block:'center'});
+ await openVideoStudio();
+});
+
 async function loadAnnouncements(){
  const {data,error}=await supabase.from('announcements').select('id,title,body,created_at').eq('status','published').order('created_at',{ascending:false}).limit(3);
  if(error||!data?.length)return;
