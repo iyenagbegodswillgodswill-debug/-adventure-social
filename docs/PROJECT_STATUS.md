@@ -1,6 +1,6 @@
 # Adventure — Project Status
 
-Last updated: 2026-11-24 (private voice messaging foundation)
+Last updated: 2026-11-25 (customer support centre foundation)
 
 ## Current milestone: Main app Phase 1 — text Feed + private messaging foundation
 
@@ -215,7 +215,25 @@ Roadmap: `docs/MAIN_APP_ROADMAP.md`. Data model review: `docs/DATA_MODEL_AND_RLS
 - [x] News items display in-feed with publisher and summary; a member can expand source details and deliberately choose the original report.
 - [x] Marketplace cards link to the in-app Marketplace; event cards link to Explore Africa.
 - [x] Feed pulls public content through existing RLS and the public news Edge Function; no new public write access or admin role added.
-- [x] Updated service worker cache to v7.
+- [x] Updated service worker cache to v8.
 - [ ] Photo and video post uploads/player are not yet implemented. Current social post schema and composer are text-only; build secure media storage, moderation-aware media visibility, upload limits and feed playback before advertising video support.
 - [ ] Add richer in-app article reading where publisher licensing permits; current feed shows headline/short RSS summary and source link.
 - [ ] Verify mixed feed against signed-in member accounts, mobile layouts, and live RSS provider responses after Pages deployment.
+
+
+## Customer Support Centre — 2026-11-25
+- [x] Added private support tickets and threaded member/support replies in Supabase with row-level security.
+- [x] Members can create and read only their own tickets; the designated owner can review all tickets and reply from the private owner dashboard.
+- [x] Added ticket categories, status tracking and timestamps; member conversations remain private.
+- [x] Added Adventure Support page, navigation link and PWA app-shell caching.
+- [x] Public registration remains closed; support ticket creation requires an authenticated, eligible member.
+- [ ] Test member-to-owner ticket lifecycle with two real accounts, including closed-ticket behavior and unauthorized cross-member access.
+- [ ] Add response-time targets, support macros, knowledge-base search and operational escalation after initial testing.
+- [ ] Do not promise 24/7 support or guaranteed response times until staffing is established.
+
+## Next product build stages
+- [ ] Secure photo/video uploads and in-feed playback, including moderation-aware access and private staging.
+- [ ] Short-video recording studio with camera capture, editing, accessible captions, safe filter processing and draft publishing.
+- [ ] Creator Hub, community membership and moderation, event RSVP, seller management and product detail/contact flows.
+- [ ] Verify news feed reliability and improve country coverage with attributed sources.
+- [ ] Full owner/member/mobile browser QA and release checklist before public launch.
