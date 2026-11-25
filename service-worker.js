@@ -1,4 +1,4 @@
-const CACHE_NAME = "adventure-preview-v8";
+const CACHE_NAME = "adventure-preview-v9";
 const APP_SHELL = [
   "./",
   "./index.html",
@@ -8,6 +8,7 @@ const APP_SHELL = [
   "./marketplace.html",
   "./discover.html",
   "./notifications.html",
+  "./support.html",
   "./policies.html",
   "./manifest.webmanifest",
   "./assets/adventure-icon.svg"
