@@ -431,3 +431,11 @@ Roadmap: `docs/MAIN_APP_ROADMAP.md`. Data model review: `docs/DATA_MODEL_AND_RLS
 - [x] Updated the shared service-worker app shell to cache the owner entry page, admin manifest and admin icon; cache version v25.
 - [x] Preserved the existing owner-only Supabase authentication and backend authorization; the admin manifest and hidden URL do not grant access.
 - [ ] Verify installation on iOS Safari and Android Chrome, plus authenticated owner login on an installed standalone launch.
+
+
+## Adventure mobile comfort and navigation pass — 2026-11-25
+- [x] Increased mobile typography, page breathing room, card padding and form/control touch targets across shared member surfaces.
+- [x] Improved bottom navigation height, icon sizing, label readability and safe-area spacing; More menu tiles are easier to tap.
+- [x] Added wider desktop content bounds and spacing without changing routes, IDs, authentication, handlers, Supabase calls or permissions.
+- [x] Refreshed the PWA app-shell cache to v26.
+- [ ] Verify on real iPhone and Android screen sizes, including bottom navigation, More menu, forms, camera and media pages. CSS/source checks do not replace real-device QA.
