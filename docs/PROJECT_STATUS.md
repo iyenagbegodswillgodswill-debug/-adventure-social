@@ -1,6 +1,6 @@
 # Adventure — Project Status
 
-Last updated: 2026-11-25 (customer support centre foundation)
+Last updated: 2026-11-25 (Music Hub foundation)
 
 ## Current milestone: Main app Phase 1 — text Feed + private messaging foundation
 
@@ -261,3 +261,16 @@ Roadmap: `docs/MAIN_APP_ROADMAP.md`. Data model review: `docs/DATA_MODEL_AND_RLS
 - [ ] This is a starter production workspace, not yet a full commercial DAW: advanced pitch correction/Auto-Tune, MIDI instruments, piano roll, detailed timeline editing, vocal comping, professional mastering, collaboration and cloud storage remain future stages.
 - [ ] Add artist profiles, rights/permission records, owner-reviewed release submissions and an in-app Music discovery catalogue before public releases.
 - [ ] Keep all studio work private by default; public registration stays closed; no paid services, audio APIs or AI provider have been enabled.
+
+
+## Adventure Music Hub — rights-aware African release discovery
+- [x] Added `music_releases` with artist/release metadata, genre, country, release date, rights statement, rights-confirmation gate and pending/approved/rejected/removed moderation states.
+- [x] Enabled RLS: only approved releases are public; submitters can see their own submissions; owner can review; submissions require an eligible signed-in member and explicit rights confirmation.
+- [x] Added Music Hub page with search, genre/country filters, release cards and official external listening/music-video destinations.
+- [x] Kept music audio on artist/rightsholder-authorised destinations; Adventure does not scrape, copy or host commercial songs in this phase.
+- [x] Added owner review queue for pending Music Hub submissions.
+- [x] Preserved the existing browser-based creator workspace as `studio.html`; `music.html` is now the discovery hub.
+- [x] Added both pages to main navigation and PWA cache v12.
+- [ ] Verify anonymous public browsing, member submission, owner approval/rejection and official link safety with real sessions.
+- [ ] Add licensed/artist-authorised audio previews, artist profiles, charts, Music Shorts integration and release notifications after rights and storage workflows are designed.
+- [ ] Keep public registration closed; no paid audio service, streaming provider or AI provider was enabled.
