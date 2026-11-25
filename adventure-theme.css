@@ -56,3 +56,50 @@ hr{border-color:var(--adv-line)!important}
 .post-actions button.liked{color:var(--adv-gold-bright)!important;border-color:var(--adv-gold)!important}
 .toast{background:#242016!important;border:1px solid #594522!important;color:#fff!important}
 @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
+
+
+/* Adventure Home — premium black, gold and restrained crimson identity.
+   Scoped to the member discovery/home page; does not alter page logic. */
+body:has(#directory-screen) .app{max-width:1180px;background:var(--adv-bg)!important}
+body:has(#directory-screen) header{padding:20px 26px 0!important;background:linear-gradient(180deg,#111114,#0b0b0e)!important;border-bottom:1px solid #30271a!important}
+body:has(#directory-screen) .top{min-height:58px}
+body:has(#directory-screen) .brand{font-size:29px!important;letter-spacing:-.8px!important;color:#f7f1e4!important}
+body:has(#directory-screen) .brand span{color:var(--adv-gold-bright)!important}
+body:has(#directory-screen) .tag{color:#aaa39a!important;font-size:12px;letter-spacing:.25px}
+body:has(#directory-screen) .icon{border:1px solid #403725!important;background:#191714!important;color:var(--adv-gold-bright)!important}
+body:has(#directory-screen) .icon:hover{border-color:var(--adv-gold)!important;background:#242016!important}
+body:has(#directory-screen) main{padding:30px 26px 46px!important}
+body:has(#directory-screen) .intro{align-items:center!important}
+body:has(#directory-screen) .eyebrow{color:var(--adv-gold-bright)!important;letter-spacing:1.5px}
+body:has(#directory-screen) .intro h1{color:#faf7ef!important;font-size:clamp(30px,5vw,44px)!important;letter-spacing:-1.6px!important}
+body:has(#directory-screen) .intro p{color:#aaa8a1!important}
+body:has(#directory-screen) .search{background:#151519!important;border:1px solid #37343a!important;color:#f7f5ef!important;border-radius:14px!important}
+body:has(#directory-screen) .search::placeholder{color:#8f8b85}
+body:has(#directory-screen) .hero{position:relative;overflow:hidden;margin:26px 0 25px!important;padding:clamp(24px,4vw,42px)!important;border:1px solid #574321!important;border-radius:23px!important;background:radial-gradient(ellipse at 85% 15%,#49351a 0,transparent 40%),linear-gradient(118deg,#191715 0%,#211c14 58%,#171216 100%)!important;box-shadow:0 18px 50px #0005}
+body:has(#directory-screen) .hero:after{content:"";position:absolute;right:-44px;bottom:-130px;width:310px;height:310px;border:1px solid #d9ad5230;border-radius:50%;box-shadow:0 0 0 24px #d9ad5208,0 0 0 50px #d9ad5206;pointer-events:none}
+body:has(#directory-screen) .hero .badge{background:#d9ad52!important;color:#17130b!important;letter-spacing:.7px;padding:7px 11px}
+body:has(#directory-screen) .hero h2{font-size:clamp(23px,3vw,32px)!important;letter-spacing:-.6px;color:#fffaf0!important;max-width:620px}
+body:has(#directory-screen) .hero p{color:#c2bbb0!important;max-width:580px}
+body:has(#directory-screen) .hero-cta{position:relative;z-index:1;background:linear-gradient(135deg,#f0cc7b,#d9ad52)!important;color:#17130b!important;border-radius:11px!important;padding:11px 16px!important;box-shadow:0 5px 18px #0005}
+body:has(#directory-screen) .preview-note{background:#151519!important;border:1px solid #37343a!important;color:#aaa8a1!important;border-radius:13px!important}
+body:has(#directory-screen) .preview-note strong{color:var(--adv-gold-bright)!important}
+body:has(#directory-screen) .heading h2{color:#f7f5ef!important;font-size:20px!important}
+body:has(#directory-screen) .heading small{color:#a6a19a!important}
+body:has(#directory-screen) .person{background:linear-gradient(155deg,#1a1a1f,#131316)!important;border:1px solid #343138!important;border-radius:17px!important;box-shadow:0 8px 24px #0002;transition:transform .18s ease,border-color .18s ease,box-shadow .18s ease}
+body:has(#directory-screen) .person:hover{transform:translateY(-2px);border-color:#80632f!important;box-shadow:0 12px 28px #0004}
+body:has(#directory-screen) .person strong{color:#f7f5ef!important}
+body:has(#directory-screen) .person p{color:#b6b1a8!important}
+body:has(#directory-screen) .handle{color:#99938b!important}
+body:has(#directory-screen) .avatar{background:#302719!important;color:#f0cc7b!important;border:1px solid #594523}
+body:has(#directory-screen) .follow{background:linear-gradient(135deg,#f0cc7b,#d9ad52)!important;color:#17130b!important;border:0!important;border-radius:10px!important}
+body:has(#directory-screen) .follow.following{background:#242329!important;color:#e5d5ad!important;border:1px solid #5c4a2c!important}
+body:has(#directory-screen) .filters .chip{background:#17171b!important;border:1px solid #37343a!important;color:#bdb8ae!important}
+body:has(#directory-screen) .filters .chip.active{background:#2a2418!important;border-color:#94733b!important;color:#f0cc7b!important}
+body:has(#directory-screen) .profile-actions button{background:#222126!important;border-color:#403b42!important;color:#e9d9b5!important}
+body:has(#directory-screen) footer{background:#0c0c0f!important;border-color:#30271a!important;color:#918c83!important}
+body:has(#directory-screen) .adventure-nav{background:rgba(12,12,15,.97)!important;border-color:#30271a!important}
+body:has(#directory-screen) .adventure-nav .nav-item{color:#aaa59b!important}
+body:has(#directory-screen) .adventure-nav .nav-item[aria-current=page],body:has(#directory-screen) .adventure-nav .nav-item.active{color:#f0cc7b!important}
+body:has(#directory-screen) .adventure-nav .nav-create{background:linear-gradient(135deg,#f0cc7b,#d9ad52)!important;color:#17130b!important}
+@media(max-width:650px){body:has(#directory-screen) header{padding:15px 16px 0!important}body:has(#directory-screen) main{padding:22px 16px 38px!important}body:has(#directory-screen) .brand{font-size:25px!important}body:has(#directory-screen) .hero{padding:24px 20px!important;border-radius:19px!important}}
+@media(prefers-reduced-motion:reduce){body:has(#directory-screen) .person{transition:none!important}}
