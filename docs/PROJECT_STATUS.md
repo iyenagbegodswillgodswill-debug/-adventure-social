@@ -500,3 +500,13 @@ Only mark a test complete after it has been run and its result recorded. Source 
 - [ ] Do not add recurring costs or enable public registration without explicit owner approval.
 
 **Release decision:** Keep registration closed and Adventure labelled as a preview until critical deployment, security, privacy, legal and core interaction gates are complete and the owner explicitly approves release.
+
+
+## Phone readability pass v2 — 2026-11-25
+- [x] Increased body and heading typography, paragraph/meta readability, form labels and control sizing across narrow-screen member and owner surfaces.
+- [x] Increased card spacing, filter/button touch targets, bottom navigation height/icon/label sizing and safe-area clearance.
+- [x] Improved narrow-screen grids and modal scrolling while preserving desktop styling.
+- [x] Presentation-only CSS change; no routes, markup IDs, handlers, authentication, Supabase calls, permissions or backend schema changed.
+- [x] Refreshed service-worker cache to v28 so installed clients can request the updated shared stylesheet.
+- [ ] Confirm Pages deployment for the latest commit and visually verify on the owner's actual iPhone; source checks cannot guarantee device rendering.
+- [ ] Run the existing release verification plan before treating Adventure as production-ready. Registration remains closed.
