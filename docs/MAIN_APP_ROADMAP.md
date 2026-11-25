@@ -87,3 +87,14 @@ The Feed is text-only. Private voice messaging and one-to-one audio/video callin
 - [ ] Add multilingual interface and translation only with explicit privacy and cost review.
 - [ ] Add country-specific currency formatting and location filters; no precise location collection without consent.
 - [ ] Add transactional payments, escrow, buyer protection and delivery partners only after legal, refund, fraud and provider-cost review.
+
+
+## Music, creator tools and live roadmap — 2026-11-25
+- [x] Create a rights-aware Music Hub foundation for owner-reviewed release metadata and official artist/rightsholder links.
+- [x] Separate Music discovery (`music.html`) from the private browser creator workspace (`studio.html`).
+- [ ] Expand artist profiles, country/genre charts, licensed previews, release follows and notifications.
+- [ ] Add Music Shorts with artist/creator permissions and moderation-aware media handling.
+- [ ] Expand Studio in tested stages: timeline editing, multitrack recording, MIDI/piano roll, licensed loops, vocal effects, pitch tools and private cloud project backup.
+- [ ] Build Explore as a unified discovery surface across creators, music, Shorts, culture, communities, events, businesses and marketplace listings.
+- [ ] Build real Live broadcasting only after selecting a reliable, cost-controlled WebRTC/SFU architecture, moderation controls and privacy design. Do not enable a paid streaming provider without explicit owner approval.
+- [ ] Keep artist submissions private until owner approval; require proof/confirmation of rights and never scrape or redistribute copyrighted music.
