@@ -214,7 +214,7 @@ async function loadFeed(){
  const {data,error}=await supabase.from('posts').select('id,author_id,body,visibility,status,moderation_status,moderation_reason,likes_count,comments_count,created_at,media_type,media_path,media_mime,media_size_bytes,duration_seconds').eq('status','published').order('created_at',{ascending:false}).limit(40);
  if(error){host.innerHTML='<div class="feed-note">The Feed could not load: '+escapeHtml(error.message)+'</div>';return;}
  feedPosts=data||[];
- const mediaRows=feedPosts.filter(p=>p.media_path);if(mediaRows.length){const signed=await supabase.storage.from('adventure-post-media').createSignedUrls(mediaRows.map(p=>p.media_path),600);const urlMap=new Map((signed.data||[]).map(x=>[x.path,x.signedUrl]));feedPosts=feedPosts.map(p=>({...p,media_url:urlMap.get(p.media_path)||null}));}
+ const mediaRows=feedPosts.filter(p=>p.media_path);if(mediaRows.length){const signed=await supabase.storage.from('adventure-post-media').createSignedUrls(mediaRows.map(p=>p.media_path),300);const urlMap=new Map((signed.data||[]).map(x=>[x.path,x.signedUrl]));feedPosts=feedPosts.map(p=>({...p,media_url:urlMap.get(p.media_path)||null}));}
  if(!feedPosts.length){feedProfiles={};feedComments=[];feedLiked.clear();await loadFeedExtras();renderFeed();return;}
  const ids=feedPosts.map(p=>p.id),userIds=[...new Set(feedPosts.map(p=>p.author_id))];
  const [commentsResult,likesResult,profilesResult]=await Promise.all([
@@ -248,7 +248,7 @@ document.querySelector('#feed-list').addEventListener('click',async e=>{
   if(result.error)showToast('Like could not be saved.');else await loadFeed();return;
  }
  const del=e.target.closest('[data-delete-post]');
- if(del){if(!confirm('Delete your post? This also removes its comments and likes.'))return;const {error}=await supabase.from('posts').delete().eq('id',del.dataset.deletePost);if(error)showToast('Post could not be deleted.');else{await loadFeed();showToast('Post deleted.');}return;}
+ if(del){if(!confirm('Delete your post? This also removes its comments and likes.'))return;const target=feedPosts.find(p=>p.id===del.dataset.deletePost);if(target?.media_path){const {error:mediaError}=await supabase.storage.from('adventure-post-media').remove([target.media_path]);if(mediaError){showToast('Media could not be removed, so the post was kept: '+mediaError.message);return;}}const {error}=await supabase.from('posts').delete().eq('id',del.dataset.deletePost);if(error)showToast('Post could not be deleted.');else{await loadFeed();showToast('Post deleted.');}return;}
  const focus=e.target.closest('[data-focus-comment]');
  if(focus){document.querySelector('[data-comment-post="'+CSS.escape(focus.dataset.focusComment)+'"] input')?.focus();}
 });
