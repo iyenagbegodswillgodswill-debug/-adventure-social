@@ -374,3 +374,10 @@ Roadmap: `docs/MAIN_APP_ROADMAP.md`. Data model review: `docs/DATA_MODEL_AND_RLS
 - [x] Incremented the service-worker cache to `adventure-preview-v19` so the updated icon and stylesheet can refresh.
 - [ ] Run the repository's automated script checks and inspect the deployed Home screen on desktop/mobile. No real-device visual or interaction test has been completed in this change.
 - [ ] Continue the redesign page by page only after reviewing the Home result; preserve all existing functionality and personal accent settings.
+
+
+## Adventure premium visual rollout — next pages
+- [x] Extended the shared black/charcoal, warm-gold and subtle-crimson design to Explore and member Account surfaces using scoped CSS only.
+- [x] Preserved existing page markup, controls, form names, event handlers and backend calls in this styling pass.
+- [x] Incremented the service-worker cache to `adventure-preview-v20` to refresh the shared stylesheet.
+- [ ] Inspect Home, Explore and Account visually on desktop and mobile; automated script checks do not replace browser/device interaction tests.
