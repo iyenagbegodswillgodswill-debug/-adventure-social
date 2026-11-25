@@ -207,3 +207,15 @@ Roadmap: `docs/MAIN_APP_ROADMAP.md`. Data model review: `docs/DATA_MODEL_AND_RLS
 - [x] Updated service worker cache to v6.
 - [ ] Verify live feed response and real mobile/desktop browsing after Pages deployment; external RSS providers may occasionally be unavailable or change feed formats.
 - [ ] Expand country-specific reporting and editorial review as the news section grows. Do not republish full copyrighted articles or imply publisher endorsement.
+
+
+## Unified Adventure Feed — 2026-11-25
+- [x] Expanded the main member Feed to mix community posts with publisher-attributed African news, active Marketplace listings and published events in one chronological scroll.
+- [x] Added Feed type filters: Everything, People, News, Marketplace and Events; existing Latest, Following and My posts controls remain.
+- [x] News items display in-feed with publisher and summary; a member can expand source details and deliberately choose the original report.
+- [x] Marketplace cards link to the in-app Marketplace; event cards link to Explore Africa.
+- [x] Feed pulls public content through existing RLS and the public news Edge Function; no new public write access or admin role added.
+- [x] Updated service worker cache to v7.
+- [ ] Photo and video post uploads/player are not yet implemented. Current social post schema and composer are text-only; build secure media storage, moderation-aware media visibility, upload limits and feed playback before advertising video support.
+- [ ] Add richer in-app article reading where publisher licensing permits; current feed shows headline/short RSS summary and source link.
+- [ ] Verify mixed feed against signed-in member accounts, mobile layouts, and live RSS provider responses after Pages deployment.
