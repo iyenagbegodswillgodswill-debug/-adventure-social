@@ -446,3 +446,13 @@ Roadmap: `docs/MAIN_APP_ROADMAP.md`. Data model review: `docs/DATA_MODEL_AND_RLS
 - [x] Kept this change presentation-only; routes, controls, handlers, authentication and backend behavior are unchanged.
 - [x] Bumped the service-worker app-shell cache to v27 so installed clients can request the refreshed stylesheet.
 - [ ] Confirm the result on the user's iPhone after the latest GitHub Pages deployment; screenshot-based CSS review is not a substitute for device verification.
+
+
+## Release hardening audit — 2026-11-25
+- [x] Rechecked the latest iPhone readability CSS and confirmed the mobile overrides are scoped to the narrow-screen breakpoint and presentation only.
+- [x] Rechecked the PWA service worker: cache key is `adventure-preview-v27`; the app shell includes the shared theme stylesheet and the current member/owner entry pages.
+- [x] Confirmed the repository documentation still keeps public registration closed and identifies legal/privacy, multi-account browser testing, real-device testing and deployment verification as release gates.
+- [x] Added `docs/RELEASE_READINESS_CHECKLIST.md` to turn the outstanding release gates into a repeatable, evidence-based test plan.
+- [ ] Deployment of the latest readability commit `fe16c9608ef44a86dd17ad8e8ec3d6c6172e756c` is not yet independently confirmed by the available GitHub status interface. Do not mark it live until a Pages/Actions run for that exact commit succeeds and the live site is checked.
+- [ ] Real iPhone visual/interaction QA remains outstanding; CSS source inspection is not proof of on-device readability.
+- [ ] No backend schema, RLS policy, authentication, owner permissions, payment, paid service or public registration setting was changed during this audit.
