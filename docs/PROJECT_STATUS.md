@@ -527,3 +527,13 @@ Only mark a test complete after it has been run and its result recorded. Source 
 - [x] Planning only: no game code, game backend, paid service, social-app integration or public game launch was started.
 - [ ] Owner decision required on first flagship, football direction, target devices/audience and any spending limit.
 - [ ] Complete competitor research and validate a distinctive gameplay hook before selecting a game to prototype.
+
+
+## Adventure Art House — first creative studio release (2026-11-25)
+- [x] Added `art-house.html` as a mobile-friendly creative studio for drawing, erasing, adding text, choosing colours/backgrounds, saving a local gallery and exporting PNG artwork.
+- [x] Added an Art House entry to the main Adventure bottom navigation.
+- [x] Added Art House to the PWA app shell and bumped the cache key to `adventure-preview-v29`.
+- [x] Connected the first artist discovery pathways to existing Adventure Discover, Messages, Feed and Music Studio pages; no duplicate account or messaging system was created.
+- [x] Gallery data stays in the member's browser local storage; no new uploads, database tables, paid services or external AI calls were introduced.
+- [ ] Verify live Pages deployment and test drawing, text, gallery save/delete, PNG export and offline shell on iPhone and desktop.
+- [ ] Dedicated artist profiles/feed, secure artwork uploads, collaboration tools and artwork sales are future phases. Do not enable uploads or sales until moderation, copyright/rights, privacy, storage and payment protections are designed and tested.
