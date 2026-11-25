@@ -38,7 +38,7 @@ footer{border-top:1px solid var(--line);padding:17px;text-align:center;color:var
   <textarea id="feed-post-body" maxlength="2000" placeholder="What's on your mind? Keep it respectful and safe…" required></textarea>
   <div class="row" style="justify-content:space-between;margin-top:9px"><select id="feed-post-visibility" aria-label="Who can see this post"><option value="public">All members · discoverable profile</option><option value="followers">Followers only</option></select><button class="follow" id="feed-post-submit" type="submit" style="width:auto">Share post</button></div>
  </form>
- <div class="feed-filters"><button class="active" data-feed-filter="all">Latest</button><button data-feed-filter="following">Following</button><button data-feed-filter="mine">My posts</button><button id="feed-refresh" type="button">↻ Refresh</button></div>
+ <div class="feed-filters"><button class="active" data-feed-filter="all">Latest</button><button data-feed-filter="following">Following</button><button data-feed-filter="mine">My posts</button><button data-feed-type="all" class="active">Everything</button><button data-feed-type="people">People</button><button data-feed-type="news">News</button><button data-feed-type="marketplace">Marketplace</button><button data-feed-type="events">Events</button><button id="feed-refresh" type="button">↻ Refresh</button></div>
  <div id="feed-message" class="feed-note hidden"></div>
  <div id="feed-list"><div class="feed-note">Loading the community feed…</div></div>
 </section>
@@ -53,7 +53,7 @@ const sampleProfiles=[
 {name:"Tunde A.",handle:"@tundeconnects",emoji:"🤝",bio:"Building community and creating room for new voices.",tag:"community"},
 {name:"Nia B.",handle:"@niasees",emoji:"📷",bio:"Finding beauty in places people often pass by.",tag:"travel"},
 {name:"Kwame S.",handle:"@kwamesounds",emoji:"🎵",bio:"Music, local stories and the sounds around us.",tag:"culture"}];
-let profiles=sampleProfiles;let liveMode=false;let currentUser=null;let following=new Set();let filter="all";let toastTimer;let reportTarget=null;let reportTargetType="profile";let reportContentId=null;let feedPosts=[],feedProfiles={},feedComments=[],feedLiked=new Set(),feedFilter="all",feedCanInteract=false;
+let profiles=sampleProfiles;let liveMode=false;let currentUser=null;let following=new Set();let filter="all";let toastTimer;let reportTarget=null;let reportTargetType="profile";let reportContentId=null;let feedPosts=[],feedProfiles={},feedComments=[],feedLiked=new Set(),feedFilter="all",feedCanInteract=false,feedExtras=[],feedType="all";
 try{const saved=JSON.parse(localStorage.getItem("adventure-demo-follows")||"[]");if(Array.isArray(saved))following=new Set(saved.filter(x=>typeof x==="string"));}catch(e){following=new Set();}
 function escapeHtml(value){return String(value??'').replace(/[&<>"']/g,ch=>{if(ch==='&')return '&amp;';if(ch==='<')return '&lt;';if(ch==='>')return '&gt;';if(ch==='"')return '&quot;';return '&#39;';});}
 function showToast(message){const el=document.querySelector("#toast");if(!el)return;el.textContent=message;el.classList.add("show");clearTimeout(toastTimer);toastTimer=setTimeout(()=>el.classList.remove("show"),2600);}
@@ -153,14 +153,32 @@ async function loadAnnouncements(){
 function renderFeed(){
  const host=document.querySelector('#feed-list');
  const visible=feedPosts.filter(p=>feedFilter==='all'||(feedFilter==='following'&&following.has(p.author_id))||(feedFilter==='mine'&&currentUser&&p.author_id===currentUser.id));
- if(!visible.length){host.innerHTML='<div class="feed-note">No posts to show here yet. Be the first to share something with Adventure.</div>';return;}
- host.innerHTML=visible.map(p=>{
+ const extras=feedExtras.filter(x=>feedType==='all'||x.kind===feedType);
+ const postCards=(feedType==='all'||feedType==='people')?visible.map(p=>{
   const author=feedProfiles[p.author_id]||{},own=currentUser&&p.author_id===currentUser.id,comments=feedComments.filter(c=>c.post_id===p.id);
   const commentHtml=comments.slice(0,4).map(c=>{const person=feedProfiles[c.author_id]||{};return '<div class="comment"><strong>'+escapeHtml(person.display_name||'Adventure member')+'</strong>'+escapeHtml(c.body)+(c.moderation_status==='hidden'&&currentUser&&c.author_id===currentUser.id?'<div class="feed-note">This comment is hidden from other members. Review reason: '+escapeHtml(c.moderation_reason||'Owner moderation')+'</div>':'')+'</div>';}).join('');
   const actions=(feedCanInteract?'<button class="'+(feedLiked.has(p.id)?'liked':'')+'" data-like-post="'+escapeHtml(p.id)+'">'+(feedLiked.has(p.id)?'♥ Liked':'♡ Like')+' · '+Number(p.likes_count||0)+'</button><button type="button" data-focus-comment="'+escapeHtml(p.id)+'">Comments · '+Number(p.comments_count||0)+'</button><button type="button" class="report-post" data-post="'+escapeHtml(p.id)+'" data-author="'+escapeHtml(p.author_id)+'">Report</button>':'<span class="post-time">'+Number(p.likes_count||0)+' likes · '+Number(p.comments_count||0)+' comments</span>')+(own?'<button type="button" data-delete-post="'+escapeHtml(p.id)+'">Delete</button>':'');
   const commentForm=feedCanInteract?'<form class="comment-form" data-comment-post="'+escapeHtml(p.id)+'"><input name="comment" maxlength="1000" placeholder="Write a respectful comment…" required><button type="submit">Send</button></form>':'';
-  return '<article class="post-card">'+(own&&p.moderation_status==='hidden'?'<div class="feed-note">This post is hidden from other members after an owner review. Reason: '+escapeHtml(p.moderation_reason||'Owner moderation')+'</div>':'')+'<div class="post-head"><div class="post-author"><strong>'+escapeHtml(author.display_name||'Adventure member')+'</strong><small>'+(author.username?'@'+escapeHtml(author.username):escapeHtml(author.country||'Community member'))+' · '+escapeHtml(new Date(p.created_at).toLocaleString())+'</small></div><small class="post-time">'+(p.visibility==='followers'?'Followers':'All members')+'</small></div><p class="post-body">'+escapeHtml(p.body)+'</p><div class="post-actions">'+actions+'</div><div class="comments">'+(commentHtml||'<div class="muted">No comments yet.</div>')+commentForm+'</div></article>';
- }).join('');
+  return {time:new Date(p.created_at).getTime()||0,html:'<article class="post-card"><div class="post-head"><div class="post-author"><strong>'+escapeHtml(author.display_name||'Adventure member')+'</strong><small>'+(author.username?'@'+escapeHtml(author.username):escapeHtml(author.country||'Community member'))+' · '+escapeHtml(new Date(p.created_at).toLocaleString())+'</small></div><small class="post-time">'+(p.visibility==='followers'?'Followers':'All members')+'</small></div>'+(own&&p.moderation_status==='hidden'?'<div class="feed-note">This post is hidden from other members. Reason: '+escapeHtml(p.moderation_reason||'Owner moderation')+'</div>':'')+'<p class="post-body">'+escapeHtml(p.body)+'</p><div class="post-actions">'+actions+'</div><div class="comments">'+(commentHtml||'<div class="muted">No comments yet.</div>')+commentForm+'</div></article>'};
+ }):[];
+ const extraCards=extras.map(x=>({time:new Date(x.created_at||x.published||0).getTime()||0,html:x.html}));
+ const cards=[...postCards,...extraCards].sort((a,b)=>b.time-a.time);
+ host.innerHTML=cards.length?cards.map(x=>x.html).join(''):'<div class="feed-note">Nothing in this part of the Feed yet. Check back soon.</div>';
+}
+async function loadFeedExtras(){
+ const tasks=await Promise.allSettled([
+  fetch('https://fhjhbkbyglchiiunwohy.supabase.co/functions/v1/adventure-news-feed',{headers:{apikey:'sb_publishable_hAnq_0mwuXZowP77K-xluA_yHRhlyhq'}}).then(r=>r.ok?r.json():{items:[]}),
+  supabase.from('marketplace_listings').select('id,title,description,price,currency,country,city,created_at').eq('status','active').order('created_at',{ascending:false}).limit(12),
+  supabase.from('adventure_events').select('id,title,description,country,city,starts_at,created_at').eq('status','published').order('starts_at',{ascending:true}).limit(12)
+ ]);
+ const news=tasks[0].status==='fulfilled'?(tasks[0].value.items||[]):[];
+ const listings=tasks[1].status==='fulfilled'?(tasks[1].value.data||[]):[];
+ const events=tasks[2].status==='fulfilled'?(tasks[2].value.data||[]):[];
+ feedExtras=[
+  ...news.slice(0,18).map(n=>({kind:'news',created_at:n.published,html:'<article class="post-card"><div class="post-head"><strong>📰 Adventure News · '+escapeHtml(n.publisher)+'</strong><small class="post-time">'+escapeHtml(n.domain||'Africa')+'</small></div><h3 style="margin:12px 0 6px">'+escapeHtml(n.title)+'</h3><p class="post-body">'+escapeHtml(n.summary||'')+'</p><div class="post-actions"><button type="button" data-feed-story="'+escapeHtml(n.url)+'" data-story-title="'+escapeHtml(n.title)+'" data-story-summary="'+escapeHtml(n.summary||'')+'" data-story-source="'+escapeHtml(n.publisher)+'">Read story</button></div></article>'})),
+  ...listings.map(x=>({kind:'marketplace',created_at:x.created_at,html:'<article class="post-card"><div class="post-head"><strong>🛍️ Marketplace</strong><small class="post-time">'+escapeHtml(x.city+', '+x.country)+'</small></div><h3 style="margin:10px 0 5px">'+escapeHtml(x.title)+'</h3><p class="post-body">'+escapeHtml(x.description.slice(0,280))+'</p><strong>'+escapeHtml(x.currency+' '+Number(x.price).toFixed(2))+'</strong><div class="post-actions"><a href="./marketplace.html" style="color:var(--green);font-weight:750">View listing in Adventure</a></div></article>'})),
+  ...events.map(x=>({kind:'events',created_at:x.starts_at,html:'<article class="post-card"><div class="post-head"><strong>📅 Adventure Event</strong><small class="post-time">'+escapeHtml(x.city+', '+x.country)+'</small></div><h3 style="margin:10px 0 5px">'+escapeHtml(x.title)+'</h3><p class="post-body">'+escapeHtml(x.description.slice(0,300))+'</p><div class="post-time">Starts '+escapeHtml(new Date(x.starts_at).toLocaleString())+'</div><div class="post-actions"><a href="./discover.html" style="color:var(--green);font-weight:750">Explore in Adventure</a></div></article>'}))
+ ];
 }
 async function loadFeed(){
  const guest=document.querySelector('#feed-guest'),composer=document.querySelector('#feed-post-form'),host=document.querySelector('#feed-list');
@@ -173,7 +191,7 @@ async function loadFeed(){
  const {data,error}=await supabase.from('posts').select('id,author_id,body,visibility,status,moderation_status,moderation_reason,likes_count,comments_count,created_at').eq('status','published').order('created_at',{ascending:false}).limit(40);
  if(error){host.innerHTML='<div class="feed-note">The Feed could not load: '+escapeHtml(error.message)+'</div>';return;}
  feedPosts=data||[];
- if(!feedPosts.length){feedProfiles={};feedComments=[];feedLiked.clear();renderFeed();return;}
+ if(!feedPosts.length){feedProfiles={};feedComments=[];feedLiked.clear();await loadFeedExtras();renderFeed();return;}
  const ids=feedPosts.map(p=>p.id),userIds=[...new Set(feedPosts.map(p=>p.author_id))];
  const [commentsResult,likesResult,profilesResult]=await Promise.all([
   supabase.from('post_comments').select('id,post_id,author_id,body,moderation_status,moderation_reason,created_at').in('post_id',ids).order('created_at',{ascending:false}).limit(120),
@@ -186,7 +204,7 @@ async function loadFeed(){
  let extraProfiles=[];
  if(extraIds.length){const x=await supabase.from('profiles').select('id,display_name,username,country').in('id',extraIds);extraProfiles=x.data||[];}
  feedProfiles=Object.fromEntries([...(profilesResult.data||[]),...extraProfiles].map(p=>[p.id,p]));
- renderFeed();
+ await loadFeedExtras();renderFeed();
 }
 document.querySelector('#feed-post-form').addEventListener('submit',async e=>{
  e.preventDefault();if(!currentUser){location.href='./account.html';return;}
@@ -215,6 +233,8 @@ document.querySelector('#feed-list').addEventListener('submit',async e=>{
  button.disabled=false;if(error){showToast('Comment could not be sent: '+error.message);return;}await loadFeed();
 });
 document.querySelectorAll('[data-feed-filter]').forEach(b=>b.addEventListener('click',()=>{feedFilter=b.dataset.feedFilter;document.querySelectorAll('[data-feed-filter]').forEach(x=>x.classList.toggle('active',x===b));renderFeed();}));
+document.querySelectorAll('[data-feed-type]').forEach(b=>b.addEventListener('click',()=>{feedType=b.dataset.feedType;document.querySelectorAll('[data-feed-type]').forEach(x=>x.classList.toggle('active',x===b));renderFeed();}));
+document.querySelector('#feed-list').addEventListener('click',e=>{const b=e.target.closest('[data-feed-story]');if(!b)return;const article=b.closest('.post-card');article.querySelector('.post-body').insertAdjacentHTML('afterend','<p class="feed-note">Source: '+escapeHtml(b.dataset.storySource)+' · This is the publisher-provided summary. <a href="'+escapeHtml(b.dataset.feedStory)+'" target="_blank" rel="noopener noreferrer">Open original report</a></p>');b.disabled=true;b.textContent='Story details shown';});
 document.querySelector('#feed-refresh').addEventListener('click',loadFeed);
 
 document.querySelector("#search").addEventListener("input",render);
