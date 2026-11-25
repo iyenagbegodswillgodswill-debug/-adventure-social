@@ -420,3 +420,5 @@ Roadmap: `docs/MAIN_APP_ROADMAP.md`. Data model review: `docs/DATA_MODEL_AND_RLS
 - [x] Refreshed the app-shell cache to v24 and included Photo Studio.
 - [ ] Verify image import/edit/export and camera recording on real mobile browsers, especially iOS Safari.
 - [ ] Face-aware virtual makeup, AI-powered photo edits, true AI instrumental generation and an AI feature-development workflow remain future integrations. They require model/provider selection, secure server-side integration, privacy review, licensing and explicit approval of any costs. No AI provider is currently connected.
+
+- [x] Corrected photo rotation rendering to preserve the source image's original proportions while rotating the canvas.
