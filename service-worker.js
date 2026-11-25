@@ -12,6 +12,9 @@ const APP_SHELL = [
   "./notifications.html",
   "./support.html",
   "./policies.html",
+  "./settings.html",
+  "./adventure-theme.css",
+  "./adventure-theme.js",
   "./manifest.webmanifest",
   "./assets/adventure-icon.svg"
 ];
