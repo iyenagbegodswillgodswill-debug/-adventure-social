@@ -549,3 +549,21 @@ Only mark a test complete after it has been run and its result recorded. Source 
 - [ ] Verify the live Pages deployment and test the Game Center navigation, responsive layout, category filters and offline shell on iPhone and desktop.
 - [ ] Decide the first flagship and complete competitor/originality research before any playable game is promised or built.
 - [ ] No games are playable yet; the Game Center is an early concept showcase, not a game launch.
+
+
+## Adventure Football — owner-approved direction (2026-11-26)
+- [x] Owner selected Adventure Football as the first flagship game.
+- [x] Owner approved a realistic professional-football simulation direction, using contemporary football games such as EA SPORTS FC 26 as a broad quality reference only; Adventure must create its own identity, code, art, teams, players and presentation.
+- [x] Owner chose an initial integrated experience inside Adventure, with the architecture intended to allow a standalone Adventure Football release later.
+- [x] Working target is mobile-first; exact device requirements remain to be researched.
+- [x] Protection rule: isolate game code, assets, services and data from the existing social app; integrate through a narrow documented boundary. Do not expose privileged Adventure database access to the game client.
+- [x] No changes to the existing social-app database, authentication, registration status or release settings are included in this approval.
+- [ ] Research competitor gameplay and define Adventure's distinctive football identity.
+- [ ] Compare suitable game engines and confirm whether the desired 3D quality is feasible for the initial integrated/mobile-first experience.
+- [ ] Define the smallest playable prototype, including controls, match loop and acceptance tests.
+- [ ] Decide initial offline/single-player versus online multiplayer scope.
+- [ ] Estimate development effort, device requirements and ongoing costs; no paid tools/services are approved.
+- [ ] Build and test a prototype before expanding to full realism, clubs, tournaments or online multiplayer.
+- [ ] Later standalone release remains a future option, not a current deployment commitment.
+
+**Honest progress note:** This records approved product direction only. No playable football game, 3D engine, game backend, multiplayer service or new game assets have been built or deployed yet.
