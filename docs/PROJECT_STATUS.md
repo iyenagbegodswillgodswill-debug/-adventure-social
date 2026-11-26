@@ -608,3 +608,12 @@ Only mark a test complete after it has been run and its result recorded. Source 
 - [ ] This is not the Unity game project and does not change the provisional Unity recommendation. A suitable desktop/laptop is still required for the proper Unity workflow.
 
 **Honest progress:** A first browser-based 3D visual/control experiment has been committed. No complete playable football game has been built or deployed/verified. No external backend, paid service, purchased asset or licensed content was added.
+
+
+## Adventure Football — Game Center access correction (2026-11-26)
+- [x] Added a direct “Open Football Prototype” action to the Game Center flagship feature and a direct prototype link on the Adventure Football concept card.
+- [x] Links target the root-level `football-prototype.html` file; no social backend, authentication, registration, service-worker or database behavior changed.
+- [ ] Confirm the updated Game Center page deploys and that both links open the prototype on iPhone Safari.
+- [ ] If the prototype URL still returns 404 after deployment, inspect the GitHub Pages workflow/artifact and deployment commit before changing routes or caching.
+
+**Honest status:** The Game Center previously showed only concept/detail anchors and did not provide a direct route to the separate prototype file. The navigation gap is now fixed in source; live deployment and device access remain unverified.
