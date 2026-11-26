@@ -617,3 +617,14 @@ Only mark a test complete after it has been run and its result recorded. Source 
 - [ ] If the prototype URL still returns 404 after deployment, inspect the GitHub Pages workflow/artifact and deployment commit before changing routes or caching.
 
 **Honest status:** The Game Center previously showed only concept/detail anchors and did not provide a direct route to the separate prototype file. The navigation gap is now fixed in source; live deployment and device access remain unverified.
+
+
+## Adventure Football — blank launch investigation (2026-11-26)
+- [x] Confirmed Game Center includes direct links to the root-level `football-prototype.html` file.
+- [x] Identified a fragile startup path: the 3D engine was imported from one external CDN, and a failed module download or startup error could leave the full-screen loading layer covering the page with no explanation.
+- [x] Added a second CDN fallback for Three.js, a visible startup failure/retry message, and a return link to Game Center.
+- [x] Updated Game Center wording so it describes the honest state: an early 3D greybox experiment, not a finished playable football game.
+- [ ] Confirm the latest GitHub Pages deployment and test the launch on the owner's iPhone; source commits alone do not prove live deployment or WebGL compatibility.
+- [ ] After launch works, test touch movement, passing, shooting, defending and goalkeeper behaviour before calling the prototype playable.
+
+Commits: prototype `566ef6ee200e57e1b79af38e588384807d488d95`; Game Center `f2a893ea235239a17a0cc7d19d5c8e05c981da5a`.
