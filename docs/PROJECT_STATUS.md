@@ -537,3 +537,15 @@ Only mark a test complete after it has been run and its result recorded. Source 
 - [x] Gallery data stays in the member's browser local storage; no new uploads, database tables, paid services or external AI calls were introduced.
 - [ ] Verify live Pages deployment and test drawing, text, gallery save/delete, PNG export and offline shell on iPhone and desktop.
 - [ ] Dedicated artist profiles/feed, secure artwork uploads, collaboration tools and artwork sales are future phases. Do not enable uploads or sales until moderation, copyright/rights, privacy, storage and payment protections are designed and tested.
+
+
+## Adventure Game Center — first hub foundation (2026-11-25)
+- [x] Created `game-center.html`, a mobile-first Game Center concept hub for Adventure Studios.
+- [x] Showcased six original game concepts: Adventure Football, Connections, World, Kids, Creative and Action; clearly labelled their early concept status.
+- [x] Added category filters and concept summaries; no external game catalogue, third-party game embeds, accounts, game backend, uploads or paid services.
+- [x] Added a Games entry to the main Adventure bottom navigation.
+- [x] Added the Game Center page to the PWA app shell and bumped the cache identifier to `adventure-preview-v30`.
+- [x] Preserved the existing social app and database; this is a standalone static concept page.
+- [ ] Verify the live Pages deployment and test the Game Center navigation, responsive layout, category filters and offline shell on iPhone and desktop.
+- [ ] Decide the first flagship and complete competitor/originality research before any playable game is promised or built.
+- [ ] No games are playable yet; the Game Center is an early concept showcase, not a game launch.
