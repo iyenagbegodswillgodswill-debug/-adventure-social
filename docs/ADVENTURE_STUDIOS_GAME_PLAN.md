@@ -1,7 +1,7 @@
 # Adventure Studios — Original Game Strategy & Build Plan
 
 Last updated: 2026-11-25  
-Status: Planning only. No game code, game database, paid service or public game launch has been approved or created.
+Status: Game Center concept hub created; game development remains in planning. No playable game, game database, paid service or public game launch has been approved or created.
 
 ## 1. Vision
 
@@ -73,6 +73,7 @@ A possible original action or tactical team game with original worlds, missions,
 - Create a dedicated game strategy document and decision log.
 - Do not modify the production social-app database or public navigation for games yet.
 - Decide whether the studio identity is an umbrella brand, an in-app label, or both.
+- A first static Game Center concept hub now exists at `game-center.html`; it presents the original game portfolio and does not imply that any title is playable.
 - Record owner-approved scope, constraints and spending limits.
 
 ### Stage 1 — Discovery and originality research
