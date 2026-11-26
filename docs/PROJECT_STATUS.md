@@ -567,3 +567,18 @@ Only mark a test complete after it has been run and its result recorded. Source 
 - [ ] Later standalone release remains a future option, not a current deployment commitment.
 
 **Honest progress note:** This records approved product direction only. No playable football game, 3D engine, game backend, multiplayer service or new game assets have been built or deployed yet.
+
+## Adventure Football — first prototype scope approved (2026-11-26)
+- [x] Owner accepted a 5-vs-5 3D match as the first playable milestone, with a future path toward 11-vs-11.
+- [x] Initial prototype scope is offline/single-player against basic AI; online multiplayer, accounts, clubs, tournaments and chat are deferred.
+- [x] First-match feature target: compact pitch, original placeholder teams, touchscreen movement, basic dribbling/passing/shooting, ball/player collisions, simple defending and goalkeeper behaviour, goals, match clock and scoreboard.
+- [x] Keep the simulation isolated and modular (match state, input, movement, ball, AI, camera and UI) so later standalone release and expansion do not require rebuilding the core.
+- [x] Unity is the provisional preferred engine candidate, not yet a final technical lock. Confirm developer-computer availability, target phone tier, current licensing, export/integration route and total cost before project creation.
+- [ ] Confirm a suitable desktop/laptop development environment and its specifications.
+- [ ] Define target phone performance tier and minimum supported devices.
+- [ ] Validate Unity licensing/pricing and the planned mobile/in-platform distribution route before selecting it finally.
+- [ ] Write detailed control layout, match-state flow and prototype acceptance tests.
+- [ ] Build and test the offline 5-vs-5 prototype; record device, browser/build, performance and test evidence.
+- [ ] Expand toward 11-vs-11, advanced realism and multiplayer only after the first prototype passes.
+
+**Protection and spending:** No paid software, asset packs, hosting, multiplayer infrastructure, licensed content or purchases have been approved. No Adventure Social database, authentication, registration or release settings were changed for this decision. No playable game has been created yet.
