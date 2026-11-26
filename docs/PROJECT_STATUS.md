@@ -582,3 +582,16 @@ Only mark a test complete after it has been run and its result recorded. Source 
 - [ ] Expand toward 11-vs-11, advanced realism and multiplayer only after the first prototype passes.
 
 **Protection and spending:** No paid software, asset packs, hosting, multiplayer infrastructure, licensed content or purchases have been approved. No Adventure Social database, authentication, registration or release settings were changed for this decision. No playable game has been created yet.
+
+
+## Adventure Football — first design baseline saved (2026-11-26)
+- [x] Created `docs/ADVENTURE_FOOTBALL_GAME_DESIGN.md` covering the first offline 5-vs-5 match, provisional rules, player roles, mobile control/HUD concept, match flow, ball/player gameplay systems, AI and goalkeeper behaviour.
+- [x] Documented isolated game-core modules and a narrow Adventure launch/return boundary; no privileged social-app credentials or database access in the game client.
+- [x] Added prototype acceptance checks, mobile performance strategy, staged build phases and explicit deferred features.
+- [x] Linked the design baseline from the Adventure Studios game plan.
+- [ ] Confirm desktop/laptop development access and specifications before starting a Unity project.
+- [ ] Confirm target phone model(s), minimum device tier and landscape usability.
+- [ ] Revalidate Unity licensing, install requirements, export/integration path and cost before final engine selection.
+- [ ] Implement the greybox and complete offline 5-vs-5 prototype; no playable game exists yet.
+
+**Honest status:** The first design baseline is documented and committed. This is not “everything” required for a finished football game: coding, 3D assets, animation, device testing, QA, security, production infrastructure and launch work remain. The owner is currently using an iPhone, so desktop-engine development is blocked until suitable computer access is available. No paid tools/services or purchases were made or approved.
