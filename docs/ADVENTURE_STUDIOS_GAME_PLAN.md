@@ -186,3 +186,35 @@ If integration is approved later, use a documented API boundary and least-privil
 - [ ] MVP and controlled release.
 
 **Important:** This document is a preparation plan only. No game has been built, no uniqueness claim has been validated, and no launch date or budget is promised.
+
+
+## Owner decisions — Adventure Football direction (2026-11-26)
+
+The owner approved Adventure Football as the first flagship game and selected a realistic professional-football simulation direction, using the broad gameplay quality of contemporary football titles such as EA SPORTS FC 26 as a quality reference—not copying EA branding, protected assets, player likenesses, licensed teams, presentation, or proprietary content.
+
+### Product and release architecture
+- First experience: integrate an Adventure Football entry point and game experience into the existing Adventure platform.
+- Long-term option: design the game boundary so the football title can later be released as its own standalone product without rebuilding the core game.
+- Mobile-first is the working target because Adventure is currently a mobile-first platform.
+- Keep game code, assets, services and data isolated from the existing social app. Integration should use a narrow, documented interface; do not expose privileged Adventure database access to the game client.
+- Do not change the existing social-app database, authentication, registration status, or release settings as part of early game prototyping.
+- No paid engine plans, hosting, multiplayer services, asset packs or other purchases are approved.
+
+### Realism target
+Aim toward responsive 3D football with believable player movement and animation, ball physics, passing/shooting, defending, goalkeeper behaviour, formations and tactics, match rules, stadium atmosphere and match presentation. These are quality goals, not claims that the first prototype will contain every feature.
+
+### Delivery sequence
+1. Research contemporary football games and define a distinctive Adventure identity and realistic-but-achievable first gameplay loop.
+2. Compare game engines and the feasibility of an embedded/in-platform launch with a later standalone build.
+3. Define a small playable prototype and test it before committing to full production.
+4. Expand toward deeper realism, teams, competitions and social/multiplayer features only after the core game proves fun and technical performance is acceptable.
+5. Keep online multiplayer, licensed content and advanced presentation behind separate technical, rights, safety and cost gates.
+
+### Decisions still open
+- Initial playable mode and exact first-match scope.
+- Target phone performance tier and minimum supported devices.
+- Engine and rendering/network architecture.
+- Whether the first prototype is offline/single-player before online multiplayer.
+- Budget and any paid tools/services (none approved yet).
+
+**Status:** Flagship, realism direction and phased integration strategy approved. Competitor research, game design, engine selection, prototype and cost review have not yet been completed.
