@@ -218,3 +218,29 @@ Aim toward responsive 3D football with believable player movement and animation,
 - Budget and any paid tools/services (none approved yet).
 
 **Status:** Flagship, realism direction and phased integration strategy approved. Competitor research, game design, engine selection, prototype and cost review have not yet been completed.
+
+## First prototype scope — owner-approved (2026-11-26)
+
+The owner accepted the recommended smaller first playable match before expanding toward full 11-vs-11 football.
+
+### First playable target: 5-vs-5 3D match
+- Build a small, complete, playable 5-vs-5 match as the first vertical slice; this is a development milestone, not a promise that the final game will be limited to five-a-side.
+- Start offline/single-player against simple AI opponents. Do not build online multiplayer, accounts, clubs, tournaments or live chat into this first prototype.
+- Include a compact pitch, two original teams, responsive movement, basic dribbling, passing, shooting, ball/player collision, simple defending and goalkeeper behaviour, goals, match clock and scoreboard.
+- Design touchscreen controls from the beginning and profile performance on representative target phones before increasing visual complexity.
+- Use placeholder/original low-cost art initially. Do not buy assets or use unlicensed team badges, kits, player likenesses, music or commentary.
+- Define clean gameplay modules (match state, input, player movement, ball, AI, camera, UI) so the simulation can later scale toward 11-vs-11 and a standalone release without depending on Adventure social-app internals.
+
+### Provisional engine direction
+Unity is the preferred engine candidate for the first prototype because of its mobile workflow, physics/animation ecosystem and broad developer support. This is a provisional recommendation, not a final technical lock: confirm the available development computer, target phone tier, current licensing terms, export/integration path and total prototype costs before creating a production project. Unreal remains an alternative if later visual targets and hardware justify it; Godot remains a lower-cost alternative if the scope changes.
+
+### Prototype acceptance checks
+1. A complete match can start, play and finish without a backend or network connection.
+2. Touch controls are understandable and responsive on a phone.
+3. Passing and shooting produce predictable, testable ball movement and collisions.
+4. Opponents and goalkeeper make basic useful decisions rather than standing still.
+5. Score, match clock, goals and restart flow work reliably.
+6. Performance is measured on named target devices; do not claim mobile readiness without device tests.
+7. The game runs as an isolated project and does not require changes to Adventure Social authentication, database, registration or release settings.
+
+**Not approved:** paid software, asset packs, hosting, multiplayer infrastructure, licensed content or purchases of any kind without a separate owner approval.
