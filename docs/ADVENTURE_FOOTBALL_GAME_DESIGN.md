@@ -230,3 +230,16 @@ A build is not considered playable until all of the following are demonstrated:
 ## 13. Definition of done for the preparation stage
 
 Preparation is complete when the owner-approved product direction, first playable scope, control concept, match loop, technical boundaries, acceptance tests, device requirements and cost/engine gates are documented. This document completes the first design baseline only; it does not mean the game itself is built or ready to launch.
+
+
+## Browser greybox experiment — 2026-11-26
+
+A separate experimental page, `football-prototype.html`, has been added at the repository root. It uses Three.js from a public CDN and creates a primitive 3D pitch, ten placeholder players, a ball, score/time HUD and touch controls for movement, passing, shooting, pressing and switching. It is a lightweight browser experiment to begin checking the match-camera and mobile-control concept from an iPhone.
+
+Important limitations:
+- This is a greybox experiment, not the Unity project and not the intended final game engine.
+- Placeholder geometry is not realistic player art or animation.
+- AI movement and ball interaction are rudimentary; this is not a complete or balanced football simulation.
+- Three.js is loaded from jsDelivr, so the page requires an internet connection and a successful CDN load.
+- The live GitHub Pages URL and actual iPhone WebGL/touch performance have not been verified. Source checks only confirmed the expected code sections are present.
+- Do not connect this experiment to Adventure accounts, Supabase or production social features. Keep it isolated and disposable if the eventual Unity prototype supersedes it.
