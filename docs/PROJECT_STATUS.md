@@ -595,3 +595,16 @@ Only mark a test complete after it has been run and its result recorded. Source 
 - [ ] Implement the greybox and complete offline 5-vs-5 prototype; no playable game exists yet.
 
 **Honest status:** The first design baseline is documented and committed. This is not “everything” required for a finished football game: coding, 3D assets, animation, device testing, QA, security, production infrastructure and launch work remain. The owner is currently using an iPhone, so desktop-engine development is blocked until suitable computer access is available. No paid tools/services or purchases were made or approved.
+
+
+## Adventure Football — first browser 3D greybox experiment (2026-11-26)
+- [x] Added `football-prototype.html` as a separate root-level browser experiment; no existing Adventure Social pages, navigation, service worker, database, authentication or registration settings were changed.
+- [x] Source includes a primitive 3D pitch, ten placeholder players (5 per side), a ball, score and match clock, and touch UI for movement, pass, shoot, press and player switching.
+- [x] Re-fetched the committed file and checked that the Three.js module import, ten-player setup, touch handlers, match clock, pass/shoot actions and both score-detection branches are present.
+- [ ] Live GitHub Pages deployment could not be independently verified in this session; the web page fetch returned an internal access error. Do not claim the page is live until opened successfully.
+- [ ] Actual iPhone browser/WebGL/touch test remains outstanding.
+- [ ] Gameplay is only a greybox: placeholder geometry, rudimentary movement/AI and simple ball handling. No realistic player models, animation system, robust football physics, proper goalkeeper saves or complete match rules yet.
+- [ ] The prototype loads Three.js from jsDelivr, so it requires an internet connection/CDN availability; it is not an offline-ready build.
+- [ ] This is not the Unity game project and does not change the provisional Unity recommendation. A suitable desktop/laptop is still required for the proper Unity workflow.
+
+**Honest progress:** A first browser-based 3D visual/control experiment has been committed. No complete playable football game has been built or deployed/verified. No external backend, paid service, purchased asset or licensed content was added.
