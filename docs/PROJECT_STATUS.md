@@ -628,3 +628,18 @@ Only mark a test complete after it has been run and its result recorded. Source 
 - [ ] After launch works, test touch movement, passing, shooting, defending and goalkeeper behaviour before calling the prototype playable.
 
 Commits: prototype `566ef6ee200e57e1b79af38e588384807d488d95`; Game Center `f2a893ea235239a17a0cc7d19d5c8e05c981da5a`.
+
+
+## Adventure Football — production direction reset (2026-11-26)
+
+- [x] Owner reaffirmed the target: a serious, realistic football simulation for adult players, with contemporary console football games as broad quality references; not a toy-like browser game.
+- [x] Added `docs/ADVENTURE_FOOTBALL_PRODUCTION_BLUEPRINT.md` covering product quality standards, staged production gates, architecture, original/licensed content rules, device testing, costs and immediate dependencies.
+- [x] Classified `football-prototype.html` as a disposable browser greybox experiment only. It is not the production game, not a Unity project and not a verified playable milestone. Do not keep polishing primitive placeholder geometry as the production route.
+- [x] Preserved Adventure Social isolation: no changes to its database, authentication, registration or release settings for this planning reset.
+- [ ] Confirm access to a suitable Windows or Mac development computer; a real game editor cannot be replaced by iPhone/GitHub web editing.
+- [ ] Confirm target phone models and Android/iOS scope.
+- [ ] Recheck current engine licensing, rendering/build pipeline and total costs before final engine selection. Unity remains provisional.
+- [ ] Create the isolated production project only after hardware, engine and cost gates are approved.
+- [ ] No playable production build, realistic player assets, animation set or device performance tests exist yet. Do not claim otherwise.
+- [ ] No paid software, assets, hosting or services are approved.
+
