@@ -244,3 +244,10 @@ Unity is the preferred engine candidate for the first prototype because of its m
 7. The game runs as an isolated project and does not require changes to Adventure Social authentication, database, registration or release settings.
 
 **Not approved:** paid software, asset packs, hosting, multiplayer infrastructure, licensed content or purchases of any kind without a separate owner approval.
+
+
+## First playable game design baseline — 2026-11-26
+
+The detailed design baseline is saved in `docs/ADVENTURE_FOOTBALL_GAME_DESIGN.md`. It specifies the offline 5-vs-5 prototype, player roles, landscape touchscreen HUD/control concept, match flow, gameplay systems, AI/goalkeeper behaviour, isolated game architecture, performance strategy, acceptance checks and staged build phases.
+
+This completes an initial design document only. It does not mean the engine is finally selected or that a playable game has been built. Desktop development access, target phone tier, final engine/licensing check and cost review remain gates. No purchases or paid services are approved.
