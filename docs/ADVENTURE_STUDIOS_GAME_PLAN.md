@@ -251,3 +251,12 @@ Unity is the preferred engine candidate for the first prototype because of its m
 The detailed design baseline is saved in `docs/ADVENTURE_FOOTBALL_GAME_DESIGN.md`. It specifies the offline 5-vs-5 prototype, player roles, landscape touchscreen HUD/control concept, match flow, gameplay systems, AI/goalkeeper behaviour, isolated game architecture, performance strategy, acceptance checks and staged build phases.
 
 This completes an initial design document only. It does not mean the engine is finally selected or that a playable game has been built. Desktop development access, target phone tier, final engine/licensing check and cost review remain gates. No purchases or paid services are approved.
+
+
+## Browser greybox experiment started — 2026-11-26
+
+- [x] Added a separate root-level `football-prototype.html` experiment with a primitive Three.js 3D pitch, ten placeholder players, ball, score/clock and touch-control UI.
+- [x] Kept the experiment separate from Adventure Social authentication, database and member features.
+- [ ] Verify the GitHub Pages deployment and test the page on the owner's iPhone.
+- [ ] Improve basic player/ball interaction and test camera/control usability before deciding whether this browser experiment is useful as a design reference.
+- [ ] Continue to treat Unity as the provisional preferred engine for the proper mobile game; this browser experiment does not replace the planned Unity prototype.
